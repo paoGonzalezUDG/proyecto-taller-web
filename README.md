@@ -30,11 +30,11 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 
 - [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y carga las librerías con NPM.
       
-      `npm i`
+      npm i
       
-      `npm cache clean --force`
+      npm cache clean --force
       
-      `npm run watch`
+      npm run watch
       
 - [ ] **Paso 4:** Configurar tu identidad en Git. Abre la terminal en VS Code y escribe:
       
