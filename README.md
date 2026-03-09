@@ -35,10 +35,16 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 - [ ] **Paso 6:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios):
       
   `git checkout -b portafolio-TU_NOMBRE`
+
 - [ ] **Paso 7:** Maquetar el esqueleto HTML semántico en el archivo `index.php` base: Hero, About, Projects y Contact.
 - [ ] **Paso 8:** Especificar tus cambios (meterlos al carrito):
+      
   `git add .`
+
 - [ ] **Paso 9:** Especificar el cambio realizado con un mensaje descriptivo:
+      
   `git commit -m "Estructura HTML base creada"`
+
 - [ ] **Paso 10:** Subir tu avance a **TU** rama específica en GitHub por primera vez:
+      
   `git push -u origin portafolio-TU_NOMBRE`
