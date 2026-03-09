@@ -14,16 +14,26 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 
 - [ ] **Paso 1:** Exploración de la plantilla de Figma e introducción al *Dev Mode*.
 - [ ] **Paso 2:** Descargar la estructura inicial. Abre la terminal, dirígete a la carpeta de Laragon (`cd C:\laragon\www`) y clona el repositorio del taller:
+      
   `git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git`
+
 - [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y carga las librerías con NPM.
+      
       `npm i`
+      
       `npm cache clean --force`
+      
       `npm run watch`
+      
 - [ ] **Paso 4:** Configurar tu identidad en Git. Abre la terminal en VS Code y escribe:
+      
   `git config --global user.name "TU_USUARIO_EN_GITHUB"`
+
   `git config --global user.email "TU_CORREO_EN_GITHUB"`
+
 - [ ] **Paso 5:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías) desde Figma.
 - [ ] **Paso 6:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios):
+      
   `git checkout -b portafolio-TU_NOMBRE`
 - [ ] **Paso 7:** Maquetar el esqueleto HTML semántico en el archivo `index.php` base: Hero, About, Projects y Contact.
 - [ ] **Paso 8:** Especificar tus cambios (meterlos al carrito):
