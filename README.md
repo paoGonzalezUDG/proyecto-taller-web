@@ -41,7 +41,9 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
       npm run watch
       
 - [ ] **Paso 4:** Configurar tu identidad en Git. Abre la terminal en VS Code y escribe:
-      
+
+  `git init`
+  
   `git config --global user.name "TU_USUARIO_EN_GITHUB"`
 
   `git config --global user.email "TU_CORREO_EN_GITHUB"`
