@@ -1,0 +1,21 @@
+/* Colores y fondos mediante bucle */
+@each $nombre, $valor in $colores {
+
+  /* Color de texto base */
+  .c-#{$nombre} {
+    color: $valor;
+  }
+
+  /* Estados: Hover, Focus y Active */
+  .h-c-#{$nombre}:hover,
+  .h-c-#{$nombre}:focus,
+  .active-c-#{$nombre} {
+    color: $valor !important;
+  }
+
+  /* Color de fondo */
+  .bg-#{$nombre} {
+    background-color: $valor;
+  }
+
+}

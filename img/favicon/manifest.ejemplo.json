@@ -1,0 +1,68 @@
+{
+  "name": "Iridizen | Conectamos marcas con personas",
+  "short_name": "Iridizen",
+  "id": "/?homescreen=1",
+  "start_url": "/?homescreen=1",
+  "icons": [
+    {
+     "src": "/img/favicon/android-icon-36x36.png",
+     "sizes": "36x36",
+     "type": "image\/png",
+     "purpose": "any",
+     "density": "0.75"
+    },
+    {
+     "src": "/img/favicon/android-icon-48x48.png",
+     "sizes": "48x48",
+     "type": "image\/png",
+     "purpose": "any",
+     "density": "1.0"
+    },
+    {
+     "src": "/img/favicon/android-icon-72x72.png",
+     "sizes": "72x72",
+     "type": "image\/png",
+     "purpose": "analytics",
+     "density": "1.5"
+    },
+    {
+     "src": "/img/favicon/android-icon-96x96.png",
+     "sizes": "96x96",
+     "type": "image\/png",
+     "purpose": "any",
+     "density": "2.0"
+    },
+    {
+     "src": "/img/favicon/android-icon-144x144.png",
+     "sizes": "144x144",
+     "type": "image\/png",
+     "purpose": "any",
+     "density": "3.0"
+    },
+    {
+     "src": "/img/favicon/android-icon-192x192.png",
+     "sizes": "192x192",
+     "type": "image\/png",
+     "purpose": "any",
+     "density": "4.0"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "background_color": "#6d0cc3",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#6d0cc3",
+  "description": "La manera de hacer negocios ya nunca será igual. Ayudamos a tu empresa a entrar a internet e incorporate a la nueva era del comercio electrónico.",
+  "screenshots": [
+    {
+      "src": "/img/screenshots/screenshot1.jpg",
+      "type": "image/jpeg",
+      "sizes": "556x798"
+    },
+    {
+      "src": "/img/screenshots/screenshot2.jpg",
+      "type": "image/jpeg",
+      "sizes": "422x610"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+//font-face
+	//font-display: swap;
+	//../fonts/
+/* Colores (Variables Individuales) */
+$c_negro: #000000;
+$c_negro_1: #0b0b0b;
+$c_blanco: #ffffff;
+$c_gris_claro: #D4D4D4;
+$c_gris_1: #cacaca;
+$c_gris_2: #484848;
+$c_azul_1: #C4E8F3;
+$c_azul_2: #6AA9E4;
+$c_azul_3: #316FF6;
+$c_azul_4: #00ACEE;
+$c_naranja_1: #FFC87E;
+$c_naranja_2: #fbad50;
+$c_verde_1: #4BAF9C;
+$c_verde_2: #075E54;
+
+/* Mapa de Colores*/
+$colores: (
+  "negro":       $c_negro,
+  "negro-1":     $c_negro_1,
+  "blanco":      $c_blanco,
+  "gris-claro":  $c_gris_claro,
+  "gris-1":      $c_gris_1,
+  "gris-2":      $c_gris_2,
+  "azul-1":      $c_azul_1,
+  "azul-2":      $c_azul_2,
+  "azul-3":      $c_azul_3,
+  "azul-4":      $c_azul_4,
+  "naranja-1":   $c_naranja_1,
+  "naranja-2":   $c_naranja_2,
+  "verde-1":     $c_verde_1,
+  "verde-2":     $c_verde_2
+);
+
+$font_1: 'Font Awesome 6 Free';//900
+$font_2: 'Font Awesome 6 Brands';//400
+$font_3: 'Montserrat';
+
+/* Fonts */
+.f-light{font-family: $font_3, sans-serif;font-weight: 300;}
+.f-regular{font-family: $font_3, sans-serif;font-weight: 400;}
+.f-medium{font-family: $font_3, sans-serif;font-weight: 500;}
+.f-semibold{font-family: $font_3, sans-serif;font-weight: 600;}
+.f-bold{font-family: $font_3, sans-serif;font-weight: 700;}
+.f-black{font-family: $font_3, sans-serif;font-weight: 800;}

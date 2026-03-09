@@ -1,0 +1,44 @@
+{
+  "name": "mi-portfolio-dev",
+  "version": "1.0.0",
+  "description": "Taller web - UDG 2026A",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "keywords": [],
+  "author": "UDG taller web - 2026A",
+  "license": "ISC",
+  "_comentario_type": "ACTIVAR SOLO SI QUIERO CONVERTIR IMAGENES A WEBP (type:module)",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.1",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "bootstrap-datepicker": "^1.10.1",
+    "cookie": "^0.5.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-svgo": "^10.0.1",
+    "imagemin-webp": "^8.0.0",
+    "jquery": "^3.7.1",
+    "owl.carousel": "^2.3.4",
+    "pnotify": "^5.2.0",
+    "sweetalert2": "^11.26.22"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.29.3",
+    "browser-sync-webpack-plugin": "^2.4.0",
+    "cross-env": "^7.0.3",
+    "laravel-mix": "^6.0.49",
+    "sass": "^1.97.3",
+    "sass-loader": "^13.3.3",
+    "vue-template-compiler": "^2.7.16"
+  }
+}

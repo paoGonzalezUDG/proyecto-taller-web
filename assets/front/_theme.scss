@@ -1,0 +1,141 @@
+*:focus{
+	outline: none!important;
+}
+
+/* General */
+.text-justify{
+	text-align: justify;
+}
+
+/* Alturas vh */
+.vh{
+	&-85{
+		height: 85vh;
+	}
+	&-75{
+		height: 75vh;
+	}
+	&-50{
+		height: 50vh;
+	}
+}
+
+a{
+	transition: all .5s ease;
+
+	&:hover,
+	&:focus{
+		text-decoration: none;
+	}
+}
+
+/* Selección*/
+::selection{
+	background-color: $c_gris_2;
+	color: $c_blanco;
+}
+
+/* Scroll Top*/
+.scroll-to-top{
+	position: fixed;
+	padding: 10px;
+	background-color: $c_gris_2;
+	cursor: pointer;
+	bottom: 10px;
+	right: 30px;
+	width:40px;
+	height: 40px;
+	z-index: 9999;
+	-webkit-transition: all 300ms linear;
+	-moz-transition: all 300ms linear;
+	-o-transition: all 300ms linear;
+	-ms-transition: all 300ms linear;transition: all 300ms linear;
+
+	&:hover{
+		background-color: $c_verde_1;
+	}
+}
+
+/*Scroll bar*/
+body{
+	//scrollbar-color: blue, lightblue;
+	&::-webkit-scrollbar{
+		width: 1em;
+	}
+	&::-webkit-scrollbar-track{
+		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	}
+	&::-webkit-scrollbar-thumb{
+		background-color: $dark;
+		outline: 1px solid transparent;
+	}
+}
+
+#main{
+	padding-top: 3rem;
+	padding-bottom: 5rem;
+
+	@include media-breakpoint-up(md){
+		height: 90vh;
+	}
+}
+
+.ico-bg{
+	position: relative;
+}
+
+/* Aviso de privacidad */
+#privacynoticepage{
+	#aviso{
+		&-1{
+			padding: 100px 0 35px;
+			@include media-breakpoint-up(md) {
+				padding: 130px 0 40px;
+			}
+			@include media-breakpoint-up(lg) {
+				padding: 160px 0 50px;
+			}
+			.box{
+				&-content{
+					p{
+						margin-bottom: 30px;
+					}
+				}
+			}
+		}
+	}
+}
+
+/*Cargando*/
+.box-loader{
+	position: absolute;
+	z-index: 1031;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.loader {
+		width: 55px;
+		aspect-ratio: 1;
+		--g1:conic-gradient(from  90deg at 3px  3px ,#0000 90deg,#fff 0);
+		--g2:conic-gradient(from -90deg at 22px 22px,#0000 90deg,#fff 0);
+		background:var(--g1),var(--g1),var(--g1), var(--g2),var(--g2),var(--g2);
+		background-size: 25px 25px;
+		background-repeat: no-repeat;
+		animation: l7 1.5s infinite;
+	}
+}
+@keyframes l7 {
+	0%   {background-position:0    0   ,0 100%,100% 100% }
+	25%  {background-position:100% 0   ,0 100%,100% 100% }
+	50%  {background-position:100% 0   ,0 0   ,100% 100% }
+	75%  {background-position:100% 0   ,0 0   ,0    100% }
+	100% {background-position:100% 100%,0 0   ,0    100% }
+}
+
+/* Personalizados */

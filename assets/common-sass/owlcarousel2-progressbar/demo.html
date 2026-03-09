@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Progress Bar for Owl Carousel by K.Grigoryan</title>
+
+    <!-- JQUERY and OWL CAROUSEL STYLES AND SCRIPT -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" integrity="sha256-nXBV7Gr2lU0t+AwKsnS05DYtzZ81oYTXS6kj7LBQHfM=" crossorigin="anonymous"/>
+  </head>
+
+  <body>
+    <!-- DEMO STYLES -->
+    <style>
+      .owl-carousel {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        margin-top: 50px;
+      }
+
+      .owl-carousel-green .item {
+        background-color: green;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+        background-color: slategray;
+        font-size: 60px;
+        font-weight: bold;
+        color: white;
+      }
+    </style>
+
+    <!-- FOR DEMO -->
+    <div class="owl-carousel owl-carousel-grey owl-theme">
+      <div class="item">
+        <h4>1</h4>
+      </div>
+      <div class="item">
+        <h4>2</h4>
+      </div>
+      <div class="item">
+        <h4>3</h4>
+      </div>
+      <div class="item">
+        <h4>4</h4>
+      </div>
+      <div class="item">
+        <h4>5</h4>
+      </div>
+      <div class="item">
+        <h4>6</h4>
+      </div>
+      <div class="item">
+        <h4>7</h4>
+      </div>
+      <div class="item">
+        <h4>8</h4>
+      </div>
+      <div class="item">
+        <h4>9</h4>
+      </div>
+      <div class="item">
+        <h4>10</h4>
+      </div>
+      <div class="item">
+        <h4>11</h4>
+      </div>
+      <div class="item">
+        <h4>12</h4>
+      </div>
+    </div>
+
+    <div class="owl-carousel owl-carousel-green owl-theme">
+      <div class="item">
+        <h4>1</h4>
+      </div>
+      <div class="item">
+        <h4>2</h4>
+      </div>
+      <div class="item">
+        <h4>3</h4>
+      </div>
+      <div class="item">
+        <h4>4</h4>
+      </div>
+      <div class="item">
+        <h4>5</h4>
+      </div>
+      <div class="item">
+        <h4>6</h4>
+      </div>
+      <div class="item">
+        <h4>7</h4>
+      </div>
+      <div class="item">
+        <h4>8</h4>
+      </div>
+      <div class="item">
+        <h4>9</h4>
+      </div>
+      <div class="item">
+        <h4>10</h4>
+      </div>
+      <div class="item">
+        <h4>11</h4>
+      </div>
+      <div class="item">
+        <h4>12</h4>
+      </div>
+    </div>
+
+    <!-- ATTACH OWLCAROUSEL-PROGRESSBAR SCRIPT BEFORE OWL CAROUSEL INSTANCE CREATION -->
+    <script src="dist/owlcarousel2-progressbar.js"></script>
+
+    <!-- CREATE OWL CAROUSEL PROGRESS BARS FOR '.owl-carousel' SELECTOR BEFORE OWL CAROUSEL INSTANCE CREATION  -->
+    <script>
+      $('.owl-carousel').owlCarouselProgressBar();
+
+      $('.owl-carousel-green').owlCarouselProgressBar({
+        size: '10px',
+        margin: '20px 50px',
+        foregroundColor: 'darkseagreen',
+        color: 'green',
+        borderRadius: 0,
+        transitionInterval: 1,
+        progressBarClassName: 'my-custom-class-name',
+        scrollerClassName: 'my-custom-scroller-class-name'
+      });
+    </script>
+
+    <!-- FOR DEMO: CREATE CAROUSEL INSTANCES WITHOUT "LOOP" OPTION -->
+    <script>
+      $('.owl-carousel').owlCarousel({
+        margin: 10,
+        nav: true,
+        dots: false,
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 3
+          },
+          1000: {
+            items: 5
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
