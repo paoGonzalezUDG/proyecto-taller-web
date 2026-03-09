@@ -13,6 +13,7 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 ## 🎨 Clase 2: Del Diseño a la Estructura (Figma a HTML)
 
 - [ ] **Paso 1:** Exploración de la plantilla de Figma e introducción al *Dev Mode*.
+      
       `https://www.figma.com/design/XUBbeQRfPIwIEfSFBgzEjW/Illustration-Based-Portfolio-Website-Template--Community-?node-id=0-1&m=dev&t=2z3KwNk2RVX5XoB1-1`
       
       `https://www.figma.com/design/KG8CyCI5EtWvMDibQBZxO1/Personal-Portfolio-%7C-Figma-Portfolio-%7C-Portfolio--Community-?node-id=2-2&m=dev&t=XviHA48FD6t1l2vC-1`
