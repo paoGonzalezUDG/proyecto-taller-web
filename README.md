@@ -12,30 +12,20 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 
 ## 🎨 Clase 2: Del Diseño a la Estructura (Figma a HTML)
 - [ ] **Paso 1:** Exploración de la plantilla de Figma e introducción al *Dev Mode*.
-- [ ] **Paso 2:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías).
-- [ ] **Paso 3:** Descargar el proyecto base. Abrir la terminal y clonar este repositorio: `git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git`.
-- [ ] **Paso 4:** **¡Crear tu universo paralelo!** En la terminal, crea tu propia rama y muévete a ella usando: `git checkout -b portafolio-tuNombre` (ej. `portafolio-juanperez`).
-- [ ] **Paso 5:** Crear la estructura inicial dentro de Laragon (`index.php`, `style.css`, y carpeta `assets`).
-- [ ] **Paso 6:** Maquetar el esqueleto HTML semántico de las secciones: Hero, About, Projects y Contact.
-- [ ] **Paso 7:** Primer *commit* y subida a **TU** rama específica: (`git add .`, luego `git commit -m "Estructura HTML base"`, y finalmente `git push -u origin portafolio-tuNombre`).
-
-## 💅 Clase 3: Estilizado y Responsividad (CSS)
-- [ ] **Paso 1:** Asegurarte de estar en tu rama (`git branch`) y actualizar si es necesario.
-- [ ] **Paso 2:** Aplicar variables CSS (Custom Properties) para nuestros colores y fuentes.
-- [ ] **Paso 3:** Estilizar la sección principal y lograr que se vea idéntica a Figma.
-- [ ] **Paso 4:** Crear la cuadrícula de proyectos usando CSS Grid o Flexbox.
-- [ ] **Paso 5:** Adaptar el diseño para dispositivos móviles (Media Queries).
-- [ ] **Paso 6:** Guardar el progreso en tu rama (`git add .`, `git commit -m "Estilos agregados"`, `git push origin portafolio-tuNombre`).
-
-## ⚙️ Clase 4: Lógica y Backend (PHP, Node y Composer)
-- [ ] **Paso 1:** Inicializar el proyecto con NPM (`npm init -y`) y Composer (`composer init`).
-- [ ] **Paso 2:** Optimizar el código separando elementos repetitivos (como el *header* y *footer*) usando `include` o `require` de PHP.
-- [ ] **Paso 3:** Construir la interfaz del Formulario de Contacto.
-- [ ] **Paso 4:** Escribir la lógica en PHP para recibir y validar los datos que el usuario ingresa en el formulario (método POST).
-- [ ] **Paso 5:** Subir los avances a tu rama en GitHub (`git push origin portafolio-tuNombre`).
-
-## 🚀 Clase 5: Optimización, SEO y Presentación Final
-- [ ] **Paso 1:** Dinámica de depuración en parejas para afinar detalles visuales y de código.
-- [ ] **Paso 2:** Configuración de reglas de reescritura en el archivo `.htaccess` y creación de un `robots.txt` para optimizar el portafolio en buscadores.
-- [ ] **Paso 3:** Auditoría final del sitio usando nuestras extensiones de Chrome (Wappalyzer, ColorZilla, etc.).
-- [ ] **Paso 4:** *Commit* final a tu rama y presentación de los portafolios terminados directamente desde tu enlace de GitHub.
+- [ ] **Paso 2:** Crear una nueva carpeta en Laragon (`C:\laragon\www\mi-portafolio`) y abrirla en VS Code.
+- [ ] **Paso 3:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías).
+- [ ] **Paso 4:** Inicializar el repositorio local. Abre la terminal en VS Code y escribe:
+  `git init`
+  `git config --global user.name "TU_USUARIO_EN_GITHUB"`
+  `git config --global user.email "TU_CORREO_EN_GITHUB"`
+- [ ] **Paso 5:** Conectar tu carpeta local con el repositorio del taller en la nube:
+  `git remote add origin https://github.com/paoGonzalezUDG/proyecto-taller-web.git`
+- [ ] **Paso 6:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios):
+  `git checkout -b portafolio-TU_NOMBRE`
+- [ ] **Paso 7:** Maquetar el esqueleto HTML semántico de las secciones: Hero, About, Projects y Contact.
+- [ ] **Paso 8:** Especificar tus cambios:
+  `git add .`
+- [ ] **Paso 9:** Especificar el cambio realizado con un mensaje descriptivo:
+  `git commit -m "Estructura HTML base creada"`
+- [ ] **Paso 10:** Subir tu avance a **TU** rama específica en GitHub por primera vez:
+  `git push -u origin portafolio-tuNombre`
