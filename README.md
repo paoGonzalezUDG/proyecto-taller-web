@@ -10,6 +10,8 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 - [x] **Paso 4:** Creación y configuración de cuenta en GitHub y Git local.
 - [x] **Paso 5:** Creación de cuenta y verificación en Figma Education.
 
+
+
 ## 🎨 Clase 2: Del Diseño a la Estructura (Figma a HTML)
 
 - [ ] **Paso 1:** Exploración de la plantilla de Figma e introducción al *Dev Mode*.
@@ -61,3 +63,6 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 - [ ] **Paso 10:** Subir tu avance a **TU** rama específica en GitHub por primera vez:
       
   `git push -u origin portafolio-TU_NOMBRE`
+
+![Git cheatsheet](https://github.com/user-attachments/assets/cca72d61-256d-42c1-83ff-903b1c30f0d2)
+![Sesión](https://drive.google.com/file/d/1FuXsD_FXgbb9N_MwepZLGQIEFZm4y1YF/view?usp=sharing)
