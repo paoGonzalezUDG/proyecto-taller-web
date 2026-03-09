@@ -1,13 +1,26 @@
 # 🚀 Actividades del Taller Paso a Paso
 
-Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en algún momento, revisa en qué paso vamos y apóyate con tu equipo.
+Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en algún momento, revisa en qué paso vamos.
 
-## 🛠️ Clase 1: Entorno de Trabajo y Diseño UI
+## ✅ Clase 1: Preparación del Entorno (Virtual)
+
+- [x] **Paso 1:** Instalación de servidor local (Laragon) y editor de código (Visual Studio Code).
+- [x] **Paso 2:** Instalación de gestores de dependencias (Node.js y Composer).
+- [x] **Paso 3:** Configuración del navegador (Extensiones de Chrome para desarrolladores).
+- [x] **Paso 4:** Creación y configuración de cuenta en GitHub y Git local.
+- [x] **Paso 5:** Creación de cuenta y verificación en Figma Education.
+
+## 🛠️ Clase 2: Entorno de Trabajo y Diseño UI
 - [ ] **Paso 1:** Presentación del proyecto final (¿Qué vamos a construir?).
 - [ ] **Paso 2:** Verificación de herramientas (Terminal, Node, Composer, Git, Laragon/XAMPP).
-- [ ] **Paso 3:** Ingresar al equipo de trabajo en Figma.
-- [ ] **Paso 4:** Dinámica: "Figma Party". Diseñar en conjunto el wireframe (Header, Body, Footer).
-- [ ] **Paso 5:** Exportar los colores y tipografías usando el *Dev Mode* de Figma.
+- [ ] **Paso 3:** Exploración de la plantilla de Figma e introducción al *Dev Mode*.
+- [ ] **Paso 4:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías).
+- [ ] **Paso 5:** Crear la carpeta del proyecto en el servidor local (`htdocs` o `www`).
+- [ ] **Paso 6:** Abrir la carpeta en Visual Studio Code.
+- [ ] **Paso 7:** Inicializar el repositorio local (`git init`) y conectarlo a este repositorio en la nube.
+- [ ] **Paso 8:** Crear la estructura inicial en Laragon (`index.php`, `home.css`, y carpeta `assets`).
+- [ ] **Paso 9:** Maquetar el esqueleto HTML semántico de las secciones: Hero (Inicio), About (Sobre mí), Projects (Proyectos) y Contact (Contacto).
+- [ ] **Paso 10:** Primer *commit* y subida a GitHub (`git add .`, `git commit -m "Estructura HTML base"`, `git push`).
 
 ## 🐙 Clase 2: Primer Código y Control de Versiones
 - [ ] **Paso 1:** Crear la carpeta del proyecto en el servidor local (`htdocs` o `www`).
