@@ -65,4 +65,3 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
   `git push -u origin portafolio-TU_NOMBRE`
 
 ![Git cheatsheet](https://github.com/user-attachments/assets/cca72d61-256d-42c1-83ff-903b1c30f0d2)
-![Sesión](https://drive.google.com/file/d/1FuXsD_FXgbb9N_MwepZLGQIEFZm4y1YF/view?usp=sharing)
