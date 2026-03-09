@@ -66,4 +66,4 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 
 ![Git cheatsheet](https://github.com/user-attachments/assets/cca72d61-256d-42c1-83ff-903b1c30f0d2)
 
-![¿Cómo descargar actualizaciones de Paola?](https://github.com/paoGonzalezUDG/proyecto-taller-web/wiki/%23%23-%F0%9F%94%84-Gu%C3%ADa-de-Supervivencia:-%C2%BFC%C3%B3mo-descargar-actualizaciones-de-la-maestra%3F)
+[¿Cómo descargar actualizaciones de Paola?](https://github.com/paoGonzalezUDG/proyecto-taller-web/wiki/%23%23-%F0%9F%94%84-Gu%C3%ADa-de-Supervivencia:-%C2%BFC%C3%B3mo-descargar-actualizaciones-de-la-maestra%3F)
