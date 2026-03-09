@@ -23,6 +23,8 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
       https://www.figma.com/design/lBxDnkhkiKtwZR2sllPIty/Personal-Portfolio-Website-Template-%7C-Mobile---Desktop--Community-?node-id=333-789&m=dev&t=zrKgXPGuAMYxppqT-1
       
       https://www.figma.com/design/TZxOCQ0KVCviMrt3kuKzfe/Personal-Portfolio-Landing-Page-Design--Community-?node-id=0-1&m=dev&t=pmxJVUSydb4F0Nsz-1
+
+      https://www.figma.com/design/dO2PQd4nZb0EnOVwIr7fEs/Personal-Portfolio-Landing-Page-Ui-Design--Community-?node-id=0-1&m=dev&t=SrUFVbiD8SovrliB-1
       
 - [ ] **Paso 2:** Descargar la estructura inicial. Abre la terminal, dirígete a la carpeta de Laragon (`cd C:\laragon\www`) y clona el repositorio del taller:
       
