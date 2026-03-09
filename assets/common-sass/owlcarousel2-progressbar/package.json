@@ -1,0 +1,30 @@
+{
+  "name": "owlcarousel2-progressbar",
+  "version": "1.0.1",
+  "description": "Super small and customizable progress bar for OwlCarousel 2",
+  "main": "dist/owlcarousel2-progressbar.js",
+  "scripts": {
+    "dev": "webpack --watch",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karengrigoryan/owlcarousel-progressbar.git"
+  },
+  "keywords": [
+    "owl",
+    "carousel",
+    "progress",
+    "bar"
+  ],
+  "author": "Karen Grigoryan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karengrigoryan/owlcarousel-progressbar/issues"
+  },
+  "homepage": "https://github.com/karengrigoryan/owlcarousel-progressbar#readme",
+  "devDependencies": {
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  }
+}

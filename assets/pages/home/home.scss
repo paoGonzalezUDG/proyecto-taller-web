@@ -1,0 +1,19 @@
+@import "../../app";
+
+@import "../../common-sass/bootstrap-fileupload/bootstrap-fileupload";
+@import "../../front/form";
+
+/*Owl Carousel v2.3.4*/
+//@import "../../common-sass/owl.carousel/src/scss/owl.carousel";
+//@import "../../common-sass/owl.carousel/src/scss/owl.theme.default";
+//@import "../../common-sass/owl.carousel/src/scss/theme.green";
+
+#homePage{
+
+	/* Selectores */
+	//:where(header, nav, main) h1,
+	:where(main) h2{
+		text-transform: capitalize;
+	}
+
+}
