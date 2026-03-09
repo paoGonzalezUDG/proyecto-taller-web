@@ -3,7 +3,7 @@
 Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en algún momento, revisa en qué paso vamos y apóyate con tu equipo. Nuestro objetivo final es construir un portafolio profesional basado en [este diseño de Figma](https://www.figma.com/design/XUBbeQRfPIwIEfSFBgzEjW/Illustration-Based-Portfolio-Website-Template--Community-?node-id=0-1&t=2z3KwNk2RVX5XoB1-1).
 
 ## ✅ Clase 1: Preparación del Entorno (Virtual)
-*¡Completada el miércoles pasado!*
+*¡Completada el miércoles 03 de marzo!*
 - [x] **Paso 1:** Instalación de servidor local (Laragon) y editor de código (Visual Studio Code).
 - [x] **Paso 2:** Instalación de gestores de dependencias (Node.js y Composer).
 - [x] **Paso 3:** Configuración del navegador (Extensiones de Chrome para desarrolladores).
