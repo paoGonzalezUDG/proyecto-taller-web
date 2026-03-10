@@ -19,6 +19,7 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
       https://www.figma.com/files/project/566141154
       
 - [ ] **Paso 2:** Descargar la estructura inicial. Abre la terminal, dirígete a la carpeta de Laragon (`cd C:\laragon\www`) y clona el repositorio del taller:
+      
       `git init`
 
       `git config --global user.name "TU_USUARIO_EN_GITHUB"`
