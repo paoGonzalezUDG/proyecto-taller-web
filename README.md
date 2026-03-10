@@ -30,13 +30,19 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 
 https://github.com/user-attachments/assets/ec6b69eb-6207-418d-b3cc-b0c00261bb4e
 
-- [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y carga las librerías con NPM.
+- [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y verifica que el prefijo NPM no marque error.
+      
+      npm i
+      
+      
+
+- [ ] **Paso 4:** Carga las librerías con NPM.
       
       npm i
       
       npm cache clean --force
       
-- [ ] **Paso 4:** Ejecutar Laragon y mostrar proyecto.
+- [ ] **Paso 5:** Ejecutar Laragon y mostrar proyecto.
       
       npm run watch
       
