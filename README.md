@@ -10,8 +10,6 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 - [x] **Paso 4:** Creación y configuración de cuenta en GitHub y Git local.
 - [x] **Paso 5:** Creación de cuenta y verificación en Figma Education.
 
-
-
 ## 🎨 Clase 2: Del Diseño a la Estructura (Figma a HTML)
 
 - [ ] **Paso 1:** Exploración de la plantilla de Figma e introducción al *Dev Mode*.
@@ -28,25 +26,26 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
       
       `git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git`
 
-https://github.com/user-attachments/assets/ec6b69eb-6207-418d-b3cc-b0c00261bb4e
+      https://github.com/user-attachments/assets/ec6b69eb-6207-418d-b3cc-b0c00261bb4e
 
 - [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y verifica que el prefijo NPM no marque error.
       
       npm i         
 
-https://github.com/user-attachments/assets/bd90e7b4-553c-42ba-849e-9e92f559a8c5
+https://github.com/user-attachments/assets/0c3350a6-ec40-40a2-ab9c-539d860c1529
 
 - [ ] **Paso 4:** Corregir errores.
       
-      
+     <img width="1699" height="487" alt="Captura de pantalla 2026-03-10 150829" src="https://github.com/user-attachments/assets/b07dd54a-21ad-4f6b-9eff-5751884a5968" />
+ 
 
-- [ ] **Paso 4:** Carga las librerías con NPM.
+- [ ] **Paso 5:** Carga las librerías con NPM.
       
       npm i
       
       npm cache clean --force
       
-- [ ] **Paso 5:** Ejecutar Laragon y mostrar proyecto.
+- [ ] **Paso 6:** Ejecutar Laragon y mostrar proyecto.
       
       npm run watch
       
