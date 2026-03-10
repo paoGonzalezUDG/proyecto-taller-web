@@ -22,6 +22,12 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
       
   `git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git`
 
+
+https://github.com/user-attachments/assets/ec6b69eb-6207-418d-b3cc-b0c00261bb4e
+
+
+
+
 - [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y carga las librerías con NPM.
       
       npm i
