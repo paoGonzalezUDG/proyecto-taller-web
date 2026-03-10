@@ -42,6 +42,8 @@ Copia
       
       Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
+https://github.com/user-attachments/assets/dc566af8-db9a-40e7-bc60-87d708023177
+
 - [ ] **Paso 5:** Carga las librerías con NPM.
       
       npm i
