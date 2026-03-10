@@ -19,30 +19,24 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
       https://www.figma.com/files/project/566141154
       
 - [ ] **Paso 2:** Descargar la estructura inicial. Abre la terminal, dirígete a la carpeta de Laragon (`cd C:\laragon\www`) y clona el repositorio del taller:
-      
-  `git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git`
+      `git init`
 
+      `git config --global user.name "TU_USUARIO_EN_GITHUB"`
+
+      `git config --global user.email "TU_CORREO_EN_GITHUB"`
+      
+      `git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git`
 
 https://github.com/user-attachments/assets/ec6b69eb-6207-418d-b3cc-b0c00261bb4e
 
-
-
-
 - [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y carga las librerías con NPM.
-      
       npm i
       
       npm cache clean --force
       
+- [ ] **Paso 4:** Ejecutar Laragon y mostrar proyecto.
       npm run watch
       
-- [ ] **Paso 4:** Configurar tu identidad en Git. Abre la terminal en VS Code y escribe:
-
-  `git init`
-  
-  `git config --global user.name "TU_USUARIO_EN_GITHUB"`
-
-  `git config --global user.email "TU_CORREO_EN_GITHUB"`
 
 - [ ] **Paso 5:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías) desde Figma.
 - [ ] **Paso 6:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios):
