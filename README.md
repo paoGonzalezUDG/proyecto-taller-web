@@ -36,6 +36,10 @@ https://github.com/user-attachments/assets/ec6b69eb-6207-418d-b3cc-b0c00261bb4e
            
 <img width="1699" height="487" alt="Captura de pantalla 2026-03-10 150829" src="https://github.com/user-attachments/assets/1f4a9993-1fed-4aed-a6d1-e29b047b1889" />
 
+- [ ] **Paso 4:** Corregir errores.
+      
+      npm i
+
 - [ ] **Paso 4:** Carga las librerías con NPM.
       
       npm i
