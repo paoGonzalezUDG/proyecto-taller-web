@@ -38,6 +38,8 @@ https://github.com/user-attachments/assets/0c3350a6-ec40-40a2-ab9c-539d860c1529
       
      <img width="1699" height="487" alt="Captura de pantalla 2026-03-10 150829" src="https://github.com/user-attachments/assets/b07dd54a-21ad-4f6b-9eff-5751884a5968" />
 
+Copia
+      
       Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
 - [ ] **Paso 5:** Carga las librerías con NPM.
