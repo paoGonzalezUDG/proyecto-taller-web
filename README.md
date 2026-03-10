@@ -20,7 +20,7 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
       
 - [ ] **Paso 2:** Descargar la estructura inicial. Abre la terminal, dirígete a la carpeta de Laragon (`cd C:\laragon\www`) y clona el repositorio del taller:
       
-  `git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git`
+  git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git
 
 - [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y carga las librerías con NPM.
       
