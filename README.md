@@ -44,6 +44,12 @@ Copia
 
 https://github.com/user-attachments/assets/dc566af8-db9a-40e7-bc60-87d708023177
 
+Si aún no se corrige el problema, intenta con los siguientes videos
+
+[Can't run the code "npm-install" in Visual Studio Code | Running Scripts is disabled on this System](https://www.youtube.com/watch?v=t9_ziPwYUWI)
+
+[NodeJS término npm no sé reconoce como nombre de un cmdlet](https://www.youtube.com/shorts/mKwI95AtunA)
+
 - [ ] **Paso 5:** Carga las librerías con NPM.
       
       npm i
