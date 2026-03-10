@@ -49,33 +49,30 @@ Si aún no se corrige el problema, intenta con los siguientes videos
 [Can't run the code "npm-install" in Visual Studio Code | Running Scripts is disabled on this System](https://www.youtube.com/watch?v=t9_ziPwYUWI)
 
 [NodeJS término npm no sé reconoce como nombre de un cmdlet](https://www.youtube.com/shorts/mKwI95AtunA)
+      
+- [ ] **Paso 5:** Ejecutar Laragon y mostrar proyecto.
 
-- [ ] **Paso 5:** Carga las librerías con NPM.
-      
-      npm i
-      
       npm cache clean --force
       
-- [ ] **Paso 6:** Ejecutar Laragon y mostrar proyecto.
-      
       npm run watch
+
       
 
-- [ ] **Paso 5:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías) desde Figma.
-- [ ] **Paso 6:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios):
+- [ ] **Paso 6:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías) desde Figma.
+- [ ] **Paso 7:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios):
       
   `git checkout -b portafolio-TU_NOMBRE`
 
-- [ ] **Paso 7:** Maquetar el esqueleto HTML semántico en el archivo `index.php` base: Hero, About, Projects y Contact.
-- [ ] **Paso 8:** Especificar tus cambios (meterlos al carrito):
+- [ ] **Paso 8:** Maquetar el esqueleto HTML semántico en el archivo `index.php` base: Hero, About, Projects y Contact.
+- [ ] **Paso 9:** Especificar tus cambios (meterlos al carrito):
       
   `git add .`
 
-- [ ] **Paso 9:** Especificar el cambio realizado con un mensaje descriptivo:
+- [ ] **Paso 10:** Especificar el cambio realizado con un mensaje descriptivo:
       
   `git commit -m "Estructura HTML base creada"`
 
-- [ ] **Paso 10:** Subir tu avance a **TU** rama específica en GitHub por primera vez:
+- [ ] **Paso 11:** Subir tu avance a **TU** rama específica en GitHub por primera vez:
       
   `git push -u origin portafolio-TU_NOMBRE`
 
