@@ -16,7 +16,7 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 
 - [ ] **Paso 1:** Exploración de la plantilla de Figma e introducción al *Dev Mode*.
       
-      https://www.figma.com/files/team/1610784691951853272/project/566141154?fuid=1537509323040043730
+      https://www.figma.com/files/project/566141154
       
 - [ ] **Paso 2:** Descargar la estructura inicial. Abre la terminal, dirígete a la carpeta de Laragon (`cd C:\laragon\www`) y clona el repositorio del taller:
       
