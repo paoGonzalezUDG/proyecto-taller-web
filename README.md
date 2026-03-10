@@ -56,7 +56,7 @@ Si aún no se corrige el problema, intenta con los siguientes videos
       
       npm run watch
 
-      
+https://github.com/user-attachments/assets/3a9b7382-3941-45f7-bd94-8c47da2b00f6
 
 - [ ] **Paso 6:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías) desde Figma.
 - [ ] **Paso 7:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios):
