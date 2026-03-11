@@ -51,13 +51,17 @@ Reto 5
       https://www.figma.com/design/lBxDnkhkiKtwZR2sllPIty/Proyecto-reto-5?m=auto&t=hqsGCKyfLTKdUMgi-6
 
 - [ ] **Paso 2:** Descargar la estructura inicial. Abre la terminal, dirígete a la carpeta de Laragon (`cd C:\laragon\www`) y clona el repositorio del taller:
-      
+
+  Usuario
+
       `git config --global user.name "TU_USUARIO_EN_GITHUB"`
       
+  Correo
 
       `git config --global user.email "TU_CORREO_EN_GITHUB"`
       
-      
+  Repositorio
+
       `git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git`
 
       
