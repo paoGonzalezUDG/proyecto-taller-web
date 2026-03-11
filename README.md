@@ -72,6 +72,17 @@ https://github.com/user-attachments/assets/efe92bb0-c4eb-4437-b435-76055a92531e
       
   `git checkout -b portafolio-paola-gonzalez`
 
+  Si te equivocaste, no pasa nada, solo reenómbralo
+  Asegúrate de estar dentro de la rama creada
+
+  `git branch -m portafolio-TU_NOMBRE_CORREGIDO`
+
+  Ya lo subí a GitHub (ya hice push):
+
+  `git push -u origin portafolio-TU_NOMBRE_CORREGIDO`
+
+  `git push origin --delete portafolio-TU_NOMBRE_EQUIVOCADO`
+
 - [ ] **Paso 8:** Maquetar el esqueleto HTML semántico en el archivo `index.php` base: Hero, About, Projects y Contact.
 - [ ] **Paso 9:** Especificar tus cambios (meterlos al carrito):
       
