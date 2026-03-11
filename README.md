@@ -18,6 +18,24 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 
 https://github.com/user-attachments/assets/fa416156-5d13-48f9-aeac-ce11cef68a5a
 
+Ahora elige tu proyecto en Figma
+
+Si no tienes conocimientos previos en `CSS` y/o `HTML`, vamos a trabajar con el `proyecto base` donde nos iremos paso a paso.
+
+      https://www.figma.com/design/7WS34YV1PlTk9uVWf6c03M/Proyecto-base
+
+Si ya tienes conocimientos, te invito a elegir alguno de los proyectos disponibles. Tómalo como un reto: una oportunidad para aprender algo nuevo, practicar y salir un poco de tu zona de confort.
+
+Recuerda `no usar IA` para resolver las actividades.
+
+La idea del taller es que desarrolles tu propio criterio y habilidades. Si la usas para hacer el trabajo, el aprendizaje se pierde… y entonces este taller no tendría sentido.
+
+      [Reto 1](https://www.figma.com/design/TZxOCQ0KVCviMrt3kuKzfe/Proyecto-reto-1?m=auto&t=hqsGCKyfLTKdUMgi-6)
+      [Reto 2](https://www.figma.com/design/dO2PQd4nZb0EnOVwIr7fEs/Proyecto-reto-2?m=auto&t=hqsGCKyfLTKdUMgi-6)
+      [Reto 3](https://www.figma.com/design/UwQchzFvLvhMJIoEHZReOS/Proyecto-reto-3?m=auto&t=hqsGCKyfLTKdUMgi-6)
+      [Reto 4](https://www.figma.com/design/KG8CyCI5EtWvMDibQBZxO1/Proyecto-reto-4?m=auto&t=hqsGCKyfLTKdUMgi-6)
+      [Reto 5](https://www.figma.com/design/lBxDnkhkiKtwZR2sllPIty/Proyecto-reto-5?m=auto&t=hqsGCKyfLTKdUMgi-6)
+
 - [ ] **Paso 2:** Descargar la estructura inicial. Abre la terminal, dirígete a la carpeta de Laragon (`cd C:\laragon\www`) y clona el repositorio del taller:
       
       `git config --global user.name "TU_USUARIO_EN_GITHUB"`
