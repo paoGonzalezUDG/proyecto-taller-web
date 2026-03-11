@@ -90,6 +90,17 @@ https://github.com/user-attachments/assets/9ead90da-3735-456c-b5a0-1768d688d279
   `git push origin --delete portafolio-TU_NOMBRE_EQUIVOCADO`
 
 - [ ] **Paso 8:** Maquetar el esqueleto HTML semántico en el archivo `index.php` base: Hero, About, Projects y Contact.
+
+      proyecto-taller-web/
+      ├── assets/                  &lt;-- 1. Aquí guardarán sus imágenes de Figma
+      │   └── images/              
+      ├── templates/               &lt;-- 2. Aquí viven tu Header y Footer (No tocar)
+      │   ├── header.php
+      │   └── footer.php
+      └── views/                   &lt;-- 3. ¡EL ÁREA DE TRABAJO!
+          └── index/
+              └── index.php        &lt;-- 🎯 AQUÍ VAN A MAQUETAR EL PORTAFOLIO
+
 - [ ] **Paso 9:** Especificar tus cambios (meterlos al carrito):
       
   `git add .`
