@@ -4,11 +4,11 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 
 ## ✅ Clase 1: Preparación del Entorno (Virtual)
 *¡Completada el miércoles 03 de marzo!*
-- [x] **Paso 1:** Instalación de servidor local (Laragon) y editor de código (Visual Studio Code).
-- [x] **Paso 2:** Instalación de gestores de dependencias (Node.js y Composer).
-- [x] **Paso 3:** Configuración del navegador (Extensiones de Chrome para desarrolladores).
-- [x] **Paso 4:** Creación y configuración de cuenta en GitHub y Git local.
-- [x] **Paso 5:** Creación de cuenta y verificación en Figma Education.
+- [x] **Paso 1:** Instalación de servidor local (Laragon) y editor de código (Visual Studio Code). [Guía](https://github.com/paoGonzalezUDG/proyecto-taller-web/wiki/Gu%C3%ADa-de-Instalaci%C3%B3n:-Laragon-(Windows))
+- [x] **Paso 2:** Instalación de gestores de dependencias (Node.js y Composer). [Guía](https://github.com/paoGonzalezUDG/proyecto-taller-web/wiki/Gu%C3%ADa:-Instalando-Node.js-y-Composer-(Los-Motores-de-tu-C%C3%B3digo))
+- [x] **Paso 3:** Configuración del navegador (Extensiones de Chrome para desarrolladores). [Guía](https://github.com/paoGonzalezUDG/proyecto-taller-web/wiki/Gu%C3%ADa:-Potenciando-tu-Navegador-con-Extensiones-de-Chrome)
+- [x] **Paso 4:** Creación y configuración de cuenta en GitHub y Git local. [Guía](https://github.com/paoGonzalezUDG/proyecto-taller-web/wiki/Gu%C3%ADa:-Instalando-Git-y-Creando-tu-Cuenta-en-GitHub)
+- [x] **Paso 5:** Creación de cuenta y verificación en Figma Education. [Guía](https://github.com/paoGonzalezUDG/proyecto-taller-web/wiki/Gu%C3%ADa:-Obteniendo-Figma-Premium-%C2%A1Gratis-para-Estudiantes!)
 
 ## 🎨 Clase 2: Del Diseño a la Estructura (Figma a HTML)
 
