@@ -141,17 +141,27 @@ Recuerda que de ahora en adelante, debes estar en tu rama creada `portafolio-TU_
 
 https://github.com/user-attachments/assets/41587fd2-8140-4e12-bdbc-728b14b88394
 
-- [ ] **Paso 9:** Especificar tus cambios (meterlos al carrito):
+- [ ] **Paso 9:** Ya quiero subir mis cambios al repositorio remoto (el que está en línea):
       
   `git add .`
 
-- [ ] **Paso 10:** Especificar el cambio realizado con un mensaje descriptivo:
-      
-  `git commit -m "Estructura HTML base creada"`
+Al realizar un commit, es indispensable incluir un mensaje claro y descriptivo que explique el cambio realizado. Entre más específico sea el mensaje, mejor.
 
-- [ ] **Paso 11:** Subir tu avance a **TU** rama específica en GitHub por primera vez:
+Evita repetir el mismo mensaje en todos tus commits. Cada cambio debe tener un mensaje único, ya que usar mensajes genéricos es una mala práctica y dificulta entender el historial del proyecto.
+
+  `git commit -m "TU_CAMBIO_DE_CODIGO_ESPECIFICO"`
+
+Ejemplo
+
+  `git commit -m "Agrega párrafo de texto en la sección de contenido""`
+
+Sube tu avance a **TU**  rama específica `portafolio-TU_NOMBRE` en GitHub por primera vez:
       
   `git push -u origin portafolio-TU_NOMBRE`
+
+Ejemplo
+
+  `git push -u origin portafolio-paola-delgado`
 
 ![Git cheatsheet](https://github.com/user-attachments/assets/cca72d61-256d-42c1-83ff-903b1c30f0d2)
 
