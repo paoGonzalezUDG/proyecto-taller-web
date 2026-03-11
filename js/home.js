@@ -1,2 +1,3677 @@
-/*! For license information please see home.js.LICENSE.txt */
-(()=>{var t={221(){var t,e;t=window.jQuery,(e=function(e,a){if(this.$element=t(e),this.type=this.$element.data("uploadtype")||(this.$element.find(".thumbnail").length>0?"image":"file"),this.$input=this.$element.find(":file"),0!==this.$input.length){this.name=this.$input.attr("name")||a.name,this.$hidden=this.$element.find('input[type=hidden][name="'+this.name+'"]'),0===this.$hidden.length&&(this.$hidden=t('<input type="hidden" />'),this.$element.prepend(this.$hidden)),this.$preview=this.$element.find(".fileupload-preview");var r=this.$preview.css("height");"inline"!=this.$preview.css("display")&&"0px"!=r&&"none"!=r&&this.$preview.css("line-height",r),this.original={exists:this.$element.hasClass("fileupload-exists"),preview:this.$preview.html(),hiddenVal:this.$hidden.val()},this.$remove=this.$element.find('[data-dismiss="fileupload"]'),this.$element.find('[data-trigger="fileupload"]').on("click.fileupload",t.proxy(this.trigger,this)),this.listen()}}).prototype={listen:function(){this.$input.on("change.fileupload",t.proxy(this.change,this)),t(this.$input[0].form).on("reset.fileupload",t.proxy(this.reset,this)),this.$remove&&this.$remove.on("click.fileupload",t.proxy(this.clear,this))},change:function(t,e){if("clear"!==e){var a=void 0!==t.target.files?t.target.files[0]:t.target.value?{name:t.target.value.replace(/^.+\\/,"")}:null;if(a)if(this.$hidden.val(""),this.$hidden.attr("name",""),this.$input.attr("name",this.name),"image"===this.type&&this.$preview.length>0&&(void 0!==a.type?a.type.match("image.*"):a.name.match("\\.(gif|png|jpe?g)$"))&&"undefined"!=typeof FileReader){var r=new FileReader,s=this.$preview,i=this.$element;r.onload=function(t){s.html('<img src="'+t.target.result+'" '+("none"!=s.css("max-height")?'style="max-height: '+s.css("max-height")+';"':"")+" />"),i.addClass("fileupload-exists").removeClass("fileupload-new")},r.readAsDataURL(a)}else this.$preview.text(a.name),this.$element.addClass("fileupload-exists").removeClass("fileupload-new");else this.clear()}},clear:function(t){if(this.$hidden.val(""),this.$hidden.attr("name",this.name),this.$input.attr("name",""),navigator.userAgent.match(/msie/i)){var e=this.$input.clone(!0);this.$input.after(e),this.$input.remove(),this.$input=e}else this.$input.val("");this.$preview.html(""),this.$element.addClass("fileupload-new").removeClass("fileupload-exists"),t&&(this.$input.trigger("change",["clear"]),t.preventDefault())},reset:function(t){this.clear(),this.$hidden.val(this.original.hiddenVal),this.$preview.html(this.original.preview),this.original.exists?this.$element.addClass("fileupload-exists").removeClass("fileupload-new"):this.$element.addClass("fileupload-new").removeClass("fileupload-exists")},trigger:function(t){this.$input.trigger("click"),t.preventDefault()}},t.fn.fileupload=function(a){return this.each(function(){var r=t(this),s=r.data("fileupload");s||r.data("fileupload",s=new e(this,a)),"string"==typeof a&&s[a]()})},t.fn.fileupload.Constructor=e,t(document).on("click.fileupload.data-api",'[data-provides="fileupload"]',function(e){var a=t(this);if(!a.data("fileupload")){a.fileupload(a.data());var r=t(e.target).closest('[data-dismiss="fileupload"],[data-trigger="fileupload"]');r.length>0&&(r.trigger("click.fileupload"),e.preventDefault())}})},605(){function t(e){return t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},t(e)}if("undefined"==typeof jQuery)throw new Error("BootstrapValidator's JavaScript requires jQuery");var e,a;e=window.jQuery,(a=function(t,a){this.$form=e(t),this.options=e.extend({},e.fn.bootstrapValidator.DEFAULT_OPTIONS,a),this.$invalidFields=e([]),this.$submitButton=null,this.$hiddenButton=null,this.STATUS_NOT_VALIDATED="NOT_VALIDATED",this.STATUS_VALIDATING="VALIDATING",this.STATUS_INVALID="INVALID",this.STATUS_VALID="VALID";var r=function(){for(var t=3,e=document.createElement("div"),a=e.all||[];e.innerHTML="\x3c!--[if gt IE "+ ++t+"]><br><![endif]--\x3e",a[0];);return t>4?t:!t}(),s=document.createElement("div");this._changeEvent=9!==r&&"oninput"in s?"input":"keyup",this._submitIfValid=null,this._cacheFields={},this._init()}).prototype={constructor:a,_init:function(){var t=this,a={container:this.$form.attr("data-bv-container"),events:{formInit:this.$form.attr("data-bv-events-form-init"),formError:this.$form.attr("data-bv-events-form-error"),formSuccess:this.$form.attr("data-bv-events-form-success"),fieldAdded:this.$form.attr("data-bv-events-field-added"),fieldRemoved:this.$form.attr("data-bv-events-field-removed"),fieldInit:this.$form.attr("data-bv-events-field-init"),fieldError:this.$form.attr("data-bv-events-field-error"),fieldSuccess:this.$form.attr("data-bv-events-field-success"),fieldStatus:this.$form.attr("data-bv-events-field-status"),validatorError:this.$form.attr("data-bv-events-validator-error"),validatorSuccess:this.$form.attr("data-bv-events-validator-success")},excluded:this.$form.attr("data-bv-excluded"),feedbackIcons:{valid:this.$form.attr("data-bv-feedbackicons-valid"),invalid:this.$form.attr("data-bv-feedbackicons-invalid"),validating:this.$form.attr("data-bv-feedbackicons-validating")},group:this.$form.attr("data-bv-group"),live:this.$form.attr("data-bv-live"),message:this.$form.attr("data-bv-message"),onError:this.$form.attr("data-bv-onerror"),onSuccess:this.$form.attr("data-bv-onsuccess"),submitButtons:this.$form.attr("data-bv-submitbuttons"),threshold:this.$form.attr("data-bv-threshold"),trigger:this.$form.attr("data-bv-trigger"),verbose:this.$form.attr("data-bv-verbose"),fields:{}};for(var r in this.$form.attr("novalidate","novalidate").addClass(this.options.elementClass).on("submit.bv",function(e){e.preventDefault(),t.validate()}).on("click.bv",this.options.submitButtons,function(){t.$submitButton=e(this),t._submitIfValid=!0}).find("[name], [data-bv-field]").each(function(){var r=e(this),s=r.attr("name")||r.attr("data-bv-field"),i=t._parseOptions(r);i&&(r.attr("data-bv-field",s),a.fields[s]=e.extend({},i,a.fields[s]))}),this.options=e.extend(!0,this.options,a),this.$hiddenButton=e("<button/>").attr("type","submit").prependTo(this.$form).addClass("bv-hidden-submit").css({display:"none",width:0,height:0}),this.$form.on("click.bv",'[type="submit"]',function(a){if(!a.isDefaultPrevented()){var r=e(a.target),s=r.is('[type="submit"]')?r.eq(0):r.parent('[type="submit"]').eq(0);!t.options.submitButtons||s.is(t.options.submitButtons)||s.is(t.$hiddenButton)||t.$form.off("submit.bv").submit()}}),this.options.fields)this._initField(r);this.$form.trigger(e.Event(this.options.events.formInit),{bv:this,options:this.options}),this.options.onSuccess&&this.$form.on(this.options.events.formSuccess,function(a){e.fn.bootstrapValidator.helpers.call(t.options.onSuccess,[a])}),this.options.onError&&this.$form.on(this.options.events.formError,function(a){e.fn.bootstrapValidator.helpers.call(t.options.onError,[a])})},_parseOptions:function(t){var a,r,s,i,n,o,l,d=t.attr("name")||t.attr("data-bv-field"),u={};for(r in e.fn.bootstrapValidator.validators)if(a=e.fn.bootstrapValidator.validators[r],s=t.attr("data-bv-"+r.toLowerCase())+"",(l="function"==typeof a.enableByHtml5?a.enableByHtml5(t):null)&&"false"!==s||!0!==l&&(""===s||"true"===s))for(o in a.html5Attributes=e.extend({},{message:"message",onerror:"onError",onsuccess:"onSuccess"},a.html5Attributes),u[r]=e.extend({},!0===l?{}:l,u[r]),a.html5Attributes)i=a.html5Attributes[o],(n=t.attr("data-bv-"+r.toLowerCase()+"-"+o))&&("true"===n?n=!0:"false"===n&&(n=!1),u[r][i]=n);var f={container:t.attr("data-bv-container"),excluded:t.attr("data-bv-excluded"),feedbackIcons:t.attr("data-bv-feedbackicons"),group:t.attr("data-bv-group"),message:t.attr("data-bv-message"),onError:t.attr("data-bv-onerror"),onStatus:t.attr("data-bv-onstatus"),onSuccess:t.attr("data-bv-onsuccess"),selector:t.attr("data-bv-selector"),threshold:t.attr("data-bv-threshold"),trigger:t.attr("data-bv-trigger"),verbose:t.attr("data-bv-verbose"),validators:u},p=e.isEmptyObject(f);return!e.isEmptyObject(u)||!p&&this.options.fields&&this.options.fields[d]?(f.validators=u,f):null},_initField:function(a){var r=e([]);switch(t(a)){case"object":r=a,a=a.attr("data-bv-field");break;case"string":(r=this.getFieldElements(a)).attr("data-bv-field",a)}if(0!==r.length&&null!==this.options.fields[a]&&null!==this.options.fields[a].validators){var s;for(s in this.options.fields[a].validators)e.fn.bootstrapValidator.validators[s]||delete this.options.fields[a].validators[s];null===this.options.fields[a].enabled&&(this.options.fields[a].enabled=!0);for(var i=this,n=r.length,o=r.attr("type"),l=1===n||"radio"===o||"checkbox"===o,d="radio"===o||"checkbox"===o||"file"===o||"SELECT"===r.eq(0).get(0).tagName?"change":this._changeEvent,u=(this.options.fields[a].trigger||this.options.trigger||d).split(" "),f=e.map(u,function(t){return t+".update.bv"}).join(" "),p=0;n>p;p++){var c=r.eq(p),h=this.options.fields[a].group||this.options.group,v=c.parents(h),b="function"==typeof(this.options.fields[a].container||this.options.container)?(this.options.fields[a].container||this.options.container).call(this,c,this):this.options.fields[a].container||this.options.container,m=b&&"tooltip"!==b&&"popover"!==b?e(b):this._getMessageContainer(c,h);for(s in b&&"tooltip"!==b&&"popover"!==b&&m.addClass("has-error"),m.find('.help-block[data-bv-validator][data-bv-for="'+a+'"]').remove(),v.find('i[data-bv-icon-for="'+a+'"]').remove(),c.off(f).on(f,function(){i.updateStatus(e(this),i.STATUS_NOT_VALIDATED)}),c.data("bv.messages",m),this.options.fields[a].validators)c.data("bv.result."+s,this.STATUS_NOT_VALIDATED),l&&p!==n-1||e("<small/>").css("display","none").addClass("help-block").attr("data-bv-validator",s).attr("data-bv-for",a).attr("data-bv-result",this.STATUS_NOT_VALIDATED).html(this._getMessage(a,s)).appendTo(m),"function"==typeof e.fn.bootstrapValidator.validators[s].init&&e.fn.bootstrapValidator.validators[s].init(this,c,this.options.fields[a].validators[s]);if(!1!==this.options.fields[a].feedbackIcons&&"false"!==this.options.fields[a].feedbackIcons&&this.options.feedbackIcons&&this.options.feedbackIcons.validating&&this.options.feedbackIcons.invalid&&this.options.feedbackIcons.valid&&(!l||p===n-1)){v.addClass("has-feedback");var A=e("<i/>").css("display","none").addClass("form-control-feedback").attr("data-bv-icon-for",a).insertAfter(c);if("checkbox"===o||"radio"===o){var g=c.parent();g.hasClass(o)?A.insertAfter(g):g.parent().hasClass(o)&&A.insertAfter(g.parent())}0===v.find("label").length&&A.addClass("bv-no-label"),0!==v.find(".input-group").length&&A.addClass("bv-icon-input-group").insertAfter(v.find(".input-group").eq(0)),b&&c.off("focus.bv").on("focus.bv",function(){switch(b){case"tooltip":A.tooltip("show");break;case"popover":A.popover("show")}}).off("blur.bv").on("blur.bv",function(){switch(b){case"tooltip":A.tooltip("hide");break;case"popover":A.popover("hide")}})}}switch(r.on(this.options.events.fieldSuccess,function(t,a){var r=i.getOptions(a.field,null,"onSuccess");r&&e.fn.bootstrapValidator.helpers.call(r,[t,a])}).on(this.options.events.fieldError,function(t,a){var r=i.getOptions(a.field,null,"onError");r&&e.fn.bootstrapValidator.helpers.call(r,[t,a])}).on(this.options.events.fieldStatus,function(t,a){var r=i.getOptions(a.field,null,"onStatus");r&&e.fn.bootstrapValidator.helpers.call(r,[t,a])}).on(this.options.events.validatorError,function(t,a){var r=i.getOptions(a.field,a.validator,"onError");r&&e.fn.bootstrapValidator.helpers.call(r,[t,a])}).on(this.options.events.validatorSuccess,function(t,a){var r=i.getOptions(a.field,a.validator,"onSuccess");r&&e.fn.bootstrapValidator.helpers.call(r,[t,a])}),f=e.map(u,function(t){return t+".live.bv"}).join(" "),this.options.live){case"submitted":break;case"disabled":r.off(f);break;default:r.off(f).on(f,function(){i._exceedThreshold(e(this))&&i.validateField(e(this))})}r.trigger(e.Event(this.options.events.fieldInit),{bv:this,field:a,element:r})}},_getMessage:function(t,a){if(!(this.options.fields[t]&&e.fn.bootstrapValidator.validators[a]&&this.options.fields[t].validators&&this.options.fields[t].validators[a]))return"";var r=this.options.fields[t].validators[a];switch(!0){case!!r.message:return r.message;case!!this.options.fields[t].message:return this.options.fields[t].message;case!!e.fn.bootstrapValidator.i18n[a]:return e.fn.bootstrapValidator.i18n[a].default;default:return this.options.message}},_getMessageContainer:function(t,e){var a=t.parent();if(a.is(e))return a;var r=a.attr("class");if(!r)return this._getMessageContainer(a,e);for(var s=(r=r.split(" ")).length,i=0;s>i;i++)if(/^col-(xs|sm|md|lg)-\d+$/.test(r[i])||/^col-(xs|sm|md|lg)-offset-\d+$/.test(r[i]))return a;return this._getMessageContainer(a,e)},_submit:function(){var t=this.isValid(),a=t?this.options.events.formSuccess:this.options.events.formError,r=e.Event(a);this.$form.trigger(r),this.$submitButton&&(t?this._onSuccess(r):this._onError(r))},_isExcluded:function(t){var a=t.attr("data-bv-excluded"),r=t.attr("data-bv-field")||t.attr("name");switch(!0){case!!r&&this.options.fields&&this.options.fields[r]&&("true"===this.options.fields[r].excluded||!0===this.options.fields[r].excluded):case"true"===a:case""===a:return!0;case!!r&&this.options.fields&&this.options.fields[r]&&("false"===this.options.fields[r].excluded||!1===this.options.fields[r].excluded):case"false"===a:return!1;default:if(this.options.excluded){"string"==typeof this.options.excluded&&(this.options.excluded=e.map(this.options.excluded.split(","),function(t){return e.trim(t)}));for(var s=this.options.excluded.length,i=0;s>i;i++)if("string"==typeof this.options.excluded[i]&&t.is(this.options.excluded[i])||"function"==typeof this.options.excluded[i]&&!0===this.options.excluded[i].call(this,t,this))return!0}return!1}},_exceedThreshold:function(t){var a=t.attr("data-bv-field"),r=this.options.fields[a].threshold||this.options.threshold;return!r||-1!==e.inArray(t.attr("type"),["button","checkbox","file","hidden","image","radio","reset","submit"])||t.val().length>=r},_onError:function(t){if(!t.isDefaultPrevented()){if("submitted"===this.options.live){this.options.live="enabled";var a=this;for(var r in this.options.fields)!function(t){var s=a.getFieldElements(t);if(s.length){var i=e(s[0]).attr("type"),n="radio"===i||"checkbox"===i||"file"===i||"SELECT"===e(s[0]).get(0).tagName?"change":a._changeEvent,o=a.options.fields[r].trigger||a.options.trigger||n,l=e.map(o.split(" "),function(t){return t+".live.bv"}).join(" ");s.off(l).on(l,function(){a._exceedThreshold(e(this))&&a.validateField(e(this))})}}(r)}var s=this.$invalidFields.eq(0);if(s){var i,n=s.parents(".tab-pane");n&&(i=n.attr("id"))&&e('a[href="#'+i+'"][data-toggle="tab"]').tab("show"),s.focus()}}},_onSuccess:function(t){t.isDefaultPrevented()||this.disableSubmitButtons(!0).defaultSubmit()},_onFieldValidated:function(t,a){var r=t.attr("data-bv-field"),s=this.options.fields[r].validators,i={},n=0,o={bv:this,field:r,element:t,validator:a,result:t.data("bv.response."+a)};if(a)switch(t.data("bv.result."+a)){case this.STATUS_INVALID:t.trigger(e.Event(this.options.events.validatorError),o);break;case this.STATUS_VALID:t.trigger(e.Event(this.options.events.validatorSuccess),o)}for(var l in i[this.STATUS_NOT_VALIDATED]=0,i[this.STATUS_VALIDATING]=0,i[this.STATUS_INVALID]=0,i[this.STATUS_VALID]=0,s)if(!1!==s[l].enabled){n++;var d=t.data("bv.result."+l);d&&i[d]++}i[this.STATUS_VALID]===n?(this.$invalidFields=this.$invalidFields.not(t),t.trigger(e.Event(this.options.events.fieldSuccess),o)):0===i[this.STATUS_NOT_VALIDATED]&&0===i[this.STATUS_VALIDATING]&&i[this.STATUS_INVALID]>0&&(this.$invalidFields=this.$invalidFields.add(t),t.trigger(e.Event(this.options.events.fieldError),o))},getFieldElements:function(t){return this._cacheFields[t]||(this._cacheFields[t]=this.options.fields[t]&&this.options.fields[t].selector?e(this.options.fields[t].selector):this.$form.find('[name="'+t+'"]')),this._cacheFields[t]},getOptions:function(e,a,r){if(!e)return this.options;if("object"==t(e)&&(e=e.attr("data-bv-field")),!this.options.fields[e])return null;var s=this.options.fields[e];return a?s.validators&&s.validators[a]?r?s.validators[a][r]:s.validators[a]:null:r?s[r]:s},disableSubmitButtons:function(t){return t?"disabled"!==this.options.live&&this.$form.find(this.options.submitButtons).attr("disabled","disabled"):this.$form.find(this.options.submitButtons).removeAttr("disabled"),this},validate:function(){if(!this.options.fields)return this;for(var t in this.disableSubmitButtons(!0),this.options.fields)this.validateField(t);return this._submit(),this},validateField:function(a){var r=e([]);switch(t(a)){case"object":r=a,a=a.attr("data-bv-field");break;case"string":r=this.getFieldElements(a)}if(0===r.length||this.options.fields[a]&&!1===this.options.fields[a].enabled)return this;for(var s,i,n=this,o=r.attr("type"),l="radio"===o||"checkbox"===o?1:r.length,d="radio"===o||"checkbox"===o,u=this.options.fields[a].validators,f="true"===this.options.fields[a].verbose||!0===this.options.fields[a].verbose||"true"===this.options.verbose||!0===this.options.verbose,p=0;l>p;p++){var c=r.eq(p);if(!this._isExcluded(c)){var h=!1;for(s in u){if(c.data("bv.dfs."+s)&&c.data("bv.dfs."+s).reject(),h)break;var v=c.data("bv.result."+s);if(v!==this.STATUS_VALID&&v!==this.STATUS_INVALID)if(!1!==u[s].enabled){if(c.data("bv.result."+s,this.STATUS_VALIDATING),"object"==t(i=e.fn.bootstrapValidator.validators[s].validate(this,c,u[s]))&&i.resolve)this.updateStatus(d?a:c,this.STATUS_VALIDATING,s),c.data("bv.dfs."+s,i),i.done(function(t,e,a){t.removeData("bv.dfs."+e).data("bv.response."+e,a),a.message&&n.updateMessage(t,e,a.message),n.updateStatus(d?t.attr("data-bv-field"):t,a.valid?n.STATUS_VALID:n.STATUS_INVALID,e),a.valid&&!0===n._submitIfValid?n._submit():a.valid||f||(h=!0)});else if("object"==t(i)&&void 0!==i.valid&&void 0!==i.message){if(c.data("bv.response."+s,i),this.updateMessage(d?a:c,s,i.message),this.updateStatus(d?a:c,i.valid?this.STATUS_VALID:this.STATUS_INVALID,s),!i.valid&&!f)break}else if("boolean"==typeof i&&(c.data("bv.response."+s,i),this.updateStatus(d?a:c,i?this.STATUS_VALID:this.STATUS_INVALID,s),!i&&!f))break}else this.updateStatus(d?a:c,this.STATUS_VALID,s);else this._onFieldValidated(c,s)}}}return this},updateMessage:function(a,r,s){var i=e([]);switch(t(a)){case"object":i=a,a=a.attr("data-bv-field");break;case"string":i=this.getFieldElements(a)}i.each(function(){e(this).data("bv.messages").find('.help-block[data-bv-validator="'+r+'"][data-bv-for="'+a+'"]').html(s)})},updateStatus:function(a,r,s){var i=e([]);switch(t(a)){case"object":i=a,a=a.attr("data-bv-field");break;case"string":i=this.getFieldElements(a)}r===this.STATUS_NOT_VALIDATED&&(this._submitIfValid=!1);for(var n=i.attr("type"),o=this.options.fields[a].group||this.options.group,l="radio"===n||"checkbox"===n?1:i.length,d=0;l>d;d++){var u=i.eq(d);if(!this._isExcluded(u)){var f=u.parents(o),p=u.data("bv.messages").find('.help-block[data-bv-validator][data-bv-for="'+a+'"]'),c=s?p.filter('[data-bv-validator="'+s+'"]'):p,h=f.find('.form-control-feedback[data-bv-icon-for="'+a+'"]'),v="function"==typeof(this.options.fields[a].container||this.options.container)?(this.options.fields[a].container||this.options.container).call(this,u,this):this.options.fields[a].container||this.options.container,b=null;if(s)u.data("bv.result."+s,r);else for(var m in this.options.fields[a].validators)u.data("bv.result."+m,r);c.attr("data-bv-result",r);var A,g,I=u.parents(".tab-pane");switch(I&&(A=I.attr("id"))&&(g=e('a[href="#'+A+'"][data-toggle="tab"]').parent()),r){case this.STATUS_VALIDATING:b=null,this.disableSubmitButtons(!0),f.removeClass("has-success").removeClass("has-error"),h&&h.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show(),g&&g.removeClass("bv-tab-success").removeClass("bv-tab-error");break;case this.STATUS_INVALID:b=!1,this.disableSubmitButtons(!0),f.removeClass("has-success").addClass("has-error"),h&&h.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show(),g&&g.removeClass("bv-tab-success").addClass("bv-tab-error");break;case this.STATUS_VALID:null!==(b=0===p.filter('[data-bv-result="'+this.STATUS_NOT_VALIDATED+'"]').length?p.filter('[data-bv-result="'+this.STATUS_VALID+'"]').length===p.length:null)&&(this.disableSubmitButtons(this.$submitButton?!this.isValid():!b),h&&h.removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid).addClass(b?this.options.feedbackIcons.valid:this.options.feedbackIcons.invalid).show()),f.removeClass("has-error has-success").addClass(this.isValidContainer(f)?"has-success":"has-error"),g&&g.removeClass("bv-tab-success").removeClass("bv-tab-error").addClass(this.isValidContainer(I)?"bv-tab-success":"bv-tab-error");break;case this.STATUS_NOT_VALIDATED:default:b=null,this.disableSubmitButtons(!1),f.removeClass("has-success").removeClass("has-error"),h&&h.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide(),g&&g.removeClass("bv-tab-success").removeClass("bv-tab-error")}switch(!0){case h&&"tooltip"===v:!1===b?h.css("cursor","pointer").tooltip("destroy").tooltip({container:"body",html:!0,placement:"top",title:p.filter('[data-bv-result="'+this.STATUS_INVALID+'"]').eq(0).html()}):h.tooltip("hide");break;case h&&"popover"===v:!1===b?h.css("cursor","pointer").popover("destroy").popover({container:"body",content:p.filter('[data-bv-result="'+this.STATUS_INVALID+'"]').eq(0).html(),html:!0,placement:"top",trigger:"hover click"}):h.popover("hide");break;default:r===this.STATUS_INVALID?c.show():c.hide()}u.trigger(e.Event(this.options.events.fieldStatus),{bv:this,field:a,element:u,status:r}),this._onFieldValidated(u,s)}}return this},isValid:function(){for(var t in this.options.fields)if(!this.isValidField(t))return!1;return!0},isValidField:function(a){var r=e([]);switch(t(a)){case"object":r=a,a=a.attr("data-bv-field");break;case"string":r=this.getFieldElements(a)}if(0===r.length||null===this.options.fields[a]||!1===this.options.fields[a].enabled)return!0;for(var s,i,n=r.attr("type"),o="radio"===n||"checkbox"===n?1:r.length,l=0;o>l;l++)if(s=r.eq(l),!this._isExcluded(s))for(i in this.options.fields[a].validators)if(!1!==this.options.fields[a].validators[i].enabled&&s.data("bv.result."+i)!==this.STATUS_VALID)return!1;return!0},isValidContainer:function(t){var a=this,r={},s="string"==typeof t?e(t):t;if(0===s.length)return!0;for(var i in s.find("[data-bv-field]").each(function(){var t=e(this),s=t.attr("data-bv-field");a._isExcluded(t)||r[s]||(r[s]=t)}),r)if(r[i].data("bv.messages").find('.help-block[data-bv-validator][data-bv-for="'+i+'"]').filter('[data-bv-result="'+this.STATUS_INVALID+'"]').length>0)return!1;return!0},defaultSubmit:function(){this.$submitButton&&e("<input/>").attr("type","hidden").attr("data-bv-submit-hidden","").attr("name",this.$submitButton.attr("name")).val(this.$submitButton.val()).appendTo(this.$form),this.$form.off("submit.bv").submit()},getInvalidFields:function(){return this.$invalidFields},getSubmitButton:function(){return this.$submitButton},getMessages:function(a,r){var s=this,i=[],n=e([]);switch(!0){case a&&"object"==t(a):n=a;break;case a&&"string"==typeof a:var o=this.getFieldElements(a);if(o.length>0){var l=o.attr("type");n="radio"===l||"checkbox"===l?o.eq(0):o}break;default:n=this.$invalidFields}var d=r?'[data-bv-validator="'+r+'"]':"";return n.each(function(){i=i.concat(e(this).data("bv.messages").find('.help-block[data-bv-for="'+e(this).attr("data-bv-field")+'"][data-bv-result="'+s.STATUS_INVALID+'"]'+d).map(function(){var t=e(this).attr("data-bv-validator"),a=e(this).attr("data-bv-for");return!1===s.options.fields[a].validators[t].enabled?"":e(this).html()}).get())}),i},updateOption:function(e,a,r,s){return"object"==t(e)&&(e=e.attr("data-bv-field")),this.options.fields[e]&&this.options.fields[e].validators[a]&&(this.options.fields[e].validators[a][r]=s,this.updateStatus(e,this.STATUS_NOT_VALIDATED,a)),this},addField:function(a,r){var s=e([]);switch(t(a)){case"object":s=a,a=a.attr("data-bv-field")||a.attr("name");break;case"string":delete this._cacheFields[a],s=this.getFieldElements(a)}s.attr("data-bv-field",a);for(var i=s.attr("type"),n="radio"===i||"checkbox"===i?1:s.length,o=0;n>o;o++){var l=s.eq(o),d=this._parseOptions(l);d=null===d?r:e.extend(!0,r,d),this.options.fields[a]=e.extend(!0,this.options.fields[a],d),this._cacheFields[a]=this._cacheFields[a]?this._cacheFields[a].add(l):l,this._initField("checkbox"===i||"radio"===i?a:l)}return this.disableSubmitButtons(!1),this.$form.trigger(e.Event(this.options.events.fieldAdded),{field:a,element:s,options:this.options.fields[a]}),this},removeField:function(a){var r=e([]);switch(t(a)){case"object":r=a,a=a.attr("data-bv-field")||a.attr("name"),r.attr("data-bv-field",a);break;case"string":r=this.getFieldElements(a)}if(0===r.length)return this;for(var s=r.attr("type"),i="radio"===s||"checkbox"===s?1:r.length,n=0;i>n;n++){var o=r.eq(n);this.$invalidFields=this.$invalidFields.not(o),this._cacheFields[a]=this._cacheFields[a].not(o)}return this._cacheFields[a]&&0!==this._cacheFields[a].length||delete this.options.fields[a],("checkbox"===s||"radio"===s)&&this._initField(a),this.disableSubmitButtons(!1),this.$form.trigger(e.Event(this.options.events.fieldRemoved),{field:a,element:r}),this},resetField:function(a,r){var s=e([]);switch(t(a)){case"object":s=a,a=a.attr("data-bv-field");break;case"string":s=this.getFieldElements(a)}var i=s.length;if(this.options.fields[a])for(var n=0;i>n;n++)for(var o in this.options.fields[a].validators)s.eq(n).removeData("bv.dfs."+o);if(this.updateStatus(a,this.STATUS_NOT_VALIDATED),r){var l=s.attr("type");"radio"===l||"checkbox"===l?s.removeAttr("checked").removeAttr("selected"):s.val("")}return this},resetForm:function(t){for(var a in this.options.fields)this.resetField(a,t);return this.$invalidFields=e([]),this.$submitButton=null,this.disableSubmitButtons(!1),this},revalidateField:function(t){return this.updateStatus(t,this.STATUS_NOT_VALIDATED).validateField(t),this},enableFieldValidators:function(t,e,a){var r=this.options.fields[t].validators;if(a&&r&&r[a]&&r[a].enabled!==e)this.options.fields[t].validators[a].enabled=e,this.updateStatus(t,this.STATUS_NOT_VALIDATED,a);else if(!a&&this.options.fields[t].enabled!==e)for(var s in this.options.fields[t].enabled=e,r)this.enableFieldValidators(t,e,s);return this},getDynamicOption:function(t,a){var r="string"==typeof t?this.getFieldElements(t):t,s=r.val();if("function"==typeof a)return e.fn.bootstrapValidator.helpers.call(a,[s,this,r]);if("string"==typeof a){var i=this.getFieldElements(a);return i.length?i.val():e.fn.bootstrapValidator.helpers.call(a,[s,this,r])||a}return null},destroy:function(){var t,a,r,s,i,n;for(t in this.options.fields){a=this.getFieldElements(t),n=this.options.fields[t].group||this.options.group;for(var o=0;o<a.length;o++){if((r=a.eq(o)).data("bv.messages").find('.help-block[data-bv-validator][data-bv-for="'+t+'"]').remove().end().end().removeData("bv.messages").parents(n).removeClass("has-feedback has-error has-success").end().off(".bv").removeAttr("data-bv-field"),i=r.parents(n).find('i[data-bv-icon-for="'+t+'"]'))switch("function"==typeof(this.options.fields[t].container||this.options.container)?(this.options.fields[t].container||this.options.container).call(this,r,this):this.options.fields[t].container||this.options.container){case"tooltip":i.tooltip("destroy").remove();break;case"popover":i.popover("destroy").remove();break;default:i.remove()}for(s in this.options.fields[t].validators)r.data("bv.dfs."+s)&&r.data("bv.dfs."+s).reject(),r.removeData("bv.result."+s).removeData("bv.response."+s).removeData("bv.dfs."+s),"function"==typeof e.fn.bootstrapValidator.validators[s].destroy&&e.fn.bootstrapValidator.validators[s].destroy(this,r,this.options.fields[t].validators[s])}}this.disableSubmitButtons(!1),this.$hiddenButton.remove(),this.$form.removeClass(this.options.elementClass).off(".bv").removeData("bootstrapValidator").find("[data-bv-submit-hidden]").remove().end().find('[type="submit"]').off("click.bv")}},e.fn.bootstrapValidator=function(r){var s=arguments;return this.each(function(){var i=e(this),n=i.data("bootstrapValidator"),o="object"==t(r)&&r;n||(n=new a(this,o),i.data("bootstrapValidator",n)),"string"==typeof r&&n[r].apply(n,Array.prototype.slice.call(s,1))})},e.fn.bootstrapValidator.DEFAULT_OPTIONS={elementClass:"bv-form",message:"This value is not valid",group:".form-group",container:null,threshold:null,excluded:[":disabled",":hidden",":not(:visible)"],feedbackIcons:{valid:null,invalid:null,validating:null},submitButtons:'[type="submit"]',live:"enabled",fields:null,events:{formInit:"init.form.bv",formError:"error.form.bv",formSuccess:"success.form.bv",fieldAdded:"added.field.bv",fieldRemoved:"removed.field.bv",fieldInit:"init.field.bv",fieldError:"error.field.bv",fieldSuccess:"success.field.bv",fieldStatus:"status.field.bv",validatorError:"error.validator.bv",validatorSuccess:"success.validator.bv"},verbose:!0},e.fn.bootstrapValidator.validators={},e.fn.bootstrapValidator.i18n={},e.fn.bootstrapValidator.Constructor=a,e.fn.bootstrapValidator.helpers={call:function(t,e){if("function"==typeof t)return t.apply(this,e);if("string"==typeof t){"()"===t.substring(t.length-2)&&(t=t.substring(0,t.length-2));for(var a=t.split("."),r=a.pop(),s=window,i=0;i<a.length;i++)s=s[a[i]];return void 0===s[r]?null:s[r].apply(this,e)}},format:function(t,a){for(var r in e.isArray(a)||(a=[a]),a)t=t.replace("%s",a[r]);return t},date:function(t,e,a,r){if(isNaN(t)||isNaN(e)||isNaN(a))return!1;if(a.length>2||e.length>2||t.length>4)return!1;if(a=parseInt(a,10),e=parseInt(e,10),1e3>(t=parseInt(t,10))||t>9999||0>=e||e>12)return!1;var s=[31,28,31,30,31,30,31,31,30,31,30,31];if((t%400==0||t%100!=0&&t%4==0)&&(s[1]=29),0>=a||a>s[e-1])return!1;if(!0===r){var i=new Date,n=i.getFullYear(),o=i.getMonth(),l=i.getDate();return n>t||t===n&&o>e-1||t===n&&e-1===o&&l>a}return!0},luhn:function(t){for(var e=t.length,a=0,r=[[0,1,2,3,4,5,6,7,8,9],[0,2,4,6,8,1,3,5,7,9]],s=0;e--;)s+=r[a][parseInt(t.charAt(e),10)],a^=1;return s%10==0&&s>0},mod11And10:function(t){for(var e=5,a=t.length,r=0;a>r;r++)e=(2*(e||10)%11+parseInt(t.charAt(r),10))%10;return 1===e},mod37And36:function(t,e){for(var a=(e=e||"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ").length,r=t.length,s=Math.floor(a/2),i=0;r>i;i++)s=(2*(s||a)%(a+1)+e.indexOf(t.charAt(i)))%a;return 1===s}},function(t){t.fn.bootstrapValidator.i18n.base64=t.extend(t.fn.bootstrapValidator.i18n.base64||{},{default:"Please enter a valid base 64 encoded"}),t.fn.bootstrapValidator.validators.base64={validate:function(t,e){var a=e.val();return""===a||/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$/.test(a)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.between=t.extend(t.fn.bootstrapValidator.i18n.between||{},{default:"Please enter a value between %s and %s",notInclusive:"Please enter a value between %s and %s strictly"}),t.fn.bootstrapValidator.validators.between={html5Attributes:{message:"message",min:"min",max:"max",inclusive:"inclusive"},enableByHtml5:function(t){return"range"===t.attr("type")&&{min:t.attr("min"),max:t.attr("max")}},validate:function(e,a,r){var s=a.val();if(""===s)return!0;if(!t.isNumeric(s))return!1;var i=t.isNumeric(r.min)?r.min:e.getDynamicOption(a,r.min),n=t.isNumeric(r.max)?r.max:e.getDynamicOption(a,r.max);return s=parseFloat(s),!0===r.inclusive||void 0===r.inclusive?{valid:s>=i&&n>=s,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.between.default,[i,n])}:{valid:s>i&&n>s,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.between.notInclusive,[i,n])}}}}(window.jQuery),window.jQuery.fn.bootstrapValidator.validators.blank={validate:function(){return!0}},function(t){t.fn.bootstrapValidator.i18n.callback=t.extend(t.fn.bootstrapValidator.i18n.callback||{},{default:"Please enter a valid value"}),t.fn.bootstrapValidator.validators.callback={html5Attributes:{message:"message",callback:"callback"},validate:function(e,a,r){var s=a.val(),i=new t.Deferred,n={valid:!0};if(r.callback){var o=t.fn.bootstrapValidator.helpers.call(r.callback,[s,e,a]);n="boolean"==typeof o?{valid:o}:o}return i.resolve(a,"callback",n),i}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.choice=t.extend(t.fn.bootstrapValidator.i18n.choice||{},{default:"Please enter a valid value",less:"Please choose %s options at minimum",more:"Please choose %s options at maximum",between:"Please choose %s - %s options"}),t.fn.bootstrapValidator.validators.choice={html5Attributes:{message:"message",min:"min",max:"max"},validate:function(e,a,r){var s=a.is("select")?e.getFieldElements(a.attr("data-bv-field")).find("option").filter(":selected").length:e.getFieldElements(a.attr("data-bv-field")).filter(":checked").length,i=r.min?t.isNumeric(r.min)?r.min:e.getDynamicOption(a,r.min):null,n=r.max?t.isNumeric(r.max)?r.max:e.getDynamicOption(a,r.max):null,o=!0,l=r.message||t.fn.bootstrapValidator.i18n.choice.default;switch((i&&s<parseInt(i,10)||n&&s>parseInt(n,10))&&(o=!1),!0){case!!i&&!!n:l=t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.choice.between,[parseInt(i,10),parseInt(n,10)]);break;case!!i:l=t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.choice.less,parseInt(i,10));break;case!!n:l=t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.choice.more,parseInt(n,10))}return{valid:o,message:l}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.creditCard=t.extend(t.fn.bootstrapValidator.i18n.creditCard||{},{default:"Please enter a valid credit card number"}),t.fn.bootstrapValidator.validators.creditCard={validate:function(e,a){var r=a.val();if(""===r)return!0;if(/[^0-9-\s]+/.test(r))return!1;if(r=r.replace(/\D/g,""),!t.fn.bootstrapValidator.helpers.luhn(r))return!1;var s,i,n={AMERICAN_EXPRESS:{length:[15],prefix:["34","37"]},DINERS_CLUB:{length:[14],prefix:["300","301","302","303","304","305","36"]},DINERS_CLUB_US:{length:[16],prefix:["54","55"]},DISCOVER:{length:[16],prefix:["6011","622126","622127","622128","622129","62213","62214","62215","62216","62217","62218","62219","6222","6223","6224","6225","6226","6227","6228","62290","62291","622920","622921","622922","622923","622924","622925","644","645","646","647","648","649","65"]},JCB:{length:[16],prefix:["3528","3529","353","354","355","356","357","358"]},LASER:{length:[16,17,18,19],prefix:["6304","6706","6771","6709"]},MAESTRO:{length:[12,13,14,15,16,17,18,19],prefix:["5018","5020","5038","6304","6759","6761","6762","6763","6764","6765","6766"]},MASTERCARD:{length:[16],prefix:["51","52","53","54","55"]},SOLO:{length:[16,18,19],prefix:["6334","6767"]},UNIONPAY:{length:[16,17,18,19],prefix:["622126","622127","622128","622129","62213","62214","62215","62216","62217","62218","62219","6222","6223","6224","6225","6226","6227","6228","62290","62291","622920","622921","622922","622923","622924","622925"]},VISA:{length:[16],prefix:["4"]}};for(s in n)for(i in n[s].prefix)if(r.substr(0,n[s].prefix[i].length)===n[s].prefix[i]&&-1!==t.inArray(r.length,n[s].length))return!0;return!1}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.cusip=t.extend(t.fn.bootstrapValidator.i18n.cusip||{},{default:"Please enter a valid CUSIP number"}),t.fn.bootstrapValidator.validators.cusip={validate:function(e,a){var r=a.val();if(""===r)return!0;if(r=r.toUpperCase(),!/^[0-9A-Z]{9}$/.test(r))return!1;for(var s=t.map(r.split(""),function(t){var e=t.charCodeAt(0);return e>="A".charCodeAt(0)&&e<="Z".charCodeAt(0)?e-"A".charCodeAt(0)+10:t}),i=s.length,n=0,o=0;i-1>o;o++){var l=parseInt(s[o],10);o%2!=0&&(l*=2),l>9&&(l-=9),n+=l}return(n=(10-n%10)%10)===s[i-1]}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.cvv=t.extend(t.fn.bootstrapValidator.i18n.cvv||{},{default:"Please enter a valid CVV number"}),t.fn.bootstrapValidator.validators.cvv={html5Attributes:{message:"message",ccfield:"creditCardField"},validate:function(e,a,r){var s=a.val();if(""===s)return!0;if(!/^[0-9]{3,4}$/.test(s))return!1;if(!r.creditCardField)return!0;var i=e.getFieldElements(r.creditCardField).val();if(""===i)return!0;i=i.replace(/\D/g,"");var n,o,l={AMERICAN_EXPRESS:{length:[15],prefix:["34","37"]},DINERS_CLUB:{length:[14],prefix:["300","301","302","303","304","305","36"]},DINERS_CLUB_US:{length:[16],prefix:["54","55"]},DISCOVER:{length:[16],prefix:["6011","622126","622127","622128","622129","62213","62214","62215","62216","62217","62218","62219","6222","6223","6224","6225","6226","6227","6228","62290","62291","622920","622921","622922","622923","622924","622925","644","645","646","647","648","649","65"]},JCB:{length:[16],prefix:["3528","3529","353","354","355","356","357","358"]},LASER:{length:[16,17,18,19],prefix:["6304","6706","6771","6709"]},MAESTRO:{length:[12,13,14,15,16,17,18,19],prefix:["5018","5020","5038","6304","6759","6761","6762","6763","6764","6765","6766"]},MASTERCARD:{length:[16],prefix:["51","52","53","54","55"]},SOLO:{length:[16,18,19],prefix:["6334","6767"]},UNIONPAY:{length:[16,17,18,19],prefix:["622126","622127","622128","622129","62213","62214","62215","62216","62217","62218","62219","6222","6223","6224","6225","6226","6227","6228","62290","62291","622920","622921","622922","622923","622924","622925"]},VISA:{length:[16],prefix:["4"]}},d=null;for(n in l)for(o in l[n].prefix)if(i.substr(0,l[n].prefix[o].length)===l[n].prefix[o]&&-1!==t.inArray(i.length,l[n].length)){d=n;break}return null!==d&&("AMERICAN_EXPRESS"===d?4===s.length:3===s.length)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.date=t.extend(t.fn.bootstrapValidator.i18n.date||{},{default:"Please enter a valid date"}),t.fn.bootstrapValidator.validators.date={html5Attributes:{message:"message",format:"format",separator:"separator"},validate:function(e,a,r){var s=a.val();if(""===s)return!0;r.format=r.format||"MM/DD/YYYY","date"===a.attr("type")&&(r.format="YYYY-MM-DD");var i=r.format.split(" "),n=i[0],o=i.length>1?i[1]:null,l=i.length>2?i[2]:null,d=s.split(" "),u=d[0],f=d.length>1?d[1]:null;if(i.length!==d.length)return!1;var p=r.separator;if(p||(p=-1!==u.indexOf("/")?"/":-1!==u.indexOf("-")?"-":null),null===p||-1===u.indexOf(p))return!1;if(u=u.split(p),n=n.split(p),u.length!==n.length)return!1;var c=u[t.inArray("YYYY",n)],h=u[t.inArray("MM",n)],v=u[t.inArray("DD",n)];if(!c||!h||!v||4!==c.length)return!1;var b=null,m=null,A=null;if(o){if(o=o.split(":"),f=f.split(":"),o.length!==f.length)return!1;if(m=f.length>0?f[0]:null,b=f.length>1?f[1]:null,A=f.length>2?f[2]:null){if(isNaN(A)||A.length>2)return!1;if(0>(A=parseInt(A,10))||A>60)return!1}if(m){if(isNaN(m)||m.length>2)return!1;if(0>(m=parseInt(m,10))||m>=24||l&&m>12)return!1}if(b){if(isNaN(b)||b.length>2)return!1;if(0>(b=parseInt(b,10))||b>59)return!1}}return t.fn.bootstrapValidator.helpers.date(c,h,v)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.different=t.extend(t.fn.bootstrapValidator.i18n.different||{},{default:"Please enter a different value"}),t.fn.bootstrapValidator.validators.different={html5Attributes:{message:"message",field:"field"},validate:function(t,e,a){var r=e.val();if(""===r)return!0;for(var s=a.field.split(","),i=!0,n=0;n<s.length;n++){var o=t.getFieldElements(s[n]);if(null!=o&&0!==o.length){var l=o.val();r===l?i=!1:""!==l&&t.updateStatus(o,t.STATUS_VALID,"different")}}return i}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.digits=t.extend(t.fn.bootstrapValidator.i18n.digits||{},{default:"Please enter only digits"}),t.fn.bootstrapValidator.validators.digits={validate:function(t,e){var a=e.val();return""===a||/^\d+$/.test(a)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.ean=t.extend(t.fn.bootstrapValidator.i18n.ean||{},{default:"Please enter a valid EAN number"}),t.fn.bootstrapValidator.validators.ean={validate:function(t,e){var a=e.val();if(""===a)return!0;if(!/^(\d{8}|\d{12}|\d{13})$/.test(a))return!1;for(var r=a.length,s=0,i=8===r?[3,1]:[1,3],n=0;r-1>n;n++)s+=parseInt(a.charAt(n),10)*i[n%2];return(s=(10-s%10)%10)+""===a.charAt(r-1)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.emailAddress=t.extend(t.fn.bootstrapValidator.i18n.emailAddress||{},{default:"Please enter a valid email address"}),t.fn.bootstrapValidator.validators.emailAddress={html5Attributes:{message:"message",multiple:"multiple",separator:"separator"},enableByHtml5:function(t){return"email"===t.attr("type")},validate:function(t,e,a){var r=e.val();if(""===r)return!0;var s=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;if(!0===a.multiple||"true"===a.multiple){for(var i=a.separator||/[,;]/,n=this._splitEmailAddresses(r,i),o=0;o<n.length;o++)if(!s.test(n[o]))return!1;return!0}return s.test(r)},_splitEmailAddresses:function(t,e){for(var a=t.split(/"/),r=a.length,s=[],i="",n=0;r>n;n++)if(n%2==0){var o=a[n].split(e),l=o.length;if(1===l)i+=o[0];else{s.push(i+o[0]);for(var d=1;l-1>d;d++)s.push(o[d]);i=o[l-1]}}else i+='"'+a[n],r-1>n&&(i+='"');return s.push(i),s}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.file=t.extend(t.fn.bootstrapValidator.i18n.file||{},{default:"Please choose a valid file"}),t.fn.bootstrapValidator.validators.file={html5Attributes:{extension:"extension",maxsize:"maxSize",minsize:"minSize",message:"message",type:"type"},validate:function(e,a,r){var s=a.val();if(""===s)return!0;var i,n=r.extension?r.extension.toLowerCase().split(","):null,o=r.type?r.type.toLowerCase().split(","):null;if(window.File&&window.FileList&&window.FileReader)for(var l=a.get(0).files,d=l.length,u=0;d>u;u++){if(r.minSize&&l[u].size<parseInt(r.minSize,10))return!1;if(r.maxSize&&l[u].size>parseInt(r.maxSize,10))return!1;if(i=l[u].name.substr(l[u].name.lastIndexOf(".")+1),n&&-1===t.inArray(i.toLowerCase(),n))return!1;if(l[u].type&&o&&-1===t.inArray(l[u].type.toLowerCase(),o))return!1}else if(i=s.substr(s.lastIndexOf(".")+1),n&&-1===t.inArray(i.toLowerCase(),n))return!1;return!0}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.greaterThan=t.extend(t.fn.bootstrapValidator.i18n.greaterThan||{},{default:"Please enter a value greater than or equal to %s",notInclusive:"Please enter a value greater than %s"}),t.fn.bootstrapValidator.validators.greaterThan={html5Attributes:{message:"message",value:"value",inclusive:"inclusive"},enableByHtml5:function(t){var e=t.attr("type"),a=t.attr("min");return!(!a||"date"===e)&&{value:a}},validate:function(e,a,r){var s=a.val();if(""===s)return!0;if(!t.isNumeric(s))return!1;var i=t.isNumeric(r.value)?r.value:e.getDynamicOption(a,r.value);return s=parseFloat(s),!0===r.inclusive||void 0===r.inclusive?{valid:s>=i,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.greaterThan.default,i)}:{valid:s>i,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.greaterThan.notInclusive,i)}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.grid=t.extend(t.fn.bootstrapValidator.i18n.grid||{},{default:"Please enter a valid GRId number"}),t.fn.bootstrapValidator.validators.grid={validate:function(e,a){var r=a.val();return""===r||(r=r.toUpperCase(),!!/^[GRID:]*([0-9A-Z]{2})[-\s]*([0-9A-Z]{5})[-\s]*([0-9A-Z]{10})[-\s]*([0-9A-Z]{1})$/g.test(r)&&("GRID:"===(r=r.replace(/\s/g,"").replace(/-/g,"")).substr(0,5)&&(r=r.substr(5)),t.fn.bootstrapValidator.helpers.mod37And36(r)))}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.hex=t.extend(t.fn.bootstrapValidator.i18n.hex||{},{default:"Please enter a valid hexadecimal number"}),t.fn.bootstrapValidator.validators.hex={validate:function(t,e){var a=e.val();return""===a||/^[0-9a-fA-F]+$/.test(a)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.hexColor=t.extend(t.fn.bootstrapValidator.i18n.hexColor||{},{default:"Please enter a valid hex color"}),t.fn.bootstrapValidator.validators.hexColor={enableByHtml5:function(t){return"color"===t.attr("type")},validate:function(t,e){var a=e.val();return""===a||/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(a)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.iban=t.extend(t.fn.bootstrapValidator.i18n.iban||{},{default:"Please enter a valid IBAN number",countryNotSupported:"The country code %s is not supported",country:"Please enter a valid IBAN number in %s",countries:{AD:"Andorra",AE:"United Arab Emirates",AL:"Albania",AO:"Angola",AT:"Austria",AZ:"Azerbaijan",BA:"Bosnia and Herzegovina",BE:"Belgium",BF:"Burkina Faso",BG:"Bulgaria",BH:"Bahrain",BI:"Burundi",BJ:"Benin",BR:"Brazil",CH:"Switzerland",CI:"Ivory Coast",CM:"Cameroon",CR:"Costa Rica",CV:"Cape Verde",CY:"Cyprus",CZ:"Czech Republic",DE:"Germany",DK:"Denmark",DO:"Dominica",DZ:"Algeria",EE:"Estonia",ES:"Spain",FI:"Finland",FO:"Faroe Islands",FR:"France",GB:"United Kingdom",GE:"Georgia",GI:"Gibraltar",GL:"Greenland",GR:"Greece",GT:"Guatemala",HR:"Croatia",HU:"Hungary",IE:"Ireland",IL:"Israel",IR:"Iran",IS:"Iceland",IT:"Italy",JO:"Jordan",KW:"Kuwait",KZ:"Kazakhstan",LB:"Lebanon",LI:"Liechtenstein",LT:"Lithuania",LU:"Luxembourg",LV:"Latvia",MC:"Monaco",MD:"Moldova",ME:"Montenegro",MG:"Madagascar",MK:"Macedonia",ML:"Mali",MR:"Mauritania",MT:"Malta",MU:"Mauritius",MZ:"Mozambique",NL:"Netherlands",NO:"Norway",PK:"Pakistan",PL:"Poland",PS:"Palestine",PT:"Portugal",QA:"Qatar",RO:"Romania",RS:"Serbia",SA:"Saudi Arabia",SE:"Sweden",SI:"Slovenia",SK:"Slovakia",SM:"San Marino",SN:"Senegal",TN:"Tunisia",TR:"Turkey",VG:"Virgin Islands, British"}}),t.fn.bootstrapValidator.validators.iban={html5Attributes:{message:"message",country:"country"},REGEX:{AD:"AD[0-9]{2}[0-9]{4}[0-9]{4}[A-Z0-9]{12}",AE:"AE[0-9]{2}[0-9]{3}[0-9]{16}",AL:"AL[0-9]{2}[0-9]{8}[A-Z0-9]{16}",AO:"AO[0-9]{2}[0-9]{21}",AT:"AT[0-9]{2}[0-9]{5}[0-9]{11}",AZ:"AZ[0-9]{2}[A-Z]{4}[A-Z0-9]{20}",BA:"BA[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{8}[0-9]{2}",BE:"BE[0-9]{2}[0-9]{3}[0-9]{7}[0-9]{2}",BF:"BF[0-9]{2}[0-9]{23}",BG:"BG[0-9]{2}[A-Z]{4}[0-9]{4}[0-9]{2}[A-Z0-9]{8}",BH:"BH[0-9]{2}[A-Z]{4}[A-Z0-9]{14}",BI:"BI[0-9]{2}[0-9]{12}",BJ:"BJ[0-9]{2}[A-Z]{1}[0-9]{23}",BR:"BR[0-9]{2}[0-9]{8}[0-9]{5}[0-9]{10}[A-Z][A-Z0-9]",CH:"CH[0-9]{2}[0-9]{5}[A-Z0-9]{12}",CI:"CI[0-9]{2}[A-Z]{1}[0-9]{23}",CM:"CM[0-9]{2}[0-9]{23}",CR:"CR[0-9]{2}[0-9]{3}[0-9]{14}",CV:"CV[0-9]{2}[0-9]{21}",CY:"CY[0-9]{2}[0-9]{3}[0-9]{5}[A-Z0-9]{16}",CZ:"CZ[0-9]{2}[0-9]{20}",DE:"DE[0-9]{2}[0-9]{8}[0-9]{10}",DK:"DK[0-9]{2}[0-9]{14}",DO:"DO[0-9]{2}[A-Z0-9]{4}[0-9]{20}",DZ:"DZ[0-9]{2}[0-9]{20}",EE:"EE[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{11}[0-9]{1}",ES:"ES[0-9]{2}[0-9]{4}[0-9]{4}[0-9]{1}[0-9]{1}[0-9]{10}",FI:"FI[0-9]{2}[0-9]{6}[0-9]{7}[0-9]{1}",FO:"FO[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}",FR:"FR[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}",GB:"GB[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}",GE:"GE[0-9]{2}[A-Z]{2}[0-9]{16}",GI:"GI[0-9]{2}[A-Z]{4}[A-Z0-9]{15}",GL:"GL[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}",GR:"GR[0-9]{2}[0-9]{3}[0-9]{4}[A-Z0-9]{16}",GT:"GT[0-9]{2}[A-Z0-9]{4}[A-Z0-9]{20}",HR:"HR[0-9]{2}[0-9]{7}[0-9]{10}",HU:"HU[0-9]{2}[0-9]{3}[0-9]{4}[0-9]{1}[0-9]{15}[0-9]{1}",IE:"IE[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}",IL:"IL[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{13}",IR:"IR[0-9]{2}[0-9]{22}",IS:"IS[0-9]{2}[0-9]{4}[0-9]{2}[0-9]{6}[0-9]{10}",IT:"IT[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[A-Z0-9]{12}",JO:"JO[0-9]{2}[A-Z]{4}[0-9]{4}[0]{8}[A-Z0-9]{10}",KW:"KW[0-9]{2}[A-Z]{4}[0-9]{22}",KZ:"KZ[0-9]{2}[0-9]{3}[A-Z0-9]{13}",LB:"LB[0-9]{2}[0-9]{4}[A-Z0-9]{20}",LI:"LI[0-9]{2}[0-9]{5}[A-Z0-9]{12}",LT:"LT[0-9]{2}[0-9]{5}[0-9]{11}",LU:"LU[0-9]{2}[0-9]{3}[A-Z0-9]{13}",LV:"LV[0-9]{2}[A-Z]{4}[A-Z0-9]{13}",MC:"MC[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}",MD:"MD[0-9]{2}[A-Z0-9]{20}",ME:"ME[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}",MG:"MG[0-9]{2}[0-9]{23}",MK:"MK[0-9]{2}[0-9]{3}[A-Z0-9]{10}[0-9]{2}",ML:"ML[0-9]{2}[A-Z]{1}[0-9]{23}",MR:"MR13[0-9]{5}[0-9]{5}[0-9]{11}[0-9]{2}",MT:"MT[0-9]{2}[A-Z]{4}[0-9]{5}[A-Z0-9]{18}",MU:"MU[0-9]{2}[A-Z]{4}[0-9]{2}[0-9]{2}[0-9]{12}[0-9]{3}[A-Z]{3}",MZ:"MZ[0-9]{2}[0-9]{21}",NL:"NL[0-9]{2}[A-Z]{4}[0-9]{10}",NO:"NO[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{1}",PK:"PK[0-9]{2}[A-Z]{4}[A-Z0-9]{16}",PL:"PL[0-9]{2}[0-9]{8}[0-9]{16}",PS:"PS[0-9]{2}[A-Z]{4}[A-Z0-9]{21}",PT:"PT[0-9]{2}[0-9]{4}[0-9]{4}[0-9]{11}[0-9]{2}",QA:"QA[0-9]{2}[A-Z]{4}[A-Z0-9]{21}",RO:"RO[0-9]{2}[A-Z]{4}[A-Z0-9]{16}",RS:"RS[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}",SA:"SA[0-9]{2}[0-9]{2}[A-Z0-9]{18}",SE:"SE[0-9]{2}[0-9]{3}[0-9]{16}[0-9]{1}",SI:"SI[0-9]{2}[0-9]{5}[0-9]{8}[0-9]{2}",SK:"SK[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{10}",SM:"SM[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[A-Z0-9]{12}",SN:"SN[0-9]{2}[A-Z]{1}[0-9]{23}",TN:"TN59[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}",TR:"TR[0-9]{2}[0-9]{5}[A-Z0-9]{1}[A-Z0-9]{16}",VG:"VG[0-9]{2}[A-Z]{4}[0-9]{16}"},validate:function(e,a,r){var s=a.val();if(""===s)return!0;s=s.replace(/[^a-zA-Z0-9]/g,"").toUpperCase();var i=r.country;if(i?"string"==typeof i&&this.REGEX[i]||(i=e.getDynamicOption(a,i)):i=s.substr(0,2),!this.REGEX[i])return{valid:!1,message:t.fn.bootstrapValidator.helpers.format(t.fn.bootstrapValidator.i18n.iban.countryNotSupported,i)};if(!new RegExp("^"+this.REGEX[i]+"$").test(s))return{valid:!1,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.iban.country,t.fn.bootstrapValidator.i18n.iban.countries[i])};s=s.substr(4)+s.substr(0,4),s=t.map(s.split(""),function(t){var e=t.charCodeAt(0);return e>="A".charCodeAt(0)&&e<="Z".charCodeAt(0)?e-"A".charCodeAt(0)+10:t}),s=s.join("");for(var n=parseInt(s.substr(0,1),10),o=s.length,l=1;o>l;++l)n=(10*n+parseInt(s.substr(l,1),10))%97;return{valid:1===n,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.iban.country,t.fn.bootstrapValidator.i18n.iban.countries[i])}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.id=t.extend(t.fn.bootstrapValidator.i18n.id||{},{default:"Please enter a valid identification number",countryNotSupported:"The country code %s is not supported",country:"Please enter a valid identification number in %s",countries:{BA:"Bosnia and Herzegovina",BG:"Bulgaria",BR:"Brazil",CH:"Switzerland",CL:"Chile",CN:"China",CZ:"Czech Republic",DK:"Denmark",EE:"Estonia",ES:"Spain",FI:"Finland",HR:"Croatia",IE:"Ireland",IS:"Iceland",LT:"Lithuania",LV:"Latvia",ME:"Montenegro",MK:"Macedonia",NL:"Netherlands",RO:"Romania",RS:"Serbia",SE:"Sweden",SI:"Slovenia",SK:"Slovakia",SM:"San Marino",TH:"Thailand",ZA:"South Africa"}}),t.fn.bootstrapValidator.validators.id={html5Attributes:{message:"message",country:"country"},COUNTRY_CODES:["BA","BG","BR","CH","CL","CN","CZ","DK","EE","ES","FI","HR","IE","IS","LT","LV","ME","MK","NL","RO","RS","SE","SI","SK","SM","TH","ZA"],validate:function(e,a,r){var s=a.val();if(""===s)return!0;var i=r.country;return i?("string"!=typeof i||-1===t.inArray(i.toUpperCase(),this.COUNTRY_CODES))&&(i=e.getDynamicOption(a,i)):i=s.substr(0,2),-1===t.inArray(i,this.COUNTRY_CODES)?{valid:!1,message:t.fn.bootstrapValidator.helpers.format(t.fn.bootstrapValidator.i18n.id.countryNotSupported,i)}:!!this[["_",i.toLowerCase()].join("")](s)||{valid:!1,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.id.country,t.fn.bootstrapValidator.i18n.id.countries[i.toUpperCase()])}},_validateJMBG:function(t,e){if(!/^\d{13}$/.test(t))return!1;var a=parseInt(t.substr(0,2),10),r=parseInt(t.substr(2,2),10),s=(parseInt(t.substr(4,3),10),parseInt(t.substr(7,2),10)),i=parseInt(t.substr(12,1),10);if(a>31||r>12)return!1;for(var n=0,o=0;6>o;o++)n+=(7-o)*(parseInt(t.charAt(o),10)+parseInt(t.charAt(o+6),10));if((10===(n=11-n%11)||11===n)&&(n=0),n!==i)return!1;switch(e.toUpperCase()){case"BA":return s>=10&&19>=s;case"MK":return s>=41&&49>=s;case"ME":return s>=20&&29>=s;case"RS":return s>=70&&99>=s;case"SI":return s>=50&&59>=s;default:return!0}},_ba:function(t){return this._validateJMBG(t,"BA")},_mk:function(t){return this._validateJMBG(t,"MK")},_me:function(t){return this._validateJMBG(t,"ME")},_rs:function(t){return this._validateJMBG(t,"RS")},_si:function(t){return this._validateJMBG(t,"SI")},_bg:function(e){if(!/^\d{10}$/.test(e)&&!/^\d{6}\s\d{3}\s\d{1}$/.test(e))return!1;e=e.replace(/\s/g,"");var a=parseInt(e.substr(0,2),10)+1900,r=parseInt(e.substr(2,2),10),s=parseInt(e.substr(4,2),10);if(r>40?(a+=100,r-=40):r>20&&(a-=100,r-=20),!t.fn.bootstrapValidator.helpers.date(a,r,s))return!1;for(var i=0,n=[2,4,8,5,10,9,7,3,6],o=0;9>o;o++)i+=parseInt(e.charAt(o),10)*n[o];return(i=i%11%10)+""===e.substr(9,1)},_br:function(t){if(/^1{11}|2{11}|3{11}|4{11}|5{11}|6{11}|7{11}|8{11}|9{11}|0{11}$/.test(t))return!1;if(!/^\d{11}$/.test(t)&&!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(t))return!1;t=t.replace(/\./g,"").replace(/-/g,"");for(var e=0,a=0;9>a;a++)e+=(10-a)*parseInt(t.charAt(a),10);if((10===(e=11-e%11)||11===e)&&(e=0),e+""!==t.charAt(9))return!1;var r=0;for(a=0;10>a;a++)r+=(11-a)*parseInt(t.charAt(a),10);return(10===(r=11-r%11)||11===r)&&(r=0),r+""===t.charAt(10)},_ch:function(t){if(!/^756[\.]{0,1}[0-9]{4}[\.]{0,1}[0-9]{4}[\.]{0,1}[0-9]{2}$/.test(t))return!1;for(var e=(t=t.replace(/\D/g,"").substr(3)).length,a=0,r=8===e?[3,1]:[1,3],s=0;e-1>s;s++)a+=parseInt(t.charAt(s),10)*r[s%2];return(a=10-a%10)+""===t.charAt(e-1)},_cl:function(t){if(!/^\d{7,8}[-]{0,1}[0-9K]$/i.test(t))return!1;for(t=t.replace(/\-/g,"");t.length<9;)t="0"+t;for(var e=0,a=[3,2,7,6,5,4,3,2],r=0;8>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return 11===(e=11-e%11)?e=0:10===e&&(e="K"),e+""===t.charAt(8).toUpperCase()},_cn:function(e){if(e=e.trim(),!/^\d{15}$/.test(e)&&!/^\d{17}[\dXx]{1}$/.test(e))return!1;var a,r={11:{0:[0],1:[[0,9],[11,17]],2:[0,28,29]},12:{0:[0],1:[[0,16]],2:[0,21,23,25]},13:{0:[0],1:[[0,5],7,8,21,[23,33],[81,85]],2:[[0,5],[7,9],[23,25],27,29,30,81,83],3:[[0,4],[21,24]],4:[[0,4],6,21,[23,35],81],5:[[0,3],[21,35],81,82],6:[[0,4],[21,38],[81,84]],7:[[0,3],5,6,[21,33]],8:[[0,4],[21,28]],9:[[0,3],[21,30],[81,84]],10:[[0,3],[22,26],28,81,82],11:[[0,2],[21,28],81,82]},14:{0:[0],1:[0,1,[5,10],[21,23],81],2:[[0,3],11,12,[21,27]],3:[[0,3],11,21,22],4:[[0,2],11,21,[23,31],81],5:[[0,2],21,22,24,25,81],6:[[0,3],[21,24]],7:[[0,2],[21,29],81],8:[[0,2],[21,30],81,82],9:[[0,2],[21,32],81],10:[[0,2],[21,34],81,82],11:[[0,2],[21,30],81,82],23:[[0,3],22,23,[25,30],32,33]},15:{0:[0],1:[[0,5],[21,25]],2:[[0,7],[21,23]],3:[[0,4]],4:[[0,4],[21,26],[28,30]],5:[[0,2],[21,26],81],6:[[0,2],[21,27]],7:[[0,3],[21,27],[81,85]],8:[[0,2],[21,26]],9:[[0,2],[21,29],81],22:[[0,2],[21,24]],25:[[0,2],[22,31]],26:[[0,2],[24,27],[29,32],34],28:[0,1,[22,27]],29:[0,[21,23]]},21:{0:[0],1:[[0,6],[11,14],[22,24],81],2:[[0,4],[11,13],24,[81,83]],3:[[0,4],11,21,23,81],4:[[0,4],11,[21,23]],5:[[0,5],21,22],6:[[0,4],24,81,82],7:[[0,3],11,26,27,81,82],8:[[0,4],11,81,82],9:[[0,5],11,21,22],10:[[0,5],11,21,81],11:[[0,3],21,22],12:[[0,2],4,21,23,24,81,82],13:[[0,3],21,22,24,81,82],14:[[0,4],21,22,81]},22:{0:[0],1:[[0,6],12,22,[81,83]],2:[[0,4],11,21,[81,84]],3:[[0,3],22,23,81,82],4:[[0,3],21,22],5:[[0,3],21,23,24,81,82],6:[[0,2],4,5,[21,23],25,81],7:[[0,2],[21,24],81],8:[[0,2],21,22,81,82],24:[[0,6],24,26]},23:{0:[0],1:[[0,12],21,[23,29],[81,84]],2:[[0,8],21,[23,25],27,[29,31],81],3:[[0,7],21,81,82],4:[[0,7],21,22],5:[[0,3],5,6,[21,24]],6:[[0,6],[21,24]],7:[[0,16],22,81],8:[[0,5],11,22,26,28,33,81,82],9:[[0,4],21],10:[[0,5],24,25,81,[83,85]],11:[[0,2],21,23,24,81,82],12:[[0,2],[21,26],[81,83]],27:[[0,4],[21,23]]},31:{0:[0],1:[0,1,[3,10],[12,20]],2:[0,30]},32:{0:[0],1:[[0,7],11,[13,18],24,25],2:[[0,6],11,81,82],3:[[0,5],11,12,[21,24],81,82],4:[[0,2],4,5,11,12,81,82],5:[[0,9],[81,85]],6:[[0,2],11,12,21,23,[81,84]],7:[0,1,3,5,6,[21,24]],8:[[0,4],11,26,[29,31]],9:[[0,3],[21,25],28,81,82],10:[[0,3],11,12,23,81,84,88],11:[[0,2],11,12,[81,83]],12:[[0,4],[81,84]],13:[[0,2],11,[21,24]]},33:{0:[0],1:[[0,6],[8,10],22,27,82,83,85],2:[0,1,[3,6],11,12,25,26,[81,83]],3:[[0,4],22,24,[26,29],81,82],4:[[0,2],11,21,24,[81,83]],5:[[0,3],[21,23]],6:[[0,2],21,24,[81,83]],7:[[0,3],23,26,27,[81,84]],8:[[0,3],22,24,25,81],9:[[0,3],21,22],10:[[0,4],[21,24],81,82],11:[[0,2],[21,27],81]},34:{0:[0],1:[[0,4],11,[21,24],81],2:[[0,4],7,8,[21,23],25],3:[[0,4],11,[21,23]],4:[[0,6],21],5:[[0,4],6,[21,23]],6:[[0,4],21],7:[[0,3],11,21],8:[[0,3],11,[22,28],81],10:[[0,4],[21,24]],11:[[0,3],22,[24,26],81,82],12:[[0,4],21,22,25,26,82],13:[[0,2],[21,24]],14:[[0,2],[21,24]],15:[[0,3],[21,25]],16:[[0,2],[21,23]],17:[[0,2],[21,23]],18:[[0,2],[21,25],81]},35:{0:[0],1:[[0,5],11,[21,25],28,81,82],2:[[0,6],[11,13]],3:[[0,5],22],4:[[0,3],21,[23,30],81],5:[[0,5],21,[24,27],[81,83]],6:[[0,3],[22,29],81],7:[[0,2],[21,25],[81,84]],8:[[0,2],[21,25],81],9:[[0,2],[21,26],81,82]},36:{0:[0],1:[[0,5],11,[21,24]],2:[[0,3],22,81],3:[[0,2],13,[21,23]],4:[[0,3],21,[23,30],81,82],5:[[0,2],21],6:[[0,2],22,81],7:[[0,2],[21,35],81,82],8:[[0,3],[21,30],81],9:[[0,2],[21,26],[81,83]],10:[[0,2],[21,30]],11:[[0,2],[21,30],81]},37:{0:[0],1:[[0,5],12,13,[24,26],81],2:[[0,3],5,[11,14],[81,85]],3:[[0,6],[21,23]],4:[[0,6],81],5:[[0,3],[21,23]],6:[[0,2],[11,13],34,[81,87]],7:[[0,5],24,25,[81,86]],8:[[0,2],11,[26,32],[81,83]],9:[[0,3],11,21,23,82,83],10:[[0,2],[81,83]],11:[[0,3],21,22],12:[[0,3]],13:[[0,2],11,12,[21,29]],14:[[0,2],[21,28],81,82],15:[[0,2],[21,26],81],16:[[0,2],[21,26]],17:[[0,2],[21,28]]},41:{0:[0],1:[[0,6],8,22,[81,85]],2:[[0,5],11,[21,25]],3:[[0,7],11,[22,29],81],4:[[0,4],11,[21,23],25,81,82],5:[[0,3],5,6,22,23,26,27,81],6:[[0,3],11,21,22],7:[[0,4],11,21,[24,28],81,82],8:[[0,4],11,[21,23],25,[81,83]],9:[[0,2],22,23,[26,28]],10:[[0,2],[23,25],81,82],11:[[0,4],[21,23]],12:[[0,2],21,22,24,81,82],13:[[0,3],[21,30],81],14:[[0,3],[21,26],81],15:[[0,3],[21,28]],16:[[0,2],[21,28],81],17:[[0,2],[21,29]],90:[0,1]},42:{0:[0],1:[[0,7],[11,17]],2:[[0,5],22,81],3:[[0,3],[21,25],81],5:[[0,6],[25,29],[81,83]],6:[[0,2],6,7,[24,26],[82,84]],7:[[0,4]],8:[[0,2],4,21,22,81],9:[[0,2],[21,23],81,82,84],10:[[0,3],[22,24],81,83,87],11:[[0,2],[21,27],81,82],12:[[0,2],[21,24],81],13:[[0,3],21,81],28:[[0,2],22,23,[25,28]],90:[0,[4,6],21]},43:{0:[0],1:[[0,5],11,12,21,22,24,81],2:[[0,4],11,21,[23,25],81],3:[[0,2],4,21,81,82],4:[0,1,[5,8],12,[21,24],26,81,82],5:[[0,3],11,[21,25],[27,29],81],6:[[0,3],11,21,23,24,26,81,82],7:[[0,3],[21,26],81],8:[[0,2],11,21,22],9:[[0,3],[21,23],81],10:[[0,3],[21,28],81],11:[[0,3],[21,29]],12:[[0,2],[21,30],81],13:[[0,2],21,22,81,82],31:[0,1,[22,27],30]},44:{0:[0],1:[[0,7],[11,16],83,84],2:[[0,5],21,22,24,29,32,33,81,82],3:[0,1,[3,8]],4:[[0,4]],5:[0,1,[6,15],23,82,83],6:[0,1,[4,8]],7:[0,1,[3,5],81,[83,85]],8:[[0,4],11,23,25,[81,83]],9:[[0,3],23,[81,83]],12:[[0,3],[23,26],83,84],13:[[0,3],[22,24],81],14:[[0,2],[21,24],26,27,81],15:[[0,2],21,23,81],16:[[0,2],[21,25]],17:[[0,2],21,23,81],18:[[0,3],21,23,[25,27],81,82],19:[0],20:[0],51:[[0,3],21,22],52:[[0,3],21,22,24,81],53:[[0,2],[21,23],81]},45:{0:[0],1:[[0,9],[21,27]],2:[[0,5],[21,26]],3:[[0,5],11,12,[21,32]],4:[0,1,[3,6],11,[21,23],81],5:[[0,3],12,21],6:[[0,3],21,81],7:[[0,3],21,22],8:[[0,4],21,81],9:[[0,3],[21,24],81],10:[[0,2],[21,31]],11:[[0,2],[21,23]],12:[[0,2],[21,29],81],13:[[0,2],[21,24],81],14:[[0,2],[21,25],81]},46:{0:[0],1:[0,1,[5,8]],2:[0,1],3:[0,[21,23]],90:[[0,3],[5,7],[21,39]]},50:{0:[0],1:[[0,19]],2:[0,[22,38],[40,43]],3:[0,[81,84]]},51:{0:[0],1:[0,1,[4,8],[12,15],[21,24],29,31,32,[81,84]],3:[[0,4],11,21,22],4:[[0,3],11,21,22],5:[[0,4],21,22,24,25],6:[0,1,3,23,26,[81,83]],7:[0,1,3,4,[22,27],81],8:[[0,2],11,12,[21,24]],9:[[0,4],[21,23]],10:[[0,2],11,24,25,28],11:[[0,2],[11,13],23,24,26,29,32,33,81],13:[[0,4],[21,25],81],14:[[0,2],[21,25]],15:[[0,3],[21,29]],16:[[0,3],[21,23],81],17:[[0,3],[21,25],81],18:[[0,3],[21,27]],19:[[0,3],[21,23]],20:[[0,2],21,22,81],32:[0,[21,33]],33:[0,[21,38]],34:[0,1,[22,37]]},52:{0:[0],1:[[0,3],[11,15],[21,23],81],2:[0,1,3,21,22],3:[[0,3],[21,30],81,82],4:[[0,2],[21,25]],5:[[0,2],[21,27]],6:[[0,3],[21,28]],22:[0,1,[22,30]],23:[0,1,[22,28]],24:[0,1,[22,28]],26:[0,1,[22,36]],27:[[0,2],22,23,[25,32]]},53:{0:[0],1:[[0,3],[11,14],21,22,[24,29],81],3:[[0,2],[21,26],28,81],4:[[0,2],[21,28]],5:[[0,2],[21,24]],6:[[0,2],[21,30]],7:[[0,2],[21,24]],8:[[0,2],[21,29]],9:[[0,2],[21,27]],23:[0,1,[22,29],31],25:[[0,4],[22,32]],26:[0,1,[21,28]],27:[0,1,[22,30]],28:[0,1,22,23],29:[0,1,[22,32]],31:[0,2,3,[22,24]],34:[0,[21,23]],33:[0,21,[23,25]],35:[0,[21,28]]},54:{0:[0],1:[[0,2],[21,27]],21:[0,[21,29],32,33],22:[0,[21,29],[31,33]],23:[0,1,[22,38]],24:[0,[21,31]],25:[0,[21,27]],26:[0,[21,27]]},61:{0:[0],1:[[0,4],[11,16],22,[24,26]],2:[[0,4],22],3:[[0,4],[21,24],[26,31]],4:[[0,4],[22,31],81],5:[[0,2],[21,28],81,82],6:[[0,2],[21,32]],7:[[0,2],[21,30]],8:[[0,2],[21,31]],9:[[0,2],[21,29]],10:[[0,2],[21,26]]},62:{0:[0],1:[[0,5],11,[21,23]],2:[0,1],3:[[0,2],21],4:[[0,3],[21,23]],5:[[0,3],[21,25]],6:[[0,2],[21,23]],7:[[0,2],[21,25]],8:[[0,2],[21,26]],9:[[0,2],[21,24],81,82],10:[[0,2],[21,27]],11:[[0,2],[21,26]],12:[[0,2],[21,28]],24:[0,21,[24,29]],26:[0,21,[23,30]],29:[0,1,[21,27]],30:[0,1,[21,27]]},63:{0:[0],1:[[0,5],[21,23]],2:[0,2,[21,25]],21:[0,[21,23],[26,28]],22:[0,[21,24]],23:[0,[21,24]],25:[0,[21,25]],26:[0,[21,26]],27:[0,1,[21,26]],28:[[0,2],[21,23]]},64:{0:[0],1:[0,1,[4,6],21,22,81],2:[[0,3],5,[21,23]],3:[[0,3],[21,24],81],4:[[0,2],[21,25]],5:[[0,2],21,22]},65:{0:[0],1:[[0,9],21],2:[[0,5]],21:[0,1,22,23],22:[0,1,22,23],23:[[0,3],[23,25],27,28],28:[0,1,[22,29]],29:[0,1,[22,29]],30:[0,1,[22,24]],31:[0,1,[21,31]],32:[0,1,[21,27]],40:[0,2,3,[21,28]],42:[[0,2],21,[23,26]],43:[0,1,[21,26]],90:[[0,4]],27:[[0,2],22,23]},71:{0:[0]},81:{0:[0]},82:{0:[0]}},s=parseInt(e.substr(0,2),10),i=parseInt(e.substr(2,2),10),n=parseInt(e.substr(4,2),10);if(!r[s]||!r[s][i])return!1;for(var o=!1,l=r[s][i],d=0;d<l.length;d++)if(t.isArray(l[d])&&l[d][0]<=n&&n<=l[d][1]||!t.isArray(l[d])&&n===l[d]){o=!0;break}if(!o)return!1;a=18===e.length?e.substr(6,8):"19"+e.substr(6,6);var u=parseInt(a.substr(0,4),10),f=parseInt(a.substr(4,2),10),p=parseInt(a.substr(6,2),10);if(!t.fn.bootstrapValidator.helpers.date(u,f,p))return!1;if(18===e.length){var c=0,h=[7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2];for(d=0;17>d;d++)c+=parseInt(e.charAt(d),10)*h[d];return c=(12-c%11)%11,("X"!==e.charAt(17).toUpperCase()?parseInt(e.charAt(17),10):10)===c}return!0},_cz:function(e){if(!/^\d{9,10}$/.test(e))return!1;var a=1900+parseInt(e.substr(0,2),10),r=parseInt(e.substr(2,2),10)%50%20,s=parseInt(e.substr(4,2),10);if(9===e.length){if(a>=1980&&(a-=100),a>1953)return!1}else 1954>a&&(a+=100);if(!t.fn.bootstrapValidator.helpers.date(a,r,s))return!1;if(10===e.length){var i=parseInt(e.substr(0,9),10)%11;return 1985>a&&(i%=10),i+""===e.substr(9,1)}return!0},_dk:function(e){if(!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(e))return!1;e=e.replace(/-/g,"");var a=parseInt(e.substr(0,2),10),r=parseInt(e.substr(2,2),10),s=parseInt(e.substr(4,2),10);switch(!0){case-1!=="5678".indexOf(e.charAt(6))&&s>=58:s+=1800;break;case-1!=="0123".indexOf(e.charAt(6)):case-1!=="49".indexOf(e.charAt(6))&&s>=37:s+=1900;break;default:s+=2e3}return t.fn.bootstrapValidator.helpers.date(s,r,a)},_ee:function(t){return this._lt(t)},_es:function(t){if(!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]$/.test(t)&&!/^[XYZ][-]{0,1}[0-9]{7}[-]{0,1}[0-9A-Z]$/.test(t))return!1;t=t.replace(/-/g,"");var e="XYZ".indexOf(t.charAt(0));-1!==e&&(t=e+t.substr(1)+"");var a=parseInt(t.substr(0,8),10);return(a="TRWAGMYFPDXBNJZSQVHLCKE"[a%23])===t.substr(8,1)},_fi:function(e){if(!/^[0-9]{6}[-+A][0-9]{3}[0-9ABCDEFHJKLMNPRSTUVWXY]$/.test(e))return!1;var a=parseInt(e.substr(0,2),10),r=parseInt(e.substr(2,2),10),s=parseInt(e.substr(4,2),10);if(s={"+":1800,"-":1900,A:2e3}[e.charAt(6)]+s,!t.fn.bootstrapValidator.helpers.date(s,r,a))return!1;if(2>parseInt(e.substr(7,3),10))return!1;var i=e.substr(0,6)+e.substr(7,3)+"";return i=parseInt(i,10),"0123456789ABCDEFHJKLMNPRSTUVWXY".charAt(i%31)===e.charAt(10)},_hr:function(e){return!!/^[0-9]{11}$/.test(e)&&t.fn.bootstrapValidator.helpers.mod11And10(e)},_ie:function(t){if(!/^\d{7}[A-W][AHWTX]?$/.test(t))return!1;var e=function(t){for(;t.length<7;)t="0"+t;for(var e="WABCDEFGHIJKLMNOPQRSTUV",a=0,r=0;7>r;r++)a+=parseInt(t.charAt(r),10)*(8-r);return a+=9*e.indexOf(t.substr(7)),e[a%23]};return 9!==t.length||"A"!==t.charAt(8)&&"H"!==t.charAt(8)?t.charAt(7)===e(t.substr(0,7)):t.charAt(7)===e(t.substr(0,7)+t.substr(8)+"")},_is:function(e){if(!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(e))return!1;e=e.replace(/-/g,"");var a=parseInt(e.substr(0,2),10),r=parseInt(e.substr(2,2),10),s=parseInt(e.substr(4,2),10),i=parseInt(e.charAt(9),10);if(s=9===i?1900+s:100*(20+i)+s,!t.fn.bootstrapValidator.helpers.date(s,r,a,!0))return!1;for(var n=0,o=[3,2,7,6,5,4,3,2],l=0;8>l;l++)n+=parseInt(e.charAt(l),10)*o[l];return(n=11-n%11)+""===e.charAt(8)},_lt:function(e){if(!/^[0-9]{11}$/.test(e))return!1;var a=parseInt(e.charAt(0),10),r=parseInt(e.substr(1,2),10),s=parseInt(e.substr(3,2),10),i=parseInt(e.substr(5,2),10);if(r=100*(a%2==0?17+a/2:17+(a+1)/2)+r,!t.fn.bootstrapValidator.helpers.date(r,s,i,!0))return!1;for(var n=0,o=[1,2,3,4,5,6,7,8,9,1],l=0;10>l;l++)n+=parseInt(e.charAt(l),10)*o[l];if(10!==(n%=11))return n+""===e.charAt(10);for(n=0,o=[3,4,5,6,7,8,9,1,2,3],l=0;10>l;l++)n+=parseInt(e.charAt(l),10)*o[l];return 10===(n%=11)&&(n=0),n+""===e.charAt(10)},_lv:function(e){if(!/^[0-9]{6}[-]{0,1}[0-9]{5}$/.test(e))return!1;e=e.replace(/\D/g,"");var a=parseInt(e.substr(0,2),10),r=parseInt(e.substr(2,2),10),s=parseInt(e.substr(4,2),10);if(s=s+1800+100*parseInt(e.charAt(6),10),!t.fn.bootstrapValidator.helpers.date(s,r,a,!0))return!1;for(var i=0,n=[10,5,8,4,2,1,6,3,7,9],o=0;10>o;o++)i+=parseInt(e.charAt(o),10)*n[o];return(i=(i+1)%11%10)+""===e.charAt(10)},_nl:function(t){for(;t.length<9;)t="0"+t;if(!/^[0-9]{4}[.]{0,1}[0-9]{2}[.]{0,1}[0-9]{3}$/.test(t))return!1;if(t=t.replace(/\./g,""),0===parseInt(t,10))return!1;for(var e=0,a=t.length,r=0;a-1>r;r++)e+=(9-r)*parseInt(t.charAt(r),10);return 10===(e%=11)&&(e=0),e+""===t.charAt(a-1)},_ro:function(e){if(!/^[0-9]{13}$/.test(e))return!1;var a=parseInt(e.charAt(0),10);if(0===a||7===a||8===a)return!1;var r=parseInt(e.substr(1,2),10),s=parseInt(e.substr(3,2),10),i=parseInt(e.substr(5,2),10);if(i>31&&s>12)return!1;if(9!==a&&(r={1:1900,2:1900,3:1800,4:1800,5:2e3,6:2e3}[a+""]+r,!t.fn.bootstrapValidator.helpers.date(r,s,i)))return!1;for(var n=0,o=[2,7,9,1,4,6,3,5,8,2,7,9],l=e.length,d=0;l-1>d;d++)n+=parseInt(e.charAt(d),10)*o[d];return 10===(n%=11)&&(n=1),n+""===e.charAt(l-1)},_se:function(e){if(!/^[0-9]{10}$/.test(e)&&!/^[0-9]{6}[-|+][0-9]{4}$/.test(e))return!1;e=e.replace(/[^0-9]/g,"");var a=parseInt(e.substr(0,2),10)+1900,r=parseInt(e.substr(2,2),10),s=parseInt(e.substr(4,2),10);return!!t.fn.bootstrapValidator.helpers.date(a,r,s)&&t.fn.bootstrapValidator.helpers.luhn(e)},_sk:function(t){return this._cz(t)},_sm:function(t){return/^\d{5}$/.test(t)},_th:function(t){if(13!==t.length)return!1;for(var e=0,a=0;12>a;a++)e+=parseInt(t.charAt(a),10)*(13-a);return(11-e%11)%10===parseInt(t.charAt(12),10)},_za:function(e){if(!/^[0-9]{10}[0|1][8|9][0-9]$/.test(e))return!1;var a=parseInt(e.substr(0,2),10),r=(new Date).getFullYear()%100,s=parseInt(e.substr(2,2),10),i=parseInt(e.substr(4,2),10);return a=a>=r?a+1900:a+2e3,!!t.fn.bootstrapValidator.helpers.date(a,s,i)&&t.fn.bootstrapValidator.helpers.luhn(e)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.identical=t.extend(t.fn.bootstrapValidator.i18n.identical||{},{default:"Please enter the same value"}),t.fn.bootstrapValidator.validators.identical={html5Attributes:{message:"message",field:"field"},validate:function(t,e,a){var r=e.val();if(""===r)return!0;var s=t.getFieldElements(a.field);return null===s||0===s.length||r===s.val()&&(t.updateStatus(a.field,t.STATUS_VALID,"identical"),!0)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.imei=t.extend(t.fn.bootstrapValidator.i18n.imei||{},{default:"Please enter a valid IMEI number"}),t.fn.bootstrapValidator.validators.imei={validate:function(e,a){var r=a.val();if(""===r)return!0;switch(!0){case/^\d{15}$/.test(r):case/^\d{2}-\d{6}-\d{6}-\d{1}$/.test(r):case/^\d{2}\s\d{6}\s\d{6}\s\d{1}$/.test(r):return r=r.replace(/[^0-9]/g,""),t.fn.bootstrapValidator.helpers.luhn(r);case/^\d{14}$/.test(r):case/^\d{16}$/.test(r):case/^\d{2}-\d{6}-\d{6}(|-\d{2})$/.test(r):case/^\d{2}\s\d{6}\s\d{6}(|\s\d{2})$/.test(r):return!0;default:return!1}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.imo=t.extend(t.fn.bootstrapValidator.i18n.imo||{},{default:"Please enter a valid IMO number"}),t.fn.bootstrapValidator.validators.imo={validate:function(t,e){var a=e.val();if(""===a)return!0;if(!/^IMO \d{7}$/i.test(a))return!1;for(var r=0,s=a.replace(/^.*(\d{7})$/,"$1"),i=6;i>=1;i--)r+=s.slice(6-i,-i)*(i+1);return r%10===parseInt(s.charAt(6),10)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.integer=t.extend(t.fn.bootstrapValidator.i18n.integer||{},{default:"Please enter a valid number"}),t.fn.bootstrapValidator.validators.integer={enableByHtml5:function(t){return"number"===t.attr("type")&&(void 0===t.attr("step")||t.attr("step")%1==0)},validate:function(t,e){if(this.enableByHtml5(e)&&e.get(0).validity&&!0===e.get(0).validity.badInput)return!1;var a=e.val();return""===a||/^(?:-?(?:0|[1-9][0-9]*))$/.test(a)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.ip=t.extend(t.fn.bootstrapValidator.i18n.ip||{},{default:"Please enter a valid IP address",ipv4:"Please enter a valid IPv4 address",ipv6:"Please enter a valid IPv6 address"}),t.fn.bootstrapValidator.validators.ip={html5Attributes:{message:"message",ipv4:"ipv4",ipv6:"ipv6"},validate:function(e,a,r){var s=a.val();if(""===s)return!0;var i,n=/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,o=/^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/,l=!1;switch(!0){case(r=t.extend({},{ipv4:!0,ipv6:!0},r)).ipv4&&!r.ipv6:l=n.test(s),i=r.message||t.fn.bootstrapValidator.i18n.ip.ipv4;break;case!r.ipv4&&r.ipv6:l=o.test(s),i=r.message||t.fn.bootstrapValidator.i18n.ip.ipv6;break;case r.ipv4&&r.ipv6:default:l=n.test(s)||o.test(s),i=r.message||t.fn.bootstrapValidator.i18n.ip.default}return{valid:l,message:i}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.isbn=t.extend(t.fn.bootstrapValidator.i18n.isbn||{},{default:"Please enter a valid ISBN number"}),t.fn.bootstrapValidator.validators.isbn={validate:function(t,e){var a,r=e.val();if(""===r)return!0;switch(!0){case/^\d{9}[\dX]$/.test(r):case 13===r.length&&/^(\d+)-(\d+)-(\d+)-([\dX])$/.test(r):case 13===r.length&&/^(\d+)\s(\d+)\s(\d+)\s([\dX])$/.test(r):a="ISBN10";break;case/^(978|979)\d{9}[\dX]$/.test(r):case 17===r.length&&/^(978|979)-(\d+)-(\d+)-(\d+)-([\dX])$/.test(r):case 17===r.length&&/^(978|979)\s(\d+)\s(\d+)\s(\d+)\s([\dX])$/.test(r):a="ISBN13";break;default:return!1}var s,i,n=(r=r.replace(/[^0-9X]/gi,"")).split(""),o=n.length,l=0;switch(a){case"ISBN10":for(l=0,s=0;o-1>s;s++)l+=parseInt(n[s],10)*(10-s);return 11===(i=11-l%11)?i=0:10===i&&(i="X"),i+""===n[o-1];case"ISBN13":for(l=0,s=0;o-1>s;s++)l+=s%2==0?parseInt(n[s],10):3*parseInt(n[s],10);return 10===(i=10-l%10)&&(i="0"),i+""===n[o-1];default:return!1}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.isin=t.extend(t.fn.bootstrapValidator.i18n.isin||{},{default:"Please enter a valid ISIN number"}),t.fn.bootstrapValidator.validators.isin={COUNTRY_CODES:"AF|AX|AL|DZ|AS|AD|AO|AI|AQ|AG|AR|AM|AW|AU|AT|AZ|BS|BH|BD|BB|BY|BE|BZ|BJ|BM|BT|BO|BQ|BA|BW|BV|BR|IO|BN|BG|BF|BI|KH|CM|CA|CV|KY|CF|TD|CL|CN|CX|CC|CO|KM|CG|CD|CK|CR|CI|HR|CU|CW|CY|CZ|DK|DJ|DM|DO|EC|EG|SV|GQ|ER|EE|ET|FK|FO|FJ|FI|FR|GF|PF|TF|GA|GM|GE|DE|GH|GI|GR|GL|GD|GP|GU|GT|GG|GN|GW|GY|HT|HM|VA|HN|HK|HU|IS|IN|ID|IR|IQ|IE|IM|IL|IT|JM|JP|JE|JO|KZ|KE|KI|KP|KR|KW|KG|LA|LV|LB|LS|LR|LY|LI|LT|LU|MO|MK|MG|MW|MY|MV|ML|MT|MH|MQ|MR|MU|YT|MX|FM|MD|MC|MN|ME|MS|MA|MZ|MM|NA|NR|NP|NL|NC|NZ|NI|NE|NG|NU|NF|MP|NO|OM|PK|PW|PS|PA|PG|PY|PE|PH|PN|PL|PT|PR|QA|RE|RO|RU|RW|BL|SH|KN|LC|MF|PM|VC|WS|SM|ST|SA|SN|RS|SC|SL|SG|SX|SK|SI|SB|SO|ZA|GS|SS|ES|LK|SD|SR|SJ|SZ|SE|CH|SY|TW|TJ|TZ|TH|TL|TG|TK|TO|TT|TN|TR|TM|TC|TV|UG|UA|AE|GB|US|UM|UY|UZ|VU|VE|VN|VG|VI|WF|EH|YE|ZM|ZW",validate:function(t,e){var a=e.val();if(""===a)return!0;if(a=a.toUpperCase(),!new RegExp("^("+this.COUNTRY_CODES+")[0-9A-Z]{10}$").test(a))return!1;for(var r="",s=a.length,i=0;s-1>i;i++){var n=a.charCodeAt(i);r+=n>57?(n-55).toString():a.charAt(i)}var o="",l=r.length,d=l%2!=0?0:1;for(i=0;l>i;i++)o+=parseInt(r[i],10)*(i%2===d?2:1)+"";var u=0;for(i=0;i<o.length;i++)u+=parseInt(o.charAt(i),10);return(u=(10-u%10)%10)+""===a.charAt(s-1)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.ismn=t.extend(t.fn.bootstrapValidator.i18n.ismn||{},{default:"Please enter a valid ISMN number"}),t.fn.bootstrapValidator.validators.ismn={validate:function(t,e){var a,r=e.val();if(""===r)return!0;switch(!0){case/^M\d{9}$/.test(r):case/^M-\d{4}-\d{4}-\d{1}$/.test(r):case/^M\s\d{4}\s\d{4}\s\d{1}$/.test(r):a="ISMN10";break;case/^9790\d{9}$/.test(r):case/^979-0-\d{4}-\d{4}-\d{1}$/.test(r):case/^979\s0\s\d{4}\s\d{4}\s\d{1}$/.test(r):a="ISMN13";break;default:return!1}"ISMN10"===a&&(r="9790"+r.substr(1));for(var s=(r=r.replace(/[^0-9]/gi,"")).length,i=0,n=[1,3],o=0;s-1>o;o++)i+=parseInt(r.charAt(o),10)*n[o%2];return(i=10-i%10)+""===r.charAt(s-1)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.issn=t.extend(t.fn.bootstrapValidator.i18n.issn||{},{default:"Please enter a valid ISSN number"}),t.fn.bootstrapValidator.validators.issn={validate:function(t,e){var a=e.val();if(""===a)return!0;if(!/^\d{4}\-\d{3}[\dX]$/.test(a))return!1;var r=(a=a.replace(/[^0-9X]/gi,"")).split(""),s=r.length,i=0;"X"===r[7]&&(r[7]=10);for(var n=0;s>n;n++)i+=parseInt(r[n],10)*(8-n);return i%11==0}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.lessThan=t.extend(t.fn.bootstrapValidator.i18n.lessThan||{},{default:"Please enter a value less than or equal to %s",notInclusive:"Please enter a value less than %s"}),t.fn.bootstrapValidator.validators.lessThan={html5Attributes:{message:"message",value:"value",inclusive:"inclusive"},enableByHtml5:function(t){var e=t.attr("type"),a=t.attr("max");return!(!a||"date"===e)&&{value:a}},validate:function(e,a,r){var s=a.val();if(""===s)return!0;if(!t.isNumeric(s))return!1;var i=t.isNumeric(r.value)?r.value:e.getDynamicOption(a,r.value);return s=parseFloat(s),!0===r.inclusive||void 0===r.inclusive?{valid:i>=s,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.lessThan.default,i)}:{valid:i>s,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.lessThan.notInclusive,i)}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.mac=t.extend(t.fn.bootstrapValidator.i18n.mac||{},{default:"Please enter a valid MAC address"}),t.fn.bootstrapValidator.validators.mac={validate:function(t,e){var a=e.val();return""===a||/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/.test(a)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.meid=t.extend(t.fn.bootstrapValidator.i18n.meid||{},{default:"Please enter a valid MEID number"}),t.fn.bootstrapValidator.validators.meid={validate:function(e,a){var r=a.val();if(""===r)return!0;switch(!0){case/^[0-9A-F]{15}$/i.test(r):case/^[0-9A-F]{2}[- ][0-9A-F]{6}[- ][0-9A-F]{6}[- ][0-9A-F]$/i.test(r):case/^\d{19}$/.test(r):case/^\d{5}[- ]\d{5}[- ]\d{4}[- ]\d{4}[- ]\d$/.test(r):var s=r.charAt(r.length-1);if((r=r.replace(/[- ]/g,"")).match(/^\d*$/i))return t.fn.bootstrapValidator.helpers.luhn(r);r=r.slice(0,-1);for(var i="",n=1;13>=n;n+=2)i+=(2*parseInt(r.charAt(n),16)).toString(16);var o=0;for(n=0;n<i.length;n++)o+=parseInt(i.charAt(n),16);return o%10==0?"0"===s:s===(2*(10*Math.floor((o+10)/10)-o)).toString(16);case/^[0-9A-F]{14}$/i.test(r):case/^[0-9A-F]{2}[- ][0-9A-F]{6}[- ][0-9A-F]{6}$/i.test(r):case/^\d{18}$/.test(r):case/^\d{5}[- ]\d{5}[- ]\d{4}[- ]\d{4}$/.test(r):return!0;default:return!1}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.notEmpty=t.extend(t.fn.bootstrapValidator.i18n.notEmpty||{},{default:"Please enter a value"}),t.fn.bootstrapValidator.validators.notEmpty={enableByHtml5:function(t){var e=t.attr("required")+"";return"required"===e||"true"===e},validate:function(e,a){var r=a.attr("type");return"radio"===r||"checkbox"===r?e.getFieldElements(a.attr("data-bv-field")).filter(":checked").length>0:!("number"!==r||!a.get(0).validity||!0!==a.get(0).validity.badInput)||""!==t.trim(a.val())}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.numeric=t.extend(t.fn.bootstrapValidator.i18n.numeric||{},{default:"Please enter a valid float number"}),t.fn.bootstrapValidator.validators.numeric={html5Attributes:{message:"message",separator:"separator"},enableByHtml5:function(t){return"number"===t.attr("type")&&void 0!==t.attr("step")&&t.attr("step")%1!=0},validate:function(t,e,a){if(this.enableByHtml5(e)&&e.get(0).validity&&!0===e.get(0).validity.badInput)return!1;var r=e.val();if(""===r)return!0;var s=a.separator||".";return"."!==s&&(r=r.replace(s,".")),!isNaN(parseFloat(r))&&isFinite(r)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.phone=t.extend(t.fn.bootstrapValidator.i18n.phone||{},{default:"Please enter a valid phone number",countryNotSupported:"The country code %s is not supported",country:"Please enter a valid phone number in %s",countries:{BR:"Brazil",CN:"China",CZ:"Czech Republic",DK:"Denmark",ES:"Spain",FR:"France",GB:"United Kingdom",MA:"Morocco",PK:"Pakistan",RO:"Romania",RU:"Russia",SK:"Slovakia",TH:"Thailand",US:"USA",VE:"Venezuela"}}),t.fn.bootstrapValidator.validators.phone={html5Attributes:{message:"message",country:"country"},COUNTRY_CODES:["BR","CN","CZ","DK","ES","FR","GB","MA","PK","RO","RU","SK","TH","US","VE"],validate:function(e,a,r){var s=a.val();if(""===s)return!0;var i=r.country;if(("string"!=typeof i||-1===t.inArray(i,this.COUNTRY_CODES))&&(i=e.getDynamicOption(a,i)),!i||-1===t.inArray(i.toUpperCase(),this.COUNTRY_CODES))return{valid:!1,message:t.fn.bootstrapValidator.helpers.format(t.fn.bootstrapValidator.i18n.phone.countryNotSupported,i)};var n=!0;switch(i.toUpperCase()){case"BR":s=t.trim(s),n=/^(([\d]{4}[-.\s]{1}[\d]{2,3}[-.\s]{1}[\d]{2}[-.\s]{1}[\d]{2})|([\d]{4}[-.\s]{1}[\d]{3}[-.\s]{1}[\d]{4})|((\(?\+?[0-9]{2}\)?\s?)?(\(?\d{2}\)?\s?)?\d{4,5}[-.\s]?\d{4}))$/.test(s);break;case"CN":s=t.trim(s),n=/^((00|\+)?(86(?:-| )))?((\d{11})|(\d{3}[- ]{1}\d{4}[- ]{1}\d{4})|((\d{2,4}[- ]){1}(\d{7,8}|(\d{3,4}[- ]{1}\d{4}))([- ]{1}\d{1,4})?))$/.test(s);break;case"CZ":case"SK":n=/^(((00)([- ]?)|\+)(420)([- ]?))?((\d{3})([- ]?)){2}(\d{3})$/.test(s);break;case"DK":s=t.trim(s),n=/^(\+45|0045|\(45\))?\s?[2-9](\s?\d){7}$/.test(s);break;case"ES":s=t.trim(s),n=/^(?:(?:(?:\+|00)34\D?))?(?:9|6)(?:\d\D?){8}$/.test(s);break;case"FR":s=t.trim(s),n=/^(?:(?:(?:\+|00)33[ ]?(?:\(0\)[ ]?)?)|0){1}[1-9]{1}([ .-]?)(?:\d{2}\1?){3}\d{2}$/.test(s);break;case"GB":s=t.trim(s),n=/^\(?(?:(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?\(?(?:0\)?[\s-]?\(?)?|0)(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}|\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4}|\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3})|\d{5}\)?[\s-]?\d{4,5}|8(?:00[\s-]?11[\s-]?11|45[\s-]?46[\s-]?4\d))(?:(?:[\s-]?(?:x|ext\.?\s?|\#)\d+)?)$/.test(s);break;case"MA":s=t.trim(s),n=/^(?:(?:(?:\+|00)212[\s]?(?:[\s]?\(0\)[\s]?)?)|0){1}(?:5[\s.-]?[2-3]|6[\s.-]?[13-9]){1}[0-9]{1}(?:[\s.-]?\d{2}){3}$/.test(s);break;case"PK":s=t.trim(s),n=/^0?3[0-9]{2}[0-9]{7}$/.test(s);break;case"RO":n=/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g.test(s);break;case"RU":n=/^((8|\+7|007)[\-\.\/ ]?)?([\(\/\.]?\d{3}[\)\/\.]?[\-\.\/ ]?)?[\d\-\.\/ ]{7,10}$/g.test(s);break;case"TH":n=/^0\(?([6|8-9]{2})*-([0-9]{3})*-([0-9]{4})$/.test(s);break;case"VE":s=t.trim(s),n=/^0(?:2(?:12|4[0-9]|5[1-9]|6[0-9]|7[0-8]|8[1-35-8]|9[1-5]|3[45789])|4(?:1[246]|2[46]))\d{7}$/.test(s);break;default:s=s.replace(/\D/g,""),n=/^(?:(1\-?)|(\+1 ?))?\(?(\d{3})[\)\-\.]?(\d{3})[\-\.]?(\d{4})$/.test(s)&&10===s.length}return{valid:n,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.phone.country,t.fn.bootstrapValidator.i18n.phone.countries[i])}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.regexp=t.extend(t.fn.bootstrapValidator.i18n.regexp||{},{default:"Please enter a value matching the pattern"}),t.fn.bootstrapValidator.validators.regexp={html5Attributes:{message:"message",regexp:"regexp"},enableByHtml5:function(t){var e=t.attr("pattern");return!!e&&{regexp:e}},validate:function(t,e,a){var r=e.val();return""===r||("string"==typeof a.regexp?new RegExp(a.regexp):a.regexp).test(r)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.remote=t.extend(t.fn.bootstrapValidator.i18n.remote||{},{default:"Please enter a valid value"}),t.fn.bootstrapValidator.validators.remote={html5Attributes:{message:"message",name:"name",type:"type",url:"url",delay:"delay"},destroy:function(t,e){e.data("bv.remote.timer")&&(clearTimeout(e.data("bv.remote.timer")),e.removeData("bv.remote.timer"))},validate:function(e,a,r){function s(){var e=t.ajax({type:u,headers:f,url:d,dataType:"json",data:l});return e.then(function(t){t.valid=!0===t.valid||"true"===t.valid,n.resolve(a,"remote",t)}),n.fail(function(){e.abort()}),n}var i=a.val(),n=new t.Deferred;if(""===i)return n.resolve(a,"remote",{valid:!0}),n;var o=a.attr("data-bv-field"),l=r.data||{},d=r.url,u=r.type||"GET",f=r.headers||{};return"function"==typeof l&&(l=l.call(this,e)),"function"==typeof d&&(d=d.call(this,e)),l[r.name||o]=i,r.delay?(a.data("bv.remote.timer")&&clearTimeout(a.data("bv.remote.timer")),a.data("bv.remote.timer",setTimeout(s,r.delay)),n):s()}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.rtn=t.extend(t.fn.bootstrapValidator.i18n.rtn||{},{default:"Please enter a valid RTN number"}),t.fn.bootstrapValidator.validators.rtn={validate:function(t,e){var a=e.val();if(""===a)return!0;if(!/^\d{9}$/.test(a))return!1;for(var r=0,s=0;s<a.length;s+=3)r+=3*parseInt(a.charAt(s),10)+7*parseInt(a.charAt(s+1),10)+parseInt(a.charAt(s+2),10);return 0!==r&&r%10==0}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.sedol=t.extend(t.fn.bootstrapValidator.i18n.sedol||{},{default:"Please enter a valid SEDOL number"}),t.fn.bootstrapValidator.validators.sedol={validate:function(t,e){var a=e.val();if(""===a)return!0;if(a=a.toUpperCase(),!/^[0-9A-Z]{7}$/.test(a))return!1;for(var r=0,s=[1,3,1,7,3,9,1],i=a.length,n=0;i-1>n;n++)r+=s[n]*parseInt(a.charAt(n),36);return(r=(10-r%10)%10)+""===a.charAt(i-1)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.siren=t.extend(t.fn.bootstrapValidator.i18n.siren||{},{default:"Please enter a valid SIREN number"}),t.fn.bootstrapValidator.validators.siren={validate:function(e,a){var r=a.val();return""===r||!!/^\d{9}$/.test(r)&&t.fn.bootstrapValidator.helpers.luhn(r)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.siret=t.extend(t.fn.bootstrapValidator.i18n.siret||{},{default:"Please enter a valid SIRET number"}),t.fn.bootstrapValidator.validators.siret={validate:function(t,e){var a=e.val();if(""===a)return!0;for(var r,s=0,i=a.length,n=0;i>n;n++)r=parseInt(a.charAt(n),10),n%2==0&&((r*=2)>9&&(r-=9)),s+=r;return s%10==0}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.step=t.extend(t.fn.bootstrapValidator.i18n.step||{},{default:"Please enter a valid step of %s"}),t.fn.bootstrapValidator.validators.step={html5Attributes:{message:"message",base:"baseValue",step:"step"},validate:function(e,a,r){var s=a.val();if(""===s)return!0;if(r=t.extend({},{baseValue:0,step:1},r),s=parseFloat(s),!t.isNumeric(s))return!1;var i=function(t,e){if(0===e)return 1;var a=(t+"").split("."),r=(e+"").split("."),s=(1===a.length?0:a[1].length)+(1===r.length?0:r[1].length);return function(t,e){var a=Math.pow(10,e),r=(t*=a)>0|-(0>t);return t%1==.5*r?(Math.floor(t)+(r>0))/a:Math.round(t)/a}(t-e*Math.floor(t/e),s)}(s-r.baseValue,r.step);return{valid:0===i||i===r.step,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.step.default,[r.step])}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.stringCase=t.extend(t.fn.bootstrapValidator.i18n.stringCase||{},{default:"Please enter only lowercase characters",upper:"Please enter only uppercase characters"}),t.fn.bootstrapValidator.validators.stringCase={html5Attributes:{message:"message",case:"case"},validate:function(e,a,r){var s=a.val();if(""===s)return!0;var i=(r.case||"lower").toLowerCase();return{valid:"upper"===i?s===s.toUpperCase():s===s.toLowerCase(),message:r.message||("upper"===i?t.fn.bootstrapValidator.i18n.stringCase.upper:t.fn.bootstrapValidator.i18n.stringCase.default)}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.stringLength=t.extend(t.fn.bootstrapValidator.i18n.stringLength||{},{default:"Please enter a value with valid length",less:"Please enter less than %s characters",more:"Please enter more than %s characters",between:"Please enter value between %s and %s characters long"}),t.fn.bootstrapValidator.validators.stringLength={html5Attributes:{message:"message",min:"min",max:"max"},enableByHtml5:function(e){var a={},r=e.attr("maxlength"),s=e.attr("minlength");return r&&(a.max=parseInt(r,10)),s&&(a.min=parseInt(s,10)),!t.isEmptyObject(a)&&a},validate:function(e,a,r){var s=a.val();if(""===s)return!0;var i=t.isNumeric(r.min)?r.min:e.getDynamicOption(a,r.min),n=t.isNumeric(r.max)?r.max:e.getDynamicOption(a,r.max),o=s.length,l=!0,d=r.message||t.fn.bootstrapValidator.i18n.stringLength.default;switch((i&&o<parseInt(i,10)||n&&o>parseInt(n,10))&&(l=!1),!0){case!!i&&!!n:d=t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.stringLength.between,[parseInt(i,10),parseInt(n,10)]);break;case!!i:d=t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.stringLength.more,parseInt(i,10));break;case!!n:d=t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.stringLength.less,parseInt(n,10))}return{valid:l,message:d}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.uri=t.extend(t.fn.bootstrapValidator.i18n.uri||{},{default:"Please enter a valid URI"}),t.fn.bootstrapValidator.validators.uri={html5Attributes:{message:"message",allowlocal:"allowLocal",protocol:"protocol"},enableByHtml5:function(t){return"url"===t.attr("type")},validate:function(t,e,a){var r=e.val();if(""===r)return!0;var s=!0===a.allowLocal||"true"===a.allowLocal,i=(a.protocol||"http, https, ftp").split(",").join("|").replace(/\s/g,"");return new RegExp("^(?:(?:"+i+")://)(?:\\S+(?::\\S*)?@)?(?:"+(s?"":"(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})")+"(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))"+(s?"?":"")+")(?::\\d{2,5})?(?:/[^\\s]*)?$","i").test(r)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.uuid=t.extend(t.fn.bootstrapValidator.i18n.uuid||{},{default:"Please enter a valid UUID number",version:"Please enter a valid UUID version %s number"}),t.fn.bootstrapValidator.validators.uuid={html5Attributes:{message:"message",version:"version"},validate:function(e,a,r){var s=a.val();if(""===s)return!0;var i={3:/^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,4:/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,5:/^[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,all:/^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i},n=r.version?r.version+"":"all";return{valid:null===i[n]||i[n].test(s),message:r.version?t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.uuid.version,r.version):r.message||t.fn.bootstrapValidator.i18n.uuid.default}}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.vat=t.extend(t.fn.bootstrapValidator.i18n.vat||{},{default:"Please enter a valid VAT number",countryNotSupported:"The country code %s is not supported",country:"Please enter a valid VAT number in %s",countries:{AT:"Austria",BE:"Belgium",BG:"Bulgaria",BR:"Brazil",CH:"Switzerland",CY:"Cyprus",CZ:"Czech Republic",DE:"Germany",DK:"Denmark",EE:"Estonia",ES:"Spain",FI:"Finland",FR:"France",GB:"United Kingdom",GR:"Greek",EL:"Greek",HU:"Hungary",HR:"Croatia",IE:"Ireland",IS:"Iceland",IT:"Italy",LT:"Lithuania",LU:"Luxembourg",LV:"Latvia",MT:"Malta",NL:"Netherlands",NO:"Norway",PL:"Poland",PT:"Portugal",RO:"Romania",RU:"Russia",RS:"Serbia",SE:"Sweden",SI:"Slovenia",SK:"Slovakia",VE:"Venezuela",ZA:"South Africa"}}),t.fn.bootstrapValidator.validators.vat={html5Attributes:{message:"message",country:"country"},COUNTRY_CODES:["AT","BE","BG","BR","CH","CY","CZ","DE","DK","EE","EL","ES","FI","FR","GB","GR","HR","HU","IE","IS","IT","LT","LU","LV","MT","NL","NO","PL","PT","RO","RU","RS","SE","SK","SI","VE","ZA"],validate:function(e,a,r){var s=a.val();if(""===s)return!0;var i=r.country;return i?("string"!=typeof i||-1===t.inArray(i.toUpperCase(),this.COUNTRY_CODES))&&(i=e.getDynamicOption(a,i)):i=s.substr(0,2),-1===t.inArray(i,this.COUNTRY_CODES)?{valid:!1,message:t.fn.bootstrapValidator.helpers.format(t.fn.bootstrapValidator.i18n.vat.countryNotSupported,i)}:!!this[["_",i.toLowerCase()].join("")](s)||{valid:!1,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.vat.country,t.fn.bootstrapValidator.i18n.vat.countries[i.toUpperCase()])}},_at:function(t){if(/^ATU[0-9]{8}$/.test(t)&&(t=t.substr(2)),!/^U[0-9]{8}$/.test(t))return!1;t=t.substr(1);for(var e=0,a=[1,2,1,2,1,2,1],r=0,s=0;7>s;s++)(r=parseInt(t.charAt(s),10)*a[s])>9&&(r=Math.floor(r/10)+r%10),e+=r;return 10===(e=10-(e+4)%10)&&(e=0),e+""===t.substr(7,1)},_be:function(t){return/^BE[0]{0,1}[0-9]{9}$/.test(t)&&(t=t.substr(2)),!!/^[0]{0,1}[0-9]{9}$/.test(t)&&(9===t.length&&(t="0"+t),"0"!==t.substr(1,1)&&(parseInt(t.substr(0,8),10)+parseInt(t.substr(8,2),10))%97==0)},_bg:function(e){if(/^BG[0-9]{9,10}$/.test(e)&&(e=e.substr(2)),!/^[0-9]{9,10}$/.test(e))return!1;var a=0,r=0;if(9===e.length){for(r=0;8>r;r++)a+=parseInt(e.charAt(r),10)*(r+1);if(10===(a%=11))for(a=0,r=0;8>r;r++)a+=parseInt(e.charAt(r),10)*(r+3);return(a%=10)+""===e.substr(8)}if(10===e.length){return function(e){var a=parseInt(e.substr(0,2),10)+1900,r=parseInt(e.substr(2,2),10),s=parseInt(e.substr(4,2),10);if(r>40?(a+=100,r-=40):r>20&&(a-=100,r-=20),!t.fn.bootstrapValidator.helpers.date(a,r,s))return!1;for(var i=0,n=[2,4,8,5,10,9,7,3,6],o=0;9>o;o++)i+=parseInt(e.charAt(o),10)*n[o];return(i=i%11%10)+""===e.substr(9,1)}(e)||function(t){for(var e=0,a=[21,19,17,13,11,9,7,3,1],r=0;9>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return(e%=10)+""===t.substr(9,1)}(e)||function(t){for(var e=0,a=[4,3,2,7,6,5,4,3,2],r=0;9>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return 10!==(e=11-e%11)&&(11===e&&(e=0),e+""===t.substr(9,1))}(e)}return!1},_br:function(t){if(""===t)return!0;var e=t.replace(/[^\d]+/g,"");if(""===e||14!==e.length)return!1;if("00000000000000"===e||"11111111111111"===e||"22222222222222"===e||"33333333333333"===e||"44444444444444"===e||"55555555555555"===e||"66666666666666"===e||"77777777777777"===e||"88888888888888"===e||"99999999999999"===e)return!1;for(var a=e.length-2,r=e.substring(0,a),s=e.substring(a),i=0,n=a-7,o=a;o>=1;o--)i+=parseInt(r.charAt(a-o),10)*n--,2>n&&(n=9);var l=2>i%11?0:11-i%11;if(l!==parseInt(s.charAt(0),10))return!1;for(a+=1,r=e.substring(0,a),i=0,n=a-7,o=a;o>=1;o--)i+=parseInt(r.charAt(a-o),10)*n--,2>n&&(n=9);return(l=2>i%11?0:11-i%11)===parseInt(s.charAt(1),10)},_ch:function(t){if(/^CHE[0-9]{9}(MWST)?$/.test(t)&&(t=t.substr(2)),!/^E[0-9]{9}(MWST)?$/.test(t))return!1;t=t.substr(1);for(var e=0,a=[5,4,3,2,7,6,5,4],r=0;8>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return 10!==(e=11-e%11)&&(11===e&&(e=0),e+""===t.substr(8,1))},_cy:function(t){if(/^CY[0-5|9]{1}[0-9]{7}[A-Z]{1}$/.test(t)&&(t=t.substr(2)),!/^[0-5|9]{1}[0-9]{7}[A-Z]{1}$/.test(t))return!1;if("12"===t.substr(0,2))return!1;for(var e=0,a={0:1,1:0,2:5,3:7,4:9,5:13,6:15,7:17,8:19,9:21},r=0;8>r;r++){var s=parseInt(t.charAt(r),10);r%2==0&&(s=a[s+""]),e+=s}return(e="ABCDEFGHIJKLMNOPQRSTUVWXYZ"[e%26])+""===t.substr(8,1)},_cz:function(e){if(/^CZ[0-9]{8,10}$/.test(e)&&(e=e.substr(2)),!/^[0-9]{8,10}$/.test(e))return!1;var a=0,r=0;if(8===e.length){if(e.charAt(0)+""=="9")return!1;for(a=0,r=0;7>r;r++)a+=parseInt(e.charAt(r),10)*(8-r);return 10===(a=11-a%11)&&(a=0),11===a&&(a=1),a+""===e.substr(7,1)}if(9===e.length&&e.charAt(0)+""=="6"){for(a=0,r=0;7>r;r++)a+=parseInt(e.charAt(r+1),10)*(8-r);return 10===(a=11-a%11)&&(a=0),11===a&&(a=1),(a=[8,7,6,5,4,3,2,1,0,9,10][a-1])+""===e.substr(8,1)}if(9===e.length||10===e.length){var s=1900+parseInt(e.substr(0,2),10),i=parseInt(e.substr(2,2),10)%50%20,n=parseInt(e.substr(4,2),10);if(9===e.length){if(s>=1980&&(s-=100),s>1953)return!1}else 1954>s&&(s+=100);if(!t.fn.bootstrapValidator.helpers.date(s,i,n))return!1;if(10===e.length){var o=parseInt(e.substr(0,9),10)%11;return 1985>s&&(o%=10),o+""===e.substr(9,1)}return!0}return!1},_de:function(e){return/^DE[0-9]{9}$/.test(e)&&(e=e.substr(2)),!!/^[0-9]{9}$/.test(e)&&t.fn.bootstrapValidator.helpers.mod11And10(e)},_dk:function(t){if(/^DK[0-9]{8}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{8}$/.test(t))return!1;for(var e=0,a=[2,7,6,5,4,3,2,1],r=0;8>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return e%11==0},_ee:function(t){if(/^EE[0-9]{9}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{9}$/.test(t))return!1;for(var e=0,a=[3,7,1,3,7,1,3,7,1],r=0;9>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return e%10==0},_es:function(t){if(/^ES[0-9A-Z][0-9]{7}[0-9A-Z]$/.test(t)&&(t=t.substr(2)),!/^[0-9A-Z][0-9]{7}[0-9A-Z]$/.test(t))return!1;var e=t.charAt(0);return/^[0-9]$/.test(e)?function(t){var e=parseInt(t.substr(0,8),10);return e="TRWAGMYFPDXBNJZSQVHLCKE"[e%23],e+""===t.substr(8,1)}(t):/^[XYZ]$/.test(e)?function(t){var e=["XYZ".indexOf(t.charAt(0)),t.substr(1)].join("");return(e="TRWAGMYFPDXBNJZSQVHLCKE"[(e=parseInt(e,10))%23])+""===t.substr(8,1)}(t):function(t){var e=t.charAt(0);if(-1!=="KLM".indexOf(e))return"TRWAGMYFPDXBNJZSQVHLCKE"[parseInt(t.substr(1,8),10)%23]+""===t.substr(8,1);if(-1!=="ABCDEFGHJNPQRSUVW".indexOf(e)){for(var a=0,r=[2,1,2,1,2,1,2],s=0,i=0;7>i;i++)(s=parseInt(t.charAt(i+1),10)*r[i])>9&&(s=Math.floor(s/10)+s%10),a+=s;return a=10-a%10,a+""===t.substr(8,1)||"JABCDEFGHI"[a]===t.substr(8,1)}return!1}(t)},_fi:function(t){if(/^FI[0-9]{8}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{8}$/.test(t))return!1;for(var e=0,a=[7,9,10,5,8,4,2,1],r=0;8>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return e%11==0},_fr:function(e){if(/^FR[0-9A-Z]{2}[0-9]{9}$/.test(e)&&(e=e.substr(2)),!/^[0-9A-Z]{2}[0-9]{9}$/.test(e))return!1;if(!t.fn.bootstrapValidator.helpers.luhn(e.substr(2)))return!1;if(/^[0-9]{2}$/.test(e.substr(0,2)))return e.substr(0,2)===parseInt(e.substr(2)+"12",10)%97+"";var a,r="0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";return a=/^[0-9]{1}$/.test(e.charAt(0))?24*r.indexOf(e.charAt(0))+r.indexOf(e.charAt(1))-10:34*r.indexOf(e.charAt(0))+r.indexOf(e.charAt(1))-100,(parseInt(e.substr(2),10)+1+Math.floor(a/11))%11==a%11},_gb:function(t){if((/^GB[0-9]{9}$/.test(t)||/^GB[0-9]{12}$/.test(t)||/^GBGD[0-9]{3}$/.test(t)||/^GBHA[0-9]{3}$/.test(t)||/^GB(GD|HA)8888[0-9]{5}$/.test(t))&&(t=t.substr(2)),!(/^[0-9]{9}$/.test(t)||/^[0-9]{12}$/.test(t)||/^GD[0-9]{3}$/.test(t)||/^HA[0-9]{3}$/.test(t)||/^(GD|HA)8888[0-9]{5}$/.test(t)))return!1;var e=t.length;if(5===e){var a=t.substr(0,2),r=parseInt(t.substr(2),10);return"GD"===a&&500>r||"HA"===a&&r>=500}if(11===e&&("GD8888"===t.substr(0,6)||"HA8888"===t.substr(0,6)))return!("GD"===t.substr(0,2)&&parseInt(t.substr(6,3),10)>=500||"HA"===t.substr(0,2)&&parseInt(t.substr(6,3),10)<500)&&parseInt(t.substr(6,3),10)%97===parseInt(t.substr(9,2),10);if(9===e||12===e){for(var s=0,i=[8,7,6,5,4,3,2,10,1],n=0;9>n;n++)s+=parseInt(t.charAt(n),10)*i[n];return s%=97,parseInt(t.substr(0,3),10)>=100?0===s||42===s||55===s:0===s}return!0},_gr:function(t){if(/^(GR|EL)[0-9]{9}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{9}$/.test(t))return!1;8===t.length&&(t="0"+t);for(var e=0,a=[256,128,64,32,16,8,4,2],r=0;8>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return(e=e%11%10)+""===t.substr(8,1)},_el:function(t){return this._gr(t)},_hu:function(t){if(/^HU[0-9]{8}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{8}$/.test(t))return!1;for(var e=0,a=[9,7,3,1,9,7,3,1],r=0;8>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return e%10==0},_hr:function(e){return/^HR[0-9]{11}$/.test(e)&&(e=e.substr(2)),!!/^[0-9]{11}$/.test(e)&&t.fn.bootstrapValidator.helpers.mod11And10(e)},_ie:function(t){if(/^IE[0-9]{1}[0-9A-Z\*\+]{1}[0-9]{5}[A-Z]{1,2}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{1}[0-9A-Z\*\+]{1}[0-9]{5}[A-Z]{1,2}$/.test(t))return!1;var e=function(t){for(;t.length<7;)t="0"+t;for(var e="WABCDEFGHIJKLMNOPQRSTUV",a=0,r=0;7>r;r++)a+=parseInt(t.charAt(r),10)*(8-r);return a+=9*e.indexOf(t.substr(7)),e[a%23]};return/^[0-9]+$/.test(t.substr(0,7))?t.charAt(7)===e(t.substr(0,7)+t.substr(8)+""):-1==="ABCDEFGHIJKLMNOPQRSTUVWXYZ+*".indexOf(t.charAt(1))||t.charAt(7)===e(t.substr(2,5)+t.substr(0,1)+"")},_is:function(t){return/^IS[0-9]{5,6}$/.test(t)&&(t=t.substr(2)),/^[0-9]{5,6}$/.test(t)},_it:function(e){if(/^IT[0-9]{11}$/.test(e)&&(e=e.substr(2)),!/^[0-9]{11}$/.test(e))return!1;if(0===parseInt(e.substr(0,7),10))return!1;var a=parseInt(e.substr(7,3),10);return!(1>a||a>201&&999!==a&&888!==a)&&t.fn.bootstrapValidator.helpers.luhn(e)},_lt:function(t){if(/^LT([0-9]{7}1[0-9]{1}|[0-9]{10}1[0-9]{1})$/.test(t)&&(t=t.substr(2)),!/^([0-9]{7}1[0-9]{1}|[0-9]{10}1[0-9]{1})$/.test(t))return!1;var e,a=t.length,r=0;for(e=0;a-1>e;e++)r+=parseInt(t.charAt(e),10)*(1+e%9);var s=r%11;if(10===s)for(r=0,e=0;a-1>e;e++)r+=parseInt(t.charAt(e),10)*(1+(e+2)%9);return(s=s%11%10)+""===t.charAt(a-1)},_lu:function(t){return/^LU[0-9]{8}$/.test(t)&&(t=t.substr(2)),!!/^[0-9]{8}$/.test(t)&&parseInt(t.substr(0,6),10)%89+""===t.substr(6,2)},_lv:function(e){if(/^LV[0-9]{11}$/.test(e)&&(e=e.substr(2)),!/^[0-9]{11}$/.test(e))return!1;var a,r=parseInt(e.charAt(0),10),s=0,i=[],n=e.length;if(r>3){for(s=0,i=[9,1,4,8,3,10,2,5,7,6,1],a=0;n>a;a++)s+=parseInt(e.charAt(a),10)*i[a];return 3===(s%=11)}var o=parseInt(e.substr(0,2),10),l=parseInt(e.substr(2,2),10),d=parseInt(e.substr(4,2),10);if(d=d+1800+100*parseInt(e.charAt(6),10),!t.fn.bootstrapValidator.helpers.date(d,l,o))return!1;for(s=0,i=[10,5,8,4,2,1,6,3,7,9],a=0;n-1>a;a++)s+=parseInt(e.charAt(a),10)*i[a];return(s=(s+1)%11%10)+""===e.charAt(n-1)},_mt:function(t){if(/^MT[0-9]{8}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{8}$/.test(t))return!1;for(var e=0,a=[3,4,6,7,8,9,10,1],r=0;8>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return e%37==0},_nl:function(t){if(/^NL[0-9]{9}B[0-9]{2}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{9}B[0-9]{2}$/.test(t))return!1;for(var e=0,a=[9,8,7,6,5,4,3,2],r=0;8>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return(e%=11)>9&&(e=0),e+""===t.substr(8,1)},_no:function(t){if(/^NO[0-9]{9}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{9}$/.test(t))return!1;for(var e=0,a=[3,2,7,6,5,4,3,2],r=0;8>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return 11===(e=11-e%11)&&(e=0),e+""===t.substr(8,1)},_pl:function(t){if(/^PL[0-9]{10}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{10}$/.test(t))return!1;for(var e=0,a=[6,5,7,2,3,4,5,6,7,-1],r=0;10>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return e%11==0},_pt:function(t){if(/^PT[0-9]{9}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{9}$/.test(t))return!1;for(var e=0,a=[9,8,7,6,5,4,3,2],r=0;8>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return(e=11-e%11)>9&&(e=0),e+""===t.substr(8,1)},_ro:function(t){if(/^RO[1-9][0-9]{1,9}$/.test(t)&&(t=t.substr(2)),!/^[1-9][0-9]{1,9}$/.test(t))return!1;for(var e=t.length,a=[7,5,3,2,1,7,5,3,2].slice(10-e),r=0,s=0;e-1>s;s++)r+=parseInt(t.charAt(s),10)*a[s];return(r=10*r%11%10)+""===t.substr(e-1,1)},_ru:function(t){if(/^RU([0-9]{10}|[0-9]{12})$/.test(t)&&(t=t.substr(2)),!/^([0-9]{10}|[0-9]{12})$/.test(t))return!1;var e=0;if(10===t.length){var a=0,r=[2,4,10,3,5,9,4,6,8,0];for(e=0;10>e;e++)a+=parseInt(t.charAt(e),10)*r[e];return(a%=11)>9&&(a%=10),a+""===t.substr(9,1)}if(12===t.length){var s=0,i=[7,2,4,10,3,5,9,4,6,8,0],n=0,o=[3,7,2,4,10,3,5,9,4,6,8,0];for(e=0;11>e;e++)s+=parseInt(t.charAt(e),10)*i[e],n+=parseInt(t.charAt(e),10)*o[e];return(s%=11)>9&&(s%=10),(n%=11)>9&&(n%=10),s+""===t.substr(10,1)&&n+""===t.substr(11,1)}return!1},_rs:function(t){if(/^RS[0-9]{9}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{9}$/.test(t))return!1;for(var e=10,a=0,r=0;8>r;r++)0===(a=(parseInt(t.charAt(r),10)+e)%10)&&(a=10),e=2*a%11;return(e+parseInt(t.substr(8,1),10))%10==1},_se:function(e){return/^SE[0-9]{10}01$/.test(e)&&(e=e.substr(2)),!!/^[0-9]{10}01$/.test(e)&&(e=e.substr(0,10),t.fn.bootstrapValidator.helpers.luhn(e))},_si:function(t){if(/^SI[0-9]{8}$/.test(t)&&(t=t.substr(2)),!/^[0-9]{8}$/.test(t))return!1;for(var e=0,a=[8,7,6,5,4,3,2],r=0;7>r;r++)e+=parseInt(t.charAt(r),10)*a[r];return 10===(e=11-e%11)&&(e=0),e+""===t.substr(7,1)},_sk:function(t){return/^SK[1-9][0-9][(2-4)|(6-9)][0-9]{7}$/.test(t)&&(t=t.substr(2)),!!/^[1-9][0-9][(2-4)|(6-9)][0-9]{7}$/.test(t)&&parseInt(t,10)%11==0},_ve:function(t){if(/^VE[VEJPG][0-9]{9}$/.test(t)&&(t=t.substr(2)),!/^[VEJPG][0-9]{9}$/.test(t))return!1;for(var e={V:4,E:8,J:12,P:16,G:20}[t.charAt(0)],a=[3,2,7,6,5,4,3,2],r=0;8>r;r++)e+=parseInt(t.charAt(r+1),10)*a[r];return(11===(e=11-e%11)||10===e)&&(e=0),e+""===t.substr(9,1)},_za:function(t){return/^ZA4[0-9]{9}$/.test(t)&&(t=t.substr(2)),/^4[0-9]{9}$/.test(t)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.vin=t.extend(t.fn.bootstrapValidator.i18n.vin||{},{default:"Please enter a valid VIN number"}),t.fn.bootstrapValidator.validators.vin={validate:function(t,e){var a=e.val();if(""===a)return!0;if(!/^[a-hj-npr-z0-9]{8}[0-9xX][a-hj-npr-z0-9]{8}$/i.test(a))return!1;for(var r={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,J:1,K:2,L:3,M:4,N:5,P:7,R:9,S:2,T:3,U:4,V:5,W:6,X:7,Y:8,Z:9,1:1,2:2,3:3,4:4,5:5,6:6,7:7,8:8,9:9,0:0},s=[8,7,6,5,4,3,2,10,0,9,8,7,6,5,4,3,2],i=0,n=(a=a.toUpperCase()).length,o=0;n>o;o++)i+=r[a.charAt(o)+""]*s[o];var l=i%11;return 10===l&&(l="X"),l+""===a.charAt(8)}}}(window.jQuery),function(t){t.fn.bootstrapValidator.i18n.zipCode=t.extend(t.fn.bootstrapValidator.i18n.zipCode||{},{default:"Please enter a valid postal code",countryNotSupported:"The country code %s is not supported",country:"Please enter a valid postal code in %s",countries:{BR:"Brazil",CA:"Canada",CZ:"Czech Republic",DK:"Denmark",GB:"United Kingdom",IT:"Italy",MA:"Morocco",NL:"Netherlands",RO:"Romania",RU:"Russia",SE:"Sweden",SG:"Singapore",SK:"Slovakia",US:"USA"}}),t.fn.bootstrapValidator.validators.zipCode={html5Attributes:{message:"message",country:"country"},COUNTRY_CODES:["BR","CA","CZ","DK","GB","IT","MA","NL","RO","RU","SE","SG","SK","US"],validate:function(e,a,r){var s=a.val();if(""===s||!r.country)return!0;var i=r.country;if(("string"!=typeof i||-1===t.inArray(i,this.COUNTRY_CODES))&&(i=e.getDynamicOption(a,i)),!i||-1===t.inArray(i.toUpperCase(),this.COUNTRY_CODES))return{valid:!1,message:t.fn.bootstrapValidator.helpers.format(t.fn.bootstrapValidator.i18n.zipCode.countryNotSupported,i)};var n=!1;switch(i=i.toUpperCase()){case"BR":n=/^(\d{2})([\.]?)(\d{3})([\-]?)(\d{3})$/.test(s);break;case"CA":n=/^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}[0-9]{1}$/i.test(s);break;case"CZ":case"SK":n=/^(\d{3})([ ]?)(\d{2})$/.test(s);break;case"DK":n=/^(DK(-|\s)?)?\d{4}$/i.test(s);break;case"GB":n=this._gb(s);break;case"IT":n=/^(I-|IT-)?\d{5}$/i.test(s);break;case"MA":n=/^[1-9][0-9]{4}$/i.test(s);break;case"NL":n=/^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(s);break;case"RO":n=/^(0[1-8]{1}|[1-9]{1}[0-5]{1})?[0-9]{4}$/i.test(s);break;case"RU":n=/^[0-9]{6}$/i.test(s);break;case"SE":n=/^(S-)?\d{3}\s?\d{2}$/i.test(s);break;case"SG":n=/^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(s);break;default:n=/^\d{4,5}([\-]?\d{4})?$/.test(s)}return{valid:n,message:t.fn.bootstrapValidator.helpers.format(r.message||t.fn.bootstrapValidator.i18n.zipCode.country,t.fn.bootstrapValidator.i18n.zipCode.countries[i])}},_gb:function(t){for(var e="[ABCDEFGHIJKLMNOPRSTUWYZ]",a="[ABCDEFGHKLMNOPQRSTUVWXY]",r="[ABDEFGHJLNPQRSTUWXYZ]",s=[new RegExp("^("+e+"{1}"+a+"?[0-9]{1,2})(\\s*)([0-9]{1}"+r+"{2})$","i"),new RegExp("^("+e+"{1}[0-9]{1}[ABCDEFGHJKPMNRSTUVWXY]{1})(\\s*)([0-9]{1}"+r+"{2})$","i"),new RegExp("^("+e+"{1}"+a+"{1}?[0-9]{1}[ABEHMNPRVWXY]{1})(\\s*)([0-9]{1}"+r+"{2})$","i"),new RegExp("^(BF1)(\\s*)([0-6]{1}[ABDEFGHJLNPQRST]{1}[ABDEFGHJLNPQRSTUWZYZ]{1})$","i"),/^(GIR)(\s*)(0AA)$/i,/^(BFPO)(\s*)([0-9]{1,4})$/i,/^(BFPO)(\s*)(c\/o\s*[0-9]{1,3})$/i,/^([A-Z]{4})(\s*)(1ZZ)$/i,/^(AI-2640)$/i],i=0;i<s.length;i++)if(s[i].test(t))return!0;return!1}}}(window.jQuery)},658(){window.onload=function(){$(".letras").bind("keypress",function(t){var e=new RegExp("^[a-zA-Z ]+$"),a=String.fromCharCode(t.charCode?t.charCode:t.which);if(!e.test(a))return t.preventDefault(),!1}),$(".numeros-sin-punto").bind("keypress",function(t){var e=new RegExp("^[0-9]+$"),a=String.fromCharCode(t.charCode?t.charCode:t.which);if(!e.test(a))return t.preventDefault(),!1}),$(document).on("click",".getNewPass",function(){var t=$(this).closest("div").find('input[rel="gp"]');t.val(function(t){var e=$(t).attr("data-character-set").split(","),a="";$.inArray("a-z",e)>=0&&(a+="abcdefghijklmnopqrstuvwxyz"),$.inArray("A-Z",e)>=0&&(a+="ABCDEFGHIJKLMNOPQRSTUVWXYZ"),$.inArray("0-9",e)>=0&&(a+="0123456789"),$.inArray("#",e)>=0&&(a+="![]{}()%&*$#^<>~@|");for(var r="",s=0;s<$(t).attr("data-size");s++)r+=a.charAt(Math.floor(Math.random()*a.length));return r}(t))}),$(document).on("click",'input[rel="gp"]',function(){$(this).select()}),$("div").hasClass("js-show")&&$(".js-show").each(function(){var t=$(this).find(".js-pass");$(this).find(".js-check").click(function(){"password"===t.attr("type").toLowerCase()?t.attr("type","text"):t.attr("type","password")})})}},26(){var t=new function(){this.carouselHomeOwl=function(){var t=$(".owl-carousel-slider");$(t).owlCarousel({items:1,dots:!1,autoplay:!0,autoplayTimeout:1600,autoplayHoverPause:!0})},this.init=function(){}};$(document).ready(function(){t.init()})}},e={};function a(r){var s=e[r];if(void 0!==s)return s.exports;var i=e[r]={exports:{}};return t[r](i,i.exports,a),i.exports}a(605),a(221),a(658),a(26)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./assets/common-sass/bootstrap-fileupload/bootstrap-fileupload.min.js"
+/*!*****************************************************************************!*\
+  !*** ./assets/common-sass/bootstrap-fileupload/bootstrap-fileupload.min.js ***!
+  \*****************************************************************************/
+() {
+
+/**
+* Bootstrap.js by @mdo and @fat, extended by @ArnoldDaniels.
+* plugins: bootstrap-fileupload.js
+* Copyright 2012 Twitter, Inc.
+* http://www.apache.org/licenses/LICENSE-2.0.txt
+*/
+!function (e) {
+  var t = function t(_t, n) {
+    this.$element = e(_t), this.type = this.$element.data("uploadtype") || (this.$element.find(".thumbnail").length > 0 ? "image" : "file"), this.$input = this.$element.find(":file");
+    if (this.$input.length === 0) return;
+    this.name = this.$input.attr("name") || n.name, this.$hidden = this.$element.find('input[type=hidden][name="' + this.name + '"]'), this.$hidden.length === 0 && (this.$hidden = e('<input type="hidden" />'), this.$element.prepend(this.$hidden)), this.$preview = this.$element.find(".fileupload-preview");
+    var r = this.$preview.css("height");
+    this.$preview.css("display") != "inline" && r != "0px" && r != "none" && this.$preview.css("line-height", r), this.original = {
+      exists: this.$element.hasClass("fileupload-exists"),
+      preview: this.$preview.html(),
+      hiddenVal: this.$hidden.val()
+    }, this.$remove = this.$element.find('[data-dismiss="fileupload"]'), this.$element.find('[data-trigger="fileupload"]').on("click.fileupload", e.proxy(this.trigger, this)), this.listen();
+  };
+  t.prototype = {
+    listen: function listen() {
+      this.$input.on("change.fileupload", e.proxy(this.change, this)), e(this.$input[0].form).on("reset.fileupload", e.proxy(this.reset, this)), this.$remove && this.$remove.on("click.fileupload", e.proxy(this.clear, this));
+    },
+    change: function change(e, t) {
+      if (t === "clear") return;
+      var n = e.target.files !== undefined ? e.target.files[0] : e.target.value ? {
+        name: e.target.value.replace(/^.+\\/, "")
+      } : null;
+      if (!n) {
+        this.clear();
+        return;
+      }
+      this.$hidden.val(""), this.$hidden.attr("name", ""), this.$input.attr("name", this.name);
+      if (this.type === "image" && this.$preview.length > 0 && (typeof n.type != "undefined" ? n.type.match("image.*") : n.name.match("\\.(gif|png|jpe?g)$")) && typeof FileReader != "undefined") {
+        var r = new FileReader(),
+          i = this.$preview,
+          s = this.$element;
+        r.onload = function (e) {
+          i.html('<img src="' + e.target.result + '" ' + (i.css("max-height") != "none" ? 'style="max-height: ' + i.css("max-height") + ';"' : "") + " />"), s.addClass("fileupload-exists").removeClass("fileupload-new");
+        }, r.readAsDataURL(n);
+      } else this.$preview.text(n.name), this.$element.addClass("fileupload-exists").removeClass("fileupload-new");
+    },
+    clear: function clear(e) {
+      this.$hidden.val(""), this.$hidden.attr("name", this.name), this.$input.attr("name", "");
+      if (navigator.userAgent.match(/msie/i)) {
+        var t = this.$input.clone(!0);
+        this.$input.after(t), this.$input.remove(), this.$input = t;
+      } else this.$input.val("");
+      this.$preview.html(""), this.$element.addClass("fileupload-new").removeClass("fileupload-exists"), e && (this.$input.trigger("change", ["clear"]), e.preventDefault());
+    },
+    reset: function reset(e) {
+      this.clear(), this.$hidden.val(this.original.hiddenVal), this.$preview.html(this.original.preview), this.original.exists ? this.$element.addClass("fileupload-exists").removeClass("fileupload-new") : this.$element.addClass("fileupload-new").removeClass("fileupload-exists");
+    },
+    trigger: function trigger(e) {
+      this.$input.trigger("click"), e.preventDefault();
+    }
+  }, e.fn.fileupload = function (n) {
+    return this.each(function () {
+      var r = e(this),
+        i = r.data("fileupload");
+      i || r.data("fileupload", i = new t(this, n)), typeof n == "string" && i[n]();
+    });
+  }, e.fn.fileupload.Constructor = t, e(document).on("click.fileupload.data-api", '[data-provides="fileupload"]', function (t) {
+    var n = e(this);
+    if (n.data("fileupload")) return;
+    n.fileupload(n.data());
+    var r = e(t.target).closest('[data-dismiss="fileupload"],[data-trigger="fileupload"]');
+    r.length > 0 && (r.trigger("click.fileupload"), t.preventDefault());
+  });
+}(window.jQuery);
+
+/***/ },
+
+/***/ "./assets/common-sass/bootstrapValidator/bootstrapValidator.min.js"
+/*!*************************************************************************!*\
+  !*** ./assets/common-sass/bootstrapValidator/bootstrapValidator.min.js ***!
+  \*************************************************************************/
+() {
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+/*!
+ * BootstrapValidator (http://bootstrapvalidator.com)
+ * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
+ *
+ * @version     v0.5.2, built on 2014-09-25 4:01:07 PM
+ * @author      https://twitter.com/nghuuphuoc
+ * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
+ * @license     MIT
+ */
+if ("undefined" == typeof jQuery) throw new Error("BootstrapValidator's JavaScript requires jQuery");
+!function (a) {
+  var b = function b(_b, c) {
+    this.$form = a(_b), this.options = a.extend({}, a.fn.bootstrapValidator.DEFAULT_OPTIONS, c), this.$invalidFields = a([]), this.$submitButton = null, this.$hiddenButton = null, this.STATUS_NOT_VALIDATED = "NOT_VALIDATED", this.STATUS_VALIDATING = "VALIDATING", this.STATUS_INVALID = "INVALID", this.STATUS_VALID = "VALID";
+    var d = function () {
+        for (var a = 3, b = document.createElement("div"), c = b.all || []; b.innerHTML = "<!--[if gt IE " + ++a + "]><br><![endif]-->", c[0];);
+        return a > 4 ? a : !a;
+      }(),
+      e = document.createElement("div");
+    this._changeEvent = 9 !== d && "oninput" in e ? "input" : "keyup", this._submitIfValid = null, this._cacheFields = {}, this._init();
+  };
+  b.prototype = {
+    constructor: b,
+    _init: function _init() {
+      var b = this,
+        c = {
+          container: this.$form.attr("data-bv-container"),
+          events: {
+            formInit: this.$form.attr("data-bv-events-form-init"),
+            formError: this.$form.attr("data-bv-events-form-error"),
+            formSuccess: this.$form.attr("data-bv-events-form-success"),
+            fieldAdded: this.$form.attr("data-bv-events-field-added"),
+            fieldRemoved: this.$form.attr("data-bv-events-field-removed"),
+            fieldInit: this.$form.attr("data-bv-events-field-init"),
+            fieldError: this.$form.attr("data-bv-events-field-error"),
+            fieldSuccess: this.$form.attr("data-bv-events-field-success"),
+            fieldStatus: this.$form.attr("data-bv-events-field-status"),
+            validatorError: this.$form.attr("data-bv-events-validator-error"),
+            validatorSuccess: this.$form.attr("data-bv-events-validator-success")
+          },
+          excluded: this.$form.attr("data-bv-excluded"),
+          feedbackIcons: {
+            valid: this.$form.attr("data-bv-feedbackicons-valid"),
+            invalid: this.$form.attr("data-bv-feedbackicons-invalid"),
+            validating: this.$form.attr("data-bv-feedbackicons-validating")
+          },
+          group: this.$form.attr("data-bv-group"),
+          live: this.$form.attr("data-bv-live"),
+          message: this.$form.attr("data-bv-message"),
+          onError: this.$form.attr("data-bv-onerror"),
+          onSuccess: this.$form.attr("data-bv-onsuccess"),
+          submitButtons: this.$form.attr("data-bv-submitbuttons"),
+          threshold: this.$form.attr("data-bv-threshold"),
+          trigger: this.$form.attr("data-bv-trigger"),
+          verbose: this.$form.attr("data-bv-verbose"),
+          fields: {}
+        };
+      this.$form.attr("novalidate", "novalidate").addClass(this.options.elementClass).on("submit.bv", function (a) {
+        a.preventDefault(), b.validate();
+      }).on("click.bv", this.options.submitButtons, function () {
+        b.$submitButton = a(this), b._submitIfValid = !0;
+      }).find("[name], [data-bv-field]").each(function () {
+        var d = a(this),
+          e = d.attr("name") || d.attr("data-bv-field"),
+          f = b._parseOptions(d);
+        f && (d.attr("data-bv-field", e), c.fields[e] = a.extend({}, f, c.fields[e]));
+      }), this.options = a.extend(!0, this.options, c), this.$hiddenButton = a("<button/>").attr("type", "submit").prependTo(this.$form).addClass("bv-hidden-submit").css({
+        display: "none",
+        width: 0,
+        height: 0
+      }), this.$form.on("click.bv", '[type="submit"]', function (c) {
+        if (!c.isDefaultPrevented()) {
+          var d = a(c.target),
+            e = d.is('[type="submit"]') ? d.eq(0) : d.parent('[type="submit"]').eq(0);
+          !b.options.submitButtons || e.is(b.options.submitButtons) || e.is(b.$hiddenButton) || b.$form.off("submit.bv").submit();
+        }
+      });
+      for (var d in this.options.fields) this._initField(d);
+      this.$form.trigger(a.Event(this.options.events.formInit), {
+        bv: this,
+        options: this.options
+      }), this.options.onSuccess && this.$form.on(this.options.events.formSuccess, function (c) {
+        a.fn.bootstrapValidator.helpers.call(b.options.onSuccess, [c]);
+      }), this.options.onError && this.$form.on(this.options.events.formError, function (c) {
+        a.fn.bootstrapValidator.helpers.call(b.options.onError, [c]);
+      });
+    },
+    _parseOptions: function _parseOptions(b) {
+      var c,
+        d,
+        e,
+        f,
+        g,
+        h,
+        i,
+        j = b.attr("name") || b.attr("data-bv-field"),
+        k = {};
+      for (d in a.fn.bootstrapValidator.validators) if (c = a.fn.bootstrapValidator.validators[d], e = b.attr("data-bv-" + d.toLowerCase()) + "", i = "function" == typeof c.enableByHtml5 ? c.enableByHtml5(b) : null, i && "false" !== e || i !== !0 && ("" === e || "true" === e)) {
+        c.html5Attributes = a.extend({}, {
+          message: "message",
+          onerror: "onError",
+          onsuccess: "onSuccess"
+        }, c.html5Attributes), k[d] = a.extend({}, i === !0 ? {} : i, k[d]);
+        for (h in c.html5Attributes) f = c.html5Attributes[h], g = b.attr("data-bv-" + d.toLowerCase() + "-" + h), g && ("true" === g ? g = !0 : "false" === g && (g = !1), k[d][f] = g);
+      }
+      var l = {
+          container: b.attr("data-bv-container"),
+          excluded: b.attr("data-bv-excluded"),
+          feedbackIcons: b.attr("data-bv-feedbackicons"),
+          group: b.attr("data-bv-group"),
+          message: b.attr("data-bv-message"),
+          onError: b.attr("data-bv-onerror"),
+          onStatus: b.attr("data-bv-onstatus"),
+          onSuccess: b.attr("data-bv-onsuccess"),
+          selector: b.attr("data-bv-selector"),
+          threshold: b.attr("data-bv-threshold"),
+          trigger: b.attr("data-bv-trigger"),
+          verbose: b.attr("data-bv-verbose"),
+          validators: k
+        },
+        m = a.isEmptyObject(l),
+        n = a.isEmptyObject(k);
+      return !n || !m && this.options.fields && this.options.fields[j] ? (l.validators = k, l) : null;
+    },
+    _initField: function _initField(b) {
+      var c = a([]);
+      switch (_typeof(b)) {
+        case "object":
+          c = b, b = b.attr("data-bv-field");
+          break;
+        case "string":
+          c = this.getFieldElements(b), c.attr("data-bv-field", b);
+      }
+      if (0 !== c.length && null !== this.options.fields[b] && null !== this.options.fields[b].validators) {
+        var d;
+        for (d in this.options.fields[b].validators) a.fn.bootstrapValidator.validators[d] || delete this.options.fields[b].validators[d];
+        null === this.options.fields[b].enabled && (this.options.fields[b].enabled = !0);
+        for (var e = this, f = c.length, g = c.attr("type"), h = 1 === f || "radio" === g || "checkbox" === g, i = "radio" === g || "checkbox" === g || "file" === g || "SELECT" === c.eq(0).get(0).tagName ? "change" : this._changeEvent, j = (this.options.fields[b].trigger || this.options.trigger || i).split(" "), k = a.map(j, function (a) {
+            return a + ".update.bv";
+          }).join(" "), l = 0; f > l; l++) {
+          var m = c.eq(l),
+            n = this.options.fields[b].group || this.options.group,
+            o = m.parents(n),
+            p = "function" == typeof (this.options.fields[b].container || this.options.container) ? (this.options.fields[b].container || this.options.container).call(this, m, this) : this.options.fields[b].container || this.options.container,
+            q = p && "tooltip" !== p && "popover" !== p ? a(p) : this._getMessageContainer(m, n);
+          p && "tooltip" !== p && "popover" !== p && q.addClass("has-error"), q.find('.help-block[data-bv-validator][data-bv-for="' + b + '"]').remove(), o.find('i[data-bv-icon-for="' + b + '"]').remove(), m.off(k).on(k, function () {
+            e.updateStatus(a(this), e.STATUS_NOT_VALIDATED);
+          }), m.data("bv.messages", q);
+          for (d in this.options.fields[b].validators) m.data("bv.result." + d, this.STATUS_NOT_VALIDATED), h && l !== f - 1 || a("<small/>").css("display", "none").addClass("help-block").attr("data-bv-validator", d).attr("data-bv-for", b).attr("data-bv-result", this.STATUS_NOT_VALIDATED).html(this._getMessage(b, d)).appendTo(q), "function" == typeof a.fn.bootstrapValidator.validators[d].init && a.fn.bootstrapValidator.validators[d].init(this, m, this.options.fields[b].validators[d]);
+          if (this.options.fields[b].feedbackIcons !== !1 && "false" !== this.options.fields[b].feedbackIcons && this.options.feedbackIcons && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid && (!h || l === f - 1)) {
+            o.addClass("has-feedback");
+            var r = a("<i/>").css("display", "none").addClass("form-control-feedback").attr("data-bv-icon-for", b).insertAfter(m);
+            if ("checkbox" === g || "radio" === g) {
+              var s = m.parent();
+              s.hasClass(g) ? r.insertAfter(s) : s.parent().hasClass(g) && r.insertAfter(s.parent());
+            }
+            0 === o.find("label").length && r.addClass("bv-no-label"), 0 !== o.find(".input-group").length && r.addClass("bv-icon-input-group").insertAfter(o.find(".input-group").eq(0)), p && m.off("focus.bv").on("focus.bv", function () {
+              switch (p) {
+                case "tooltip":
+                  r.tooltip("show");
+                  break;
+                case "popover":
+                  r.popover("show");
+              }
+            }).off("blur.bv").on("blur.bv", function () {
+              switch (p) {
+                case "tooltip":
+                  r.tooltip("hide");
+                  break;
+                case "popover":
+                  r.popover("hide");
+              }
+            });
+          }
+        }
+        switch (c.on(this.options.events.fieldSuccess, function (b, c) {
+          var d = e.getOptions(c.field, null, "onSuccess");
+          d && a.fn.bootstrapValidator.helpers.call(d, [b, c]);
+        }).on(this.options.events.fieldError, function (b, c) {
+          var d = e.getOptions(c.field, null, "onError");
+          d && a.fn.bootstrapValidator.helpers.call(d, [b, c]);
+        }).on(this.options.events.fieldStatus, function (b, c) {
+          var d = e.getOptions(c.field, null, "onStatus");
+          d && a.fn.bootstrapValidator.helpers.call(d, [b, c]);
+        }).on(this.options.events.validatorError, function (b, c) {
+          var d = e.getOptions(c.field, c.validator, "onError");
+          d && a.fn.bootstrapValidator.helpers.call(d, [b, c]);
+        }).on(this.options.events.validatorSuccess, function (b, c) {
+          var d = e.getOptions(c.field, c.validator, "onSuccess");
+          d && a.fn.bootstrapValidator.helpers.call(d, [b, c]);
+        }), k = a.map(j, function (a) {
+          return a + ".live.bv";
+        }).join(" "), this.options.live) {
+          case "submitted":
+            break;
+          case "disabled":
+            c.off(k);
+            break;
+          case "enabled":
+          default:
+            c.off(k).on(k, function () {
+              e._exceedThreshold(a(this)) && e.validateField(a(this));
+            });
+        }
+        c.trigger(a.Event(this.options.events.fieldInit), {
+          bv: this,
+          field: b,
+          element: c
+        });
+      }
+    },
+    _getMessage: function _getMessage(b, c) {
+      if (!(this.options.fields[b] && a.fn.bootstrapValidator.validators[c] && this.options.fields[b].validators && this.options.fields[b].validators[c])) return "";
+      var d = this.options.fields[b].validators[c];
+      switch (!0) {
+        case !!d.message:
+          return d.message;
+        case !!this.options.fields[b].message:
+          return this.options.fields[b].message;
+        case !!a.fn.bootstrapValidator.i18n[c]:
+          return a.fn.bootstrapValidator.i18n[c]["default"];
+        default:
+          return this.options.message;
+      }
+    },
+    _getMessageContainer: function _getMessageContainer(a, b) {
+      var c = a.parent();
+      if (c.is(b)) return c;
+      var d = c.attr("class");
+      if (!d) return this._getMessageContainer(c, b);
+      d = d.split(" ");
+      for (var e = d.length, f = 0; e > f; f++) if (/^col-(xs|sm|md|lg)-\d+$/.test(d[f]) || /^col-(xs|sm|md|lg)-offset-\d+$/.test(d[f])) return c;
+      return this._getMessageContainer(c, b);
+    },
+    _submit: function _submit() {
+      var b = this.isValid(),
+        c = b ? this.options.events.formSuccess : this.options.events.formError,
+        d = a.Event(c);
+      this.$form.trigger(d), this.$submitButton && (b ? this._onSuccess(d) : this._onError(d));
+    },
+    _isExcluded: function _isExcluded(b) {
+      var c = b.attr("data-bv-excluded"),
+        d = b.attr("data-bv-field") || b.attr("name");
+      switch (!0) {
+        case !!d && this.options.fields && this.options.fields[d] && ("true" === this.options.fields[d].excluded || this.options.fields[d].excluded === !0):
+        case "true" === c:
+        case "" === c:
+          return !0;
+        case !!d && this.options.fields && this.options.fields[d] && ("false" === this.options.fields[d].excluded || this.options.fields[d].excluded === !1):
+        case "false" === c:
+          return !1;
+        default:
+          if (this.options.excluded) {
+            "string" == typeof this.options.excluded && (this.options.excluded = a.map(this.options.excluded.split(","), function (b) {
+              return a.trim(b);
+            }));
+            for (var e = this.options.excluded.length, f = 0; e > f; f++) if ("string" == typeof this.options.excluded[f] && b.is(this.options.excluded[f]) || "function" == typeof this.options.excluded[f] && this.options.excluded[f].call(this, b, this) === !0) return !0;
+          }
+          return !1;
+      }
+    },
+    _exceedThreshold: function _exceedThreshold(b) {
+      var c = b.attr("data-bv-field"),
+        d = this.options.fields[c].threshold || this.options.threshold;
+      if (!d) return !0;
+      var e = -1 !== a.inArray(b.attr("type"), ["button", "checkbox", "file", "hidden", "image", "radio", "reset", "submit"]);
+      return e || b.val().length >= d;
+    },
+    _onError: function _onError(b) {
+      if (!b.isDefaultPrevented()) {
+        if ("submitted" === this.options.live) {
+          this.options.live = "enabled";
+          var c = this;
+          for (var d in this.options.fields) !function (b) {
+            var e = c.getFieldElements(b);
+            if (e.length) {
+              var f = a(e[0]).attr("type"),
+                g = "radio" === f || "checkbox" === f || "file" === f || "SELECT" === a(e[0]).get(0).tagName ? "change" : c._changeEvent,
+                h = c.options.fields[d].trigger || c.options.trigger || g,
+                i = a.map(h.split(" "), function (a) {
+                  return a + ".live.bv";
+                }).join(" ");
+              e.off(i).on(i, function () {
+                c._exceedThreshold(a(this)) && c.validateField(a(this));
+              });
+            }
+          }(d);
+        }
+        var e = this.$invalidFields.eq(0);
+        if (e) {
+          var f,
+            g = e.parents(".tab-pane");
+          g && (f = g.attr("id")) && a('a[href="#' + f + '"][data-toggle="tab"]').tab("show"), e.focus();
+        }
+      }
+    },
+    _onSuccess: function _onSuccess(a) {
+      a.isDefaultPrevented() || this.disableSubmitButtons(!0).defaultSubmit();
+    },
+    _onFieldValidated: function _onFieldValidated(b, c) {
+      var d = b.attr("data-bv-field"),
+        e = this.options.fields[d].validators,
+        f = {},
+        g = 0,
+        h = {
+          bv: this,
+          field: d,
+          element: b,
+          validator: c,
+          result: b.data("bv.response." + c)
+        };
+      if (c) switch (b.data("bv.result." + c)) {
+        case this.STATUS_INVALID:
+          b.trigger(a.Event(this.options.events.validatorError), h);
+          break;
+        case this.STATUS_VALID:
+          b.trigger(a.Event(this.options.events.validatorSuccess), h);
+      }
+      f[this.STATUS_NOT_VALIDATED] = 0, f[this.STATUS_VALIDATING] = 0, f[this.STATUS_INVALID] = 0, f[this.STATUS_VALID] = 0;
+      for (var i in e) if (e[i].enabled !== !1) {
+        g++;
+        var j = b.data("bv.result." + i);
+        j && f[j]++;
+      }
+      f[this.STATUS_VALID] === g ? (this.$invalidFields = this.$invalidFields.not(b), b.trigger(a.Event(this.options.events.fieldSuccess), h)) : 0 === f[this.STATUS_NOT_VALIDATED] && 0 === f[this.STATUS_VALIDATING] && f[this.STATUS_INVALID] > 0 && (this.$invalidFields = this.$invalidFields.add(b), b.trigger(a.Event(this.options.events.fieldError), h));
+    },
+    getFieldElements: function getFieldElements(b) {
+      return this._cacheFields[b] || (this._cacheFields[b] = this.options.fields[b] && this.options.fields[b].selector ? a(this.options.fields[b].selector) : this.$form.find('[name="' + b + '"]')), this._cacheFields[b];
+    },
+    getOptions: function getOptions(a, b, c) {
+      if (!a) return this.options;
+      if ("object" == _typeof(a) && (a = a.attr("data-bv-field")), !this.options.fields[a]) return null;
+      var d = this.options.fields[a];
+      return b ? d.validators && d.validators[b] ? c ? d.validators[b][c] : d.validators[b] : null : c ? d[c] : d;
+    },
+    disableSubmitButtons: function disableSubmitButtons(a) {
+      return a ? "disabled" !== this.options.live && this.$form.find(this.options.submitButtons).attr("disabled", "disabled") : this.$form.find(this.options.submitButtons).removeAttr("disabled"), this;
+    },
+    validate: function validate() {
+      if (!this.options.fields) return this;
+      this.disableSubmitButtons(!0);
+      for (var a in this.options.fields) this.validateField(a);
+      return this._submit(), this;
+    },
+    validateField: function validateField(b) {
+      var c = a([]);
+      switch (_typeof(b)) {
+        case "object":
+          c = b, b = b.attr("data-bv-field");
+          break;
+        case "string":
+          c = this.getFieldElements(b);
+      }
+      if (0 === c.length || this.options.fields[b] && this.options.fields[b].enabled === !1) return this;
+      for (var d, e, f = this, g = c.attr("type"), h = "radio" === g || "checkbox" === g ? 1 : c.length, i = "radio" === g || "checkbox" === g, j = this.options.fields[b].validators, k = "true" === this.options.fields[b].verbose || this.options.fields[b].verbose === !0 || "true" === this.options.verbose || this.options.verbose === !0, l = 0; h > l; l++) {
+        var m = c.eq(l);
+        if (!this._isExcluded(m)) {
+          var n = !1;
+          for (d in j) {
+            if (m.data("bv.dfs." + d) && m.data("bv.dfs." + d).reject(), n) break;
+            var o = m.data("bv.result." + d);
+            if (o !== this.STATUS_VALID && o !== this.STATUS_INVALID) {
+              if (j[d].enabled !== !1) {
+                if (m.data("bv.result." + d, this.STATUS_VALIDATING), e = a.fn.bootstrapValidator.validators[d].validate(this, m, j[d]), "object" == _typeof(e) && e.resolve) this.updateStatus(i ? b : m, this.STATUS_VALIDATING, d), m.data("bv.dfs." + d, e), e.done(function (a, b, c) {
+                  a.removeData("bv.dfs." + b).data("bv.response." + b, c), c.message && f.updateMessage(a, b, c.message), f.updateStatus(i ? a.attr("data-bv-field") : a, c.valid ? f.STATUS_VALID : f.STATUS_INVALID, b), c.valid && f._submitIfValid === !0 ? f._submit() : c.valid || k || (n = !0);
+                });else if ("object" == _typeof(e) && void 0 !== e.valid && void 0 !== e.message) {
+                  if (m.data("bv.response." + d, e), this.updateMessage(i ? b : m, d, e.message), this.updateStatus(i ? b : m, e.valid ? this.STATUS_VALID : this.STATUS_INVALID, d), !e.valid && !k) break;
+                } else if ("boolean" == typeof e && (m.data("bv.response." + d, e), this.updateStatus(i ? b : m, e ? this.STATUS_VALID : this.STATUS_INVALID, d), !e && !k)) break;
+              } else this.updateStatus(i ? b : m, this.STATUS_VALID, d);
+            } else this._onFieldValidated(m, d);
+          }
+        }
+      }
+      return this;
+    },
+    updateMessage: function updateMessage(b, c, d) {
+      var e = a([]);
+      switch (_typeof(b)) {
+        case "object":
+          e = b, b = b.attr("data-bv-field");
+          break;
+        case "string":
+          e = this.getFieldElements(b);
+      }
+      e.each(function () {
+        a(this).data("bv.messages").find('.help-block[data-bv-validator="' + c + '"][data-bv-for="' + b + '"]').html(d);
+      });
+    },
+    updateStatus: function updateStatus(b, c, d) {
+      var e = a([]);
+      switch (_typeof(b)) {
+        case "object":
+          e = b, b = b.attr("data-bv-field");
+          break;
+        case "string":
+          e = this.getFieldElements(b);
+      }
+      c === this.STATUS_NOT_VALIDATED && (this._submitIfValid = !1);
+      for (var f = this, g = e.attr("type"), h = this.options.fields[b].group || this.options.group, i = "radio" === g || "checkbox" === g ? 1 : e.length, j = 0; i > j; j++) {
+        var k = e.eq(j);
+        if (!this._isExcluded(k)) {
+          var l = k.parents(h),
+            m = k.data("bv.messages"),
+            n = m.find('.help-block[data-bv-validator][data-bv-for="' + b + '"]'),
+            o = d ? n.filter('[data-bv-validator="' + d + '"]') : n,
+            p = l.find('.form-control-feedback[data-bv-icon-for="' + b + '"]'),
+            q = "function" == typeof (this.options.fields[b].container || this.options.container) ? (this.options.fields[b].container || this.options.container).call(this, k, this) : this.options.fields[b].container || this.options.container,
+            r = null;
+          if (d) k.data("bv.result." + d, c);else for (var s in this.options.fields[b].validators) k.data("bv.result." + s, c);
+          o.attr("data-bv-result", c);
+          var t,
+            u,
+            v = k.parents(".tab-pane");
+          switch (v && (t = v.attr("id")) && (u = a('a[href="#' + t + '"][data-toggle="tab"]').parent()), c) {
+            case this.STATUS_VALIDATING:
+              r = null, this.disableSubmitButtons(!0), l.removeClass("has-success").removeClass("has-error"), p && p.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show(), u && u.removeClass("bv-tab-success").removeClass("bv-tab-error");
+              break;
+            case this.STATUS_INVALID:
+              r = !1, this.disableSubmitButtons(!0), l.removeClass("has-success").addClass("has-error"), p && p.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show(), u && u.removeClass("bv-tab-success").addClass("bv-tab-error");
+              break;
+            case this.STATUS_VALID:
+              r = 0 === n.filter('[data-bv-result="' + this.STATUS_NOT_VALIDATED + '"]').length ? n.filter('[data-bv-result="' + this.STATUS_VALID + '"]').length === n.length : null, null !== r && (this.disableSubmitButtons(this.$submitButton ? !this.isValid() : !r), p && p.removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid).addClass(r ? this.options.feedbackIcons.valid : this.options.feedbackIcons.invalid).show()), l.removeClass("has-error has-success").addClass(this.isValidContainer(l) ? "has-success" : "has-error"), u && u.removeClass("bv-tab-success").removeClass("bv-tab-error").addClass(this.isValidContainer(v) ? "bv-tab-success" : "bv-tab-error");
+              break;
+            case this.STATUS_NOT_VALIDATED:
+            default:
+              r = null, this.disableSubmitButtons(!1), l.removeClass("has-success").removeClass("has-error"), p && p.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide(), u && u.removeClass("bv-tab-success").removeClass("bv-tab-error");
+          }
+          switch (!0) {
+            case p && "tooltip" === q:
+              r === !1 ? p.css("cursor", "pointer").tooltip("destroy").tooltip({
+                container: "body",
+                html: !0,
+                placement: "top",
+                title: n.filter('[data-bv-result="' + f.STATUS_INVALID + '"]').eq(0).html()
+              }) : p.tooltip("hide");
+              break;
+            case p && "popover" === q:
+              r === !1 ? p.css("cursor", "pointer").popover("destroy").popover({
+                container: "body",
+                content: n.filter('[data-bv-result="' + f.STATUS_INVALID + '"]').eq(0).html(),
+                html: !0,
+                placement: "top",
+                trigger: "hover click"
+              }) : p.popover("hide");
+              break;
+            default:
+              c === this.STATUS_INVALID ? o.show() : o.hide();
+          }
+          k.trigger(a.Event(this.options.events.fieldStatus), {
+            bv: this,
+            field: b,
+            element: k,
+            status: c
+          }), this._onFieldValidated(k, d);
+        }
+      }
+      return this;
+    },
+    isValid: function isValid() {
+      for (var a in this.options.fields) if (!this.isValidField(a)) return !1;
+      return !0;
+    },
+    isValidField: function isValidField(b) {
+      var c = a([]);
+      switch (_typeof(b)) {
+        case "object":
+          c = b, b = b.attr("data-bv-field");
+          break;
+        case "string":
+          c = this.getFieldElements(b);
+      }
+      if (0 === c.length || null === this.options.fields[b] || this.options.fields[b].enabled === !1) return !0;
+      for (var d, e, f, g = c.attr("type"), h = "radio" === g || "checkbox" === g ? 1 : c.length, i = 0; h > i; i++) if (d = c.eq(i), !this._isExcluded(d)) for (e in this.options.fields[b].validators) if (this.options.fields[b].validators[e].enabled !== !1 && (f = d.data("bv.result." + e), f !== this.STATUS_VALID)) return !1;
+      return !0;
+    },
+    isValidContainer: function isValidContainer(b) {
+      var c = this,
+        d = {},
+        e = "string" == typeof b ? a(b) : b;
+      if (0 === e.length) return !0;
+      e.find("[data-bv-field]").each(function () {
+        var b = a(this),
+          e = b.attr("data-bv-field");
+        c._isExcluded(b) || d[e] || (d[e] = b);
+      });
+      for (var f in d) {
+        var g = d[f];
+        if (g.data("bv.messages").find('.help-block[data-bv-validator][data-bv-for="' + f + '"]').filter('[data-bv-result="' + this.STATUS_INVALID + '"]').length > 0) return !1;
+      }
+      return !0;
+    },
+    defaultSubmit: function defaultSubmit() {
+      this.$submitButton && a("<input/>").attr("type", "hidden").attr("data-bv-submit-hidden", "").attr("name", this.$submitButton.attr("name")).val(this.$submitButton.val()).appendTo(this.$form), this.$form.off("submit.bv").submit();
+    },
+    getInvalidFields: function getInvalidFields() {
+      return this.$invalidFields;
+    },
+    getSubmitButton: function getSubmitButton() {
+      return this.$submitButton;
+    },
+    getMessages: function getMessages(b, c) {
+      var d = this,
+        e = [],
+        f = a([]);
+      switch (!0) {
+        case b && "object" == _typeof(b):
+          f = b;
+          break;
+        case b && "string" == typeof b:
+          var g = this.getFieldElements(b);
+          if (g.length > 0) {
+            var h = g.attr("type");
+            f = "radio" === h || "checkbox" === h ? g.eq(0) : g;
+          }
+          break;
+        default:
+          f = this.$invalidFields;
+      }
+      var i = c ? '[data-bv-validator="' + c + '"]' : "";
+      return f.each(function () {
+        e = e.concat(a(this).data("bv.messages").find('.help-block[data-bv-for="' + a(this).attr("data-bv-field") + '"][data-bv-result="' + d.STATUS_INVALID + '"]' + i).map(function () {
+          var b = a(this).attr("data-bv-validator"),
+            c = a(this).attr("data-bv-for");
+          return d.options.fields[c].validators[b].enabled === !1 ? "" : a(this).html();
+        }).get());
+      }), e;
+    },
+    updateOption: function updateOption(a, b, c, d) {
+      return "object" == _typeof(a) && (a = a.attr("data-bv-field")), this.options.fields[a] && this.options.fields[a].validators[b] && (this.options.fields[a].validators[b][c] = d, this.updateStatus(a, this.STATUS_NOT_VALIDATED, b)), this;
+    },
+    addField: function addField(b, c) {
+      var d = a([]);
+      switch (_typeof(b)) {
+        case "object":
+          d = b, b = b.attr("data-bv-field") || b.attr("name");
+          break;
+        case "string":
+          delete this._cacheFields[b], d = this.getFieldElements(b);
+      }
+      d.attr("data-bv-field", b);
+      for (var e = d.attr("type"), f = "radio" === e || "checkbox" === e ? 1 : d.length, g = 0; f > g; g++) {
+        var h = d.eq(g),
+          i = this._parseOptions(h);
+        i = null === i ? c : a.extend(!0, c, i), this.options.fields[b] = a.extend(!0, this.options.fields[b], i), this._cacheFields[b] = this._cacheFields[b] ? this._cacheFields[b].add(h) : h, this._initField("checkbox" === e || "radio" === e ? b : h);
+      }
+      return this.disableSubmitButtons(!1), this.$form.trigger(a.Event(this.options.events.fieldAdded), {
+        field: b,
+        element: d,
+        options: this.options.fields[b]
+      }), this;
+    },
+    removeField: function removeField(b) {
+      var c = a([]);
+      switch (_typeof(b)) {
+        case "object":
+          c = b, b = b.attr("data-bv-field") || b.attr("name"), c.attr("data-bv-field", b);
+          break;
+        case "string":
+          c = this.getFieldElements(b);
+      }
+      if (0 === c.length) return this;
+      for (var d = c.attr("type"), e = "radio" === d || "checkbox" === d ? 1 : c.length, f = 0; e > f; f++) {
+        var g = c.eq(f);
+        this.$invalidFields = this.$invalidFields.not(g), this._cacheFields[b] = this._cacheFields[b].not(g);
+      }
+      return this._cacheFields[b] && 0 !== this._cacheFields[b].length || delete this.options.fields[b], ("checkbox" === d || "radio" === d) && this._initField(b), this.disableSubmitButtons(!1), this.$form.trigger(a.Event(this.options.events.fieldRemoved), {
+        field: b,
+        element: c
+      }), this;
+    },
+    resetField: function resetField(b, c) {
+      var d = a([]);
+      switch (_typeof(b)) {
+        case "object":
+          d = b, b = b.attr("data-bv-field");
+          break;
+        case "string":
+          d = this.getFieldElements(b);
+      }
+      var e = d.length;
+      if (this.options.fields[b]) for (var f = 0; e > f; f++) for (var g in this.options.fields[b].validators) d.eq(f).removeData("bv.dfs." + g);
+      if (this.updateStatus(b, this.STATUS_NOT_VALIDATED), c) {
+        var h = d.attr("type");
+        "radio" === h || "checkbox" === h ? d.removeAttr("checked").removeAttr("selected") : d.val("");
+      }
+      return this;
+    },
+    resetForm: function resetForm(b) {
+      for (var c in this.options.fields) this.resetField(c, b);
+      return this.$invalidFields = a([]), this.$submitButton = null, this.disableSubmitButtons(!1), this;
+    },
+    revalidateField: function revalidateField(a) {
+      return this.updateStatus(a, this.STATUS_NOT_VALIDATED).validateField(a), this;
+    },
+    enableFieldValidators: function enableFieldValidators(a, b, c) {
+      var d = this.options.fields[a].validators;
+      if (c && d && d[c] && d[c].enabled !== b) this.options.fields[a].validators[c].enabled = b, this.updateStatus(a, this.STATUS_NOT_VALIDATED, c);else if (!c && this.options.fields[a].enabled !== b) {
+        this.options.fields[a].enabled = b;
+        for (var e in d) this.enableFieldValidators(a, b, e);
+      }
+      return this;
+    },
+    getDynamicOption: function getDynamicOption(b, c) {
+      var d = "string" == typeof b ? this.getFieldElements(b) : b,
+        e = d.val();
+      if ("function" == typeof c) return a.fn.bootstrapValidator.helpers.call(c, [e, this, d]);
+      if ("string" == typeof c) {
+        var f = this.getFieldElements(c);
+        return f.length ? f.val() : a.fn.bootstrapValidator.helpers.call(c, [e, this, d]) || c;
+      }
+      return null;
+    },
+    destroy: function destroy() {
+      var b, c, d, e, f, g;
+      for (b in this.options.fields) {
+        c = this.getFieldElements(b), g = this.options.fields[b].group || this.options.group;
+        for (var h = 0; h < c.length; h++) {
+          if (d = c.eq(h), d.data("bv.messages").find('.help-block[data-bv-validator][data-bv-for="' + b + '"]').remove().end().end().removeData("bv.messages").parents(g).removeClass("has-feedback has-error has-success").end().off(".bv").removeAttr("data-bv-field"), f = d.parents(g).find('i[data-bv-icon-for="' + b + '"]')) {
+            var i = "function" == typeof (this.options.fields[b].container || this.options.container) ? (this.options.fields[b].container || this.options.container).call(this, d, this) : this.options.fields[b].container || this.options.container;
+            switch (i) {
+              case "tooltip":
+                f.tooltip("destroy").remove();
+                break;
+              case "popover":
+                f.popover("destroy").remove();
+                break;
+              default:
+                f.remove();
+            }
+          }
+          for (e in this.options.fields[b].validators) d.data("bv.dfs." + e) && d.data("bv.dfs." + e).reject(), d.removeData("bv.result." + e).removeData("bv.response." + e).removeData("bv.dfs." + e), "function" == typeof a.fn.bootstrapValidator.validators[e].destroy && a.fn.bootstrapValidator.validators[e].destroy(this, d, this.options.fields[b].validators[e]);
+        }
+      }
+      this.disableSubmitButtons(!1), this.$hiddenButton.remove(), this.$form.removeClass(this.options.elementClass).off(".bv").removeData("bootstrapValidator").find("[data-bv-submit-hidden]").remove().end().find('[type="submit"]').off("click.bv");
+    }
+  }, a.fn.bootstrapValidator = function (c) {
+    var d = arguments;
+    return this.each(function () {
+      var e = a(this),
+        f = e.data("bootstrapValidator"),
+        g = "object" == _typeof(c) && c;
+      f || (f = new b(this, g), e.data("bootstrapValidator", f)), "string" == typeof c && f[c].apply(f, Array.prototype.slice.call(d, 1));
+    });
+  }, a.fn.bootstrapValidator.DEFAULT_OPTIONS = {
+    elementClass: "bv-form",
+    message: "This value is not valid",
+    group: ".form-group",
+    container: null,
+    threshold: null,
+    excluded: [":disabled", ":hidden", ":not(:visible)"],
+    feedbackIcons: {
+      valid: null,
+      invalid: null,
+      validating: null
+    },
+    submitButtons: '[type="submit"]',
+    live: "enabled",
+    fields: null,
+    events: {
+      formInit: "init.form.bv",
+      formError: "error.form.bv",
+      formSuccess: "success.form.bv",
+      fieldAdded: "added.field.bv",
+      fieldRemoved: "removed.field.bv",
+      fieldInit: "init.field.bv",
+      fieldError: "error.field.bv",
+      fieldSuccess: "success.field.bv",
+      fieldStatus: "status.field.bv",
+      validatorError: "error.validator.bv",
+      validatorSuccess: "success.validator.bv"
+    },
+    verbose: !0
+  }, a.fn.bootstrapValidator.validators = {}, a.fn.bootstrapValidator.i18n = {}, a.fn.bootstrapValidator.Constructor = b, a.fn.bootstrapValidator.helpers = {
+    call: function call(a, b) {
+      if ("function" == typeof a) return a.apply(this, b);
+      if ("string" == typeof a) {
+        "()" === a.substring(a.length - 2) && (a = a.substring(0, a.length - 2));
+        for (var c = a.split("."), d = c.pop(), e = window, f = 0; f < c.length; f++) e = e[c[f]];
+        return "undefined" == typeof e[d] ? null : e[d].apply(this, b);
+      }
+    },
+    format: function format(b, c) {
+      a.isArray(c) || (c = [c]);
+      for (var d in c) b = b.replace("%s", c[d]);
+      return b;
+    },
+    date: function date(a, b, c, d) {
+      if (isNaN(a) || isNaN(b) || isNaN(c)) return !1;
+      if (c.length > 2 || b.length > 2 || a.length > 4) return !1;
+      if (c = parseInt(c, 10), b = parseInt(b, 10), a = parseInt(a, 10), 1e3 > a || a > 9999 || 0 >= b || b > 12) return !1;
+      var e = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      if ((a % 400 === 0 || a % 100 !== 0 && a % 4 === 0) && (e[1] = 29), 0 >= c || c > e[b - 1]) return !1;
+      if (d === !0) {
+        var f = new Date(),
+          g = f.getFullYear(),
+          h = f.getMonth(),
+          i = f.getDate();
+        return g > a || a === g && h > b - 1 || a === g && b - 1 === h && i > c;
+      }
+      return !0;
+    },
+    luhn: function luhn(a) {
+      for (var b = a.length, c = 0, d = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]], e = 0; b--;) e += d[c][parseInt(a.charAt(b), 10)], c ^= 1;
+      return e % 10 === 0 && e > 0;
+    },
+    mod11And10: function mod11And10(a) {
+      for (var b = 5, c = a.length, d = 0; c > d; d++) b = (2 * (b || 10) % 11 + parseInt(a.charAt(d), 10)) % 10;
+      return 1 === b;
+    },
+    mod37And36: function mod37And36(a, b) {
+      b = b || "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      for (var c = b.length, d = a.length, e = Math.floor(c / 2), f = 0; d > f; f++) e = (2 * (e || c) % (c + 1) + b.indexOf(a.charAt(f))) % c;
+      return 1 === e;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.base64 = a.extend(a.fn.bootstrapValidator.i18n.base64 || {}, {
+    "default": "Please enter a valid base 64 encoded"
+  }), a.fn.bootstrapValidator.validators.base64 = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      return "" === c ? !0 : /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$/.test(c);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.between = a.extend(a.fn.bootstrapValidator.i18n.between || {}, {
+    "default": "Please enter a value between %s and %s",
+    notInclusive: "Please enter a value between %s and %s strictly"
+  }), a.fn.bootstrapValidator.validators.between = {
+    html5Attributes: {
+      message: "message",
+      min: "min",
+      max: "max",
+      inclusive: "inclusive"
+    },
+    enableByHtml5: function enableByHtml5(a) {
+      return "range" === a.attr("type") ? {
+        min: a.attr("min"),
+        max: a.attr("max")
+      } : !1;
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      if (!a.isNumeric(e)) return !1;
+      var f = a.isNumeric(d.min) ? d.min : b.getDynamicOption(c, d.min),
+        g = a.isNumeric(d.max) ? d.max : b.getDynamicOption(c, d.max);
+      return e = parseFloat(e), d.inclusive === !0 || void 0 === d.inclusive ? {
+        valid: e >= f && g >= e,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.between["default"], [f, g])
+      } : {
+        valid: e > f && g > e,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.between.notInclusive, [f, g])
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.validators.blank = {
+    validate: function validate() {
+      return !0;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.callback = a.extend(a.fn.bootstrapValidator.i18n.callback || {}, {
+    "default": "Please enter a valid value"
+  }), a.fn.bootstrapValidator.validators.callback = {
+    html5Attributes: {
+      message: "message",
+      callback: "callback"
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val(),
+        f = new a.Deferred(),
+        g = {
+          valid: !0
+        };
+      if (d.callback) {
+        var h = a.fn.bootstrapValidator.helpers.call(d.callback, [e, b, c]);
+        g = "boolean" == typeof h ? {
+          valid: h
+        } : h;
+      }
+      return f.resolve(c, "callback", g), f;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.choice = a.extend(a.fn.bootstrapValidator.i18n.choice || {}, {
+    "default": "Please enter a valid value",
+    less: "Please choose %s options at minimum",
+    more: "Please choose %s options at maximum",
+    between: "Please choose %s - %s options"
+  }), a.fn.bootstrapValidator.validators.choice = {
+    html5Attributes: {
+      message: "message",
+      min: "min",
+      max: "max"
+    },
+    validate: function validate(b, c, d) {
+      var e = c.is("select") ? b.getFieldElements(c.attr("data-bv-field")).find("option").filter(":selected").length : b.getFieldElements(c.attr("data-bv-field")).filter(":checked").length,
+        f = d.min ? a.isNumeric(d.min) ? d.min : b.getDynamicOption(c, d.min) : null,
+        g = d.max ? a.isNumeric(d.max) ? d.max : b.getDynamicOption(c, d.max) : null,
+        h = !0,
+        i = d.message || a.fn.bootstrapValidator.i18n.choice["default"];
+      switch ((f && e < parseInt(f, 10) || g && e > parseInt(g, 10)) && (h = !1), !0) {
+        case !!f && !!g:
+          i = a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.choice.between, [parseInt(f, 10), parseInt(g, 10)]);
+          break;
+        case !!f:
+          i = a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.choice.less, parseInt(f, 10));
+          break;
+        case !!g:
+          i = a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.choice.more, parseInt(g, 10));
+      }
+      return {
+        valid: h,
+        message: i
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.creditCard = a.extend(a.fn.bootstrapValidator.i18n.creditCard || {}, {
+    "default": "Please enter a valid credit card number"
+  }), a.fn.bootstrapValidator.validators.creditCard = {
+    validate: function validate(b, c) {
+      var d = c.val();
+      if ("" === d) return !0;
+      if (/[^0-9-\s]+/.test(d)) return !1;
+      if (d = d.replace(/\D/g, ""), !a.fn.bootstrapValidator.helpers.luhn(d)) return !1;
+      var e,
+        f,
+        g = {
+          AMERICAN_EXPRESS: {
+            length: [15],
+            prefix: ["34", "37"]
+          },
+          DINERS_CLUB: {
+            length: [14],
+            prefix: ["300", "301", "302", "303", "304", "305", "36"]
+          },
+          DINERS_CLUB_US: {
+            length: [16],
+            prefix: ["54", "55"]
+          },
+          DISCOVER: {
+            length: [16],
+            prefix: ["6011", "622126", "622127", "622128", "622129", "62213", "62214", "62215", "62216", "62217", "62218", "62219", "6222", "6223", "6224", "6225", "6226", "6227", "6228", "62290", "62291", "622920", "622921", "622922", "622923", "622924", "622925", "644", "645", "646", "647", "648", "649", "65"]
+          },
+          JCB: {
+            length: [16],
+            prefix: ["3528", "3529", "353", "354", "355", "356", "357", "358"]
+          },
+          LASER: {
+            length: [16, 17, 18, 19],
+            prefix: ["6304", "6706", "6771", "6709"]
+          },
+          MAESTRO: {
+            length: [12, 13, 14, 15, 16, 17, 18, 19],
+            prefix: ["5018", "5020", "5038", "6304", "6759", "6761", "6762", "6763", "6764", "6765", "6766"]
+          },
+          MASTERCARD: {
+            length: [16],
+            prefix: ["51", "52", "53", "54", "55"]
+          },
+          SOLO: {
+            length: [16, 18, 19],
+            prefix: ["6334", "6767"]
+          },
+          UNIONPAY: {
+            length: [16, 17, 18, 19],
+            prefix: ["622126", "622127", "622128", "622129", "62213", "62214", "62215", "62216", "62217", "62218", "62219", "6222", "6223", "6224", "6225", "6226", "6227", "6228", "62290", "62291", "622920", "622921", "622922", "622923", "622924", "622925"]
+          },
+          VISA: {
+            length: [16],
+            prefix: ["4"]
+          }
+        };
+      for (e in g) for (f in g[e].prefix) if (d.substr(0, g[e].prefix[f].length) === g[e].prefix[f] && -1 !== a.inArray(d.length, g[e].length)) return !0;
+      return !1;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.cusip = a.extend(a.fn.bootstrapValidator.i18n.cusip || {}, {
+    "default": "Please enter a valid CUSIP number"
+  }), a.fn.bootstrapValidator.validators.cusip = {
+    validate: function validate(b, c) {
+      var d = c.val();
+      if ("" === d) return !0;
+      if (d = d.toUpperCase(), !/^[0-9A-Z]{9}$/.test(d)) return !1;
+      for (var e = a.map(d.split(""), function (a) {
+          var b = a.charCodeAt(0);
+          return b >= "A".charCodeAt(0) && b <= "Z".charCodeAt(0) ? b - "A".charCodeAt(0) + 10 : a;
+        }), f = e.length, g = 0, h = 0; f - 1 > h; h++) {
+        var i = parseInt(e[h], 10);
+        h % 2 !== 0 && (i *= 2), i > 9 && (i -= 9), g += i;
+      }
+      return g = (10 - g % 10) % 10, g === e[f - 1];
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.cvv = a.extend(a.fn.bootstrapValidator.i18n.cvv || {}, {
+    "default": "Please enter a valid CVV number"
+  }), a.fn.bootstrapValidator.validators.cvv = {
+    html5Attributes: {
+      message: "message",
+      ccfield: "creditCardField"
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      if (!/^[0-9]{3,4}$/.test(e)) return !1;
+      if (!d.creditCardField) return !0;
+      var f = b.getFieldElements(d.creditCardField).val();
+      if ("" === f) return !0;
+      f = f.replace(/\D/g, "");
+      var g,
+        h,
+        i = {
+          AMERICAN_EXPRESS: {
+            length: [15],
+            prefix: ["34", "37"]
+          },
+          DINERS_CLUB: {
+            length: [14],
+            prefix: ["300", "301", "302", "303", "304", "305", "36"]
+          },
+          DINERS_CLUB_US: {
+            length: [16],
+            prefix: ["54", "55"]
+          },
+          DISCOVER: {
+            length: [16],
+            prefix: ["6011", "622126", "622127", "622128", "622129", "62213", "62214", "62215", "62216", "62217", "62218", "62219", "6222", "6223", "6224", "6225", "6226", "6227", "6228", "62290", "62291", "622920", "622921", "622922", "622923", "622924", "622925", "644", "645", "646", "647", "648", "649", "65"]
+          },
+          JCB: {
+            length: [16],
+            prefix: ["3528", "3529", "353", "354", "355", "356", "357", "358"]
+          },
+          LASER: {
+            length: [16, 17, 18, 19],
+            prefix: ["6304", "6706", "6771", "6709"]
+          },
+          MAESTRO: {
+            length: [12, 13, 14, 15, 16, 17, 18, 19],
+            prefix: ["5018", "5020", "5038", "6304", "6759", "6761", "6762", "6763", "6764", "6765", "6766"]
+          },
+          MASTERCARD: {
+            length: [16],
+            prefix: ["51", "52", "53", "54", "55"]
+          },
+          SOLO: {
+            length: [16, 18, 19],
+            prefix: ["6334", "6767"]
+          },
+          UNIONPAY: {
+            length: [16, 17, 18, 19],
+            prefix: ["622126", "622127", "622128", "622129", "62213", "62214", "62215", "62216", "62217", "62218", "62219", "6222", "6223", "6224", "6225", "6226", "6227", "6228", "62290", "62291", "622920", "622921", "622922", "622923", "622924", "622925"]
+          },
+          VISA: {
+            length: [16],
+            prefix: ["4"]
+          }
+        },
+        j = null;
+      for (g in i) for (h in i[g].prefix) if (f.substr(0, i[g].prefix[h].length) === i[g].prefix[h] && -1 !== a.inArray(f.length, i[g].length)) {
+        j = g;
+        break;
+      }
+      return null === j ? !1 : "AMERICAN_EXPRESS" === j ? 4 === e.length : 3 === e.length;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.date = a.extend(a.fn.bootstrapValidator.i18n.date || {}, {
+    "default": "Please enter a valid date"
+  }), a.fn.bootstrapValidator.validators.date = {
+    html5Attributes: {
+      message: "message",
+      format: "format",
+      separator: "separator"
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      d.format = d.format || "MM/DD/YYYY", "date" === c.attr("type") && (d.format = "YYYY-MM-DD");
+      var f = d.format.split(" "),
+        g = f[0],
+        h = f.length > 1 ? f[1] : null,
+        i = f.length > 2 ? f[2] : null,
+        j = e.split(" "),
+        k = j[0],
+        l = j.length > 1 ? j[1] : null;
+      if (f.length !== j.length) return !1;
+      var m = d.separator;
+      if (m || (m = -1 !== k.indexOf("/") ? "/" : -1 !== k.indexOf("-") ? "-" : null), null === m || -1 === k.indexOf(m)) return !1;
+      if (k = k.split(m), g = g.split(m), k.length !== g.length) return !1;
+      var n = k[a.inArray("YYYY", g)],
+        o = k[a.inArray("MM", g)],
+        p = k[a.inArray("DD", g)];
+      if (!n || !o || !p || 4 !== n.length) return !1;
+      var q = null,
+        r = null,
+        s = null;
+      if (h) {
+        if (h = h.split(":"), l = l.split(":"), h.length !== l.length) return !1;
+        if (r = l.length > 0 ? l[0] : null, q = l.length > 1 ? l[1] : null, s = l.length > 2 ? l[2] : null) {
+          if (isNaN(s) || s.length > 2) return !1;
+          if (s = parseInt(s, 10), 0 > s || s > 60) return !1;
+        }
+        if (r) {
+          if (isNaN(r) || r.length > 2) return !1;
+          if (r = parseInt(r, 10), 0 > r || r >= 24 || i && r > 12) return !1;
+        }
+        if (q) {
+          if (isNaN(q) || q.length > 2) return !1;
+          if (q = parseInt(q, 10), 0 > q || q > 59) return !1;
+        }
+      }
+      return a.fn.bootstrapValidator.helpers.date(n, o, p);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.different = a.extend(a.fn.bootstrapValidator.i18n.different || {}, {
+    "default": "Please enter a different value"
+  }), a.fn.bootstrapValidator.validators.different = {
+    html5Attributes: {
+      message: "message",
+      field: "field"
+    },
+    validate: function validate(a, b, c) {
+      var d = b.val();
+      if ("" === d) return !0;
+      for (var e = c.field.split(","), f = !0, g = 0; g < e.length; g++) {
+        var h = a.getFieldElements(e[g]);
+        if (null != h && 0 !== h.length) {
+          var i = h.val();
+          d === i ? f = !1 : "" !== i && a.updateStatus(h, a.STATUS_VALID, "different");
+        }
+      }
+      return f;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.digits = a.extend(a.fn.bootstrapValidator.i18n.digits || {}, {
+    "default": "Please enter only digits"
+  }), a.fn.bootstrapValidator.validators.digits = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      return "" === c ? !0 : /^\d+$/.test(c);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.ean = a.extend(a.fn.bootstrapValidator.i18n.ean || {}, {
+    "default": "Please enter a valid EAN number"
+  }), a.fn.bootstrapValidator.validators.ean = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      if ("" === c) return !0;
+      if (!/^(\d{8}|\d{12}|\d{13})$/.test(c)) return !1;
+      for (var d = c.length, e = 0, f = 8 === d ? [3, 1] : [1, 3], g = 0; d - 1 > g; g++) e += parseInt(c.charAt(g), 10) * f[g % 2];
+      return e = (10 - e % 10) % 10, e + "" === c.charAt(d - 1);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.emailAddress = a.extend(a.fn.bootstrapValidator.i18n.emailAddress || {}, {
+    "default": "Please enter a valid email address"
+  }), a.fn.bootstrapValidator.validators.emailAddress = {
+    html5Attributes: {
+      message: "message",
+      multiple: "multiple",
+      separator: "separator"
+    },
+    enableByHtml5: function enableByHtml5(a) {
+      return "email" === a.attr("type");
+    },
+    validate: function validate(a, b, c) {
+      var d = b.val();
+      if ("" === d) return !0;
+      var e = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+        f = c.multiple === !0 || "true" === c.multiple;
+      if (f) {
+        for (var g = c.separator || /[,;]/, h = this._splitEmailAddresses(d, g), i = 0; i < h.length; i++) if (!e.test(h[i])) return !1;
+        return !0;
+      }
+      return e.test(d);
+    },
+    _splitEmailAddresses: function _splitEmailAddresses(a, b) {
+      for (var c = a.split(/"/), d = c.length, e = [], f = "", g = 0; d > g; g++) if (g % 2 === 0) {
+        var h = c[g].split(b),
+          i = h.length;
+        if (1 === i) f += h[0];else {
+          e.push(f + h[0]);
+          for (var j = 1; i - 1 > j; j++) e.push(h[j]);
+          f = h[i - 1];
+        }
+      } else f += '"' + c[g], d - 1 > g && (f += '"');
+      return e.push(f), e;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.file = a.extend(a.fn.bootstrapValidator.i18n.file || {}, {
+    "default": "Please choose a valid file"
+  }), a.fn.bootstrapValidator.validators.file = {
+    html5Attributes: {
+      extension: "extension",
+      maxsize: "maxSize",
+      minsize: "minSize",
+      message: "message",
+      type: "type"
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      var f,
+        g = d.extension ? d.extension.toLowerCase().split(",") : null,
+        h = d.type ? d.type.toLowerCase().split(",") : null,
+        i = window.File && window.FileList && window.FileReader;
+      if (i) for (var j = c.get(0).files, k = j.length, l = 0; k > l; l++) {
+        if (d.minSize && j[l].size < parseInt(d.minSize, 10)) return !1;
+        if (d.maxSize && j[l].size > parseInt(d.maxSize, 10)) return !1;
+        if (f = j[l].name.substr(j[l].name.lastIndexOf(".") + 1), g && -1 === a.inArray(f.toLowerCase(), g)) return !1;
+        if (j[l].type && h && -1 === a.inArray(j[l].type.toLowerCase(), h)) return !1;
+      } else if (f = e.substr(e.lastIndexOf(".") + 1), g && -1 === a.inArray(f.toLowerCase(), g)) return !1;
+      return !0;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.greaterThan = a.extend(a.fn.bootstrapValidator.i18n.greaterThan || {}, {
+    "default": "Please enter a value greater than or equal to %s",
+    notInclusive: "Please enter a value greater than %s"
+  }), a.fn.bootstrapValidator.validators.greaterThan = {
+    html5Attributes: {
+      message: "message",
+      value: "value",
+      inclusive: "inclusive"
+    },
+    enableByHtml5: function enableByHtml5(a) {
+      var b = a.attr("type"),
+        c = a.attr("min");
+      return c && "date" !== b ? {
+        value: c
+      } : !1;
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      if (!a.isNumeric(e)) return !1;
+      var f = a.isNumeric(d.value) ? d.value : b.getDynamicOption(c, d.value);
+      return e = parseFloat(e), d.inclusive === !0 || void 0 === d.inclusive ? {
+        valid: e >= f,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.greaterThan["default"], f)
+      } : {
+        valid: e > f,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.greaterThan.notInclusive, f)
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.grid = a.extend(a.fn.bootstrapValidator.i18n.grid || {}, {
+    "default": "Please enter a valid GRId number"
+  }), a.fn.bootstrapValidator.validators.grid = {
+    validate: function validate(b, c) {
+      var d = c.val();
+      return "" === d ? !0 : (d = d.toUpperCase(), /^[GRID:]*([0-9A-Z]{2})[-\s]*([0-9A-Z]{5})[-\s]*([0-9A-Z]{10})[-\s]*([0-9A-Z]{1})$/g.test(d) ? (d = d.replace(/\s/g, "").replace(/-/g, ""), "GRID:" === d.substr(0, 5) && (d = d.substr(5)), a.fn.bootstrapValidator.helpers.mod37And36(d)) : !1);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.hex = a.extend(a.fn.bootstrapValidator.i18n.hex || {}, {
+    "default": "Please enter a valid hexadecimal number"
+  }), a.fn.bootstrapValidator.validators.hex = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      return "" === c ? !0 : /^[0-9a-fA-F]+$/.test(c);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.hexColor = a.extend(a.fn.bootstrapValidator.i18n.hexColor || {}, {
+    "default": "Please enter a valid hex color"
+  }), a.fn.bootstrapValidator.validators.hexColor = {
+    enableByHtml5: function enableByHtml5(a) {
+      return "color" === a.attr("type");
+    },
+    validate: function validate(a, b) {
+      var c = b.val();
+      return "" === c ? !0 : /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(c);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.iban = a.extend(a.fn.bootstrapValidator.i18n.iban || {}, {
+    "default": "Please enter a valid IBAN number",
+    countryNotSupported: "The country code %s is not supported",
+    country: "Please enter a valid IBAN number in %s",
+    countries: {
+      AD: "Andorra",
+      AE: "United Arab Emirates",
+      AL: "Albania",
+      AO: "Angola",
+      AT: "Austria",
+      AZ: "Azerbaijan",
+      BA: "Bosnia and Herzegovina",
+      BE: "Belgium",
+      BF: "Burkina Faso",
+      BG: "Bulgaria",
+      BH: "Bahrain",
+      BI: "Burundi",
+      BJ: "Benin",
+      BR: "Brazil",
+      CH: "Switzerland",
+      CI: "Ivory Coast",
+      CM: "Cameroon",
+      CR: "Costa Rica",
+      CV: "Cape Verde",
+      CY: "Cyprus",
+      CZ: "Czech Republic",
+      DE: "Germany",
+      DK: "Denmark",
+      DO: "Dominica",
+      DZ: "Algeria",
+      EE: "Estonia",
+      ES: "Spain",
+      FI: "Finland",
+      FO: "Faroe Islands",
+      FR: "France",
+      GB: "United Kingdom",
+      GE: "Georgia",
+      GI: "Gibraltar",
+      GL: "Greenland",
+      GR: "Greece",
+      GT: "Guatemala",
+      HR: "Croatia",
+      HU: "Hungary",
+      IE: "Ireland",
+      IL: "Israel",
+      IR: "Iran",
+      IS: "Iceland",
+      IT: "Italy",
+      JO: "Jordan",
+      KW: "Kuwait",
+      KZ: "Kazakhstan",
+      LB: "Lebanon",
+      LI: "Liechtenstein",
+      LT: "Lithuania",
+      LU: "Luxembourg",
+      LV: "Latvia",
+      MC: "Monaco",
+      MD: "Moldova",
+      ME: "Montenegro",
+      MG: "Madagascar",
+      MK: "Macedonia",
+      ML: "Mali",
+      MR: "Mauritania",
+      MT: "Malta",
+      MU: "Mauritius",
+      MZ: "Mozambique",
+      NL: "Netherlands",
+      NO: "Norway",
+      PK: "Pakistan",
+      PL: "Poland",
+      PS: "Palestine",
+      PT: "Portugal",
+      QA: "Qatar",
+      RO: "Romania",
+      RS: "Serbia",
+      SA: "Saudi Arabia",
+      SE: "Sweden",
+      SI: "Slovenia",
+      SK: "Slovakia",
+      SM: "San Marino",
+      SN: "Senegal",
+      TN: "Tunisia",
+      TR: "Turkey",
+      VG: "Virgin Islands, British"
+    }
+  }), a.fn.bootstrapValidator.validators.iban = {
+    html5Attributes: {
+      message: "message",
+      country: "country"
+    },
+    REGEX: {
+      AD: "AD[0-9]{2}[0-9]{4}[0-9]{4}[A-Z0-9]{12}",
+      AE: "AE[0-9]{2}[0-9]{3}[0-9]{16}",
+      AL: "AL[0-9]{2}[0-9]{8}[A-Z0-9]{16}",
+      AO: "AO[0-9]{2}[0-9]{21}",
+      AT: "AT[0-9]{2}[0-9]{5}[0-9]{11}",
+      AZ: "AZ[0-9]{2}[A-Z]{4}[A-Z0-9]{20}",
+      BA: "BA[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{8}[0-9]{2}",
+      BE: "BE[0-9]{2}[0-9]{3}[0-9]{7}[0-9]{2}",
+      BF: "BF[0-9]{2}[0-9]{23}",
+      BG: "BG[0-9]{2}[A-Z]{4}[0-9]{4}[0-9]{2}[A-Z0-9]{8}",
+      BH: "BH[0-9]{2}[A-Z]{4}[A-Z0-9]{14}",
+      BI: "BI[0-9]{2}[0-9]{12}",
+      BJ: "BJ[0-9]{2}[A-Z]{1}[0-9]{23}",
+      BR: "BR[0-9]{2}[0-9]{8}[0-9]{5}[0-9]{10}[A-Z][A-Z0-9]",
+      CH: "CH[0-9]{2}[0-9]{5}[A-Z0-9]{12}",
+      CI: "CI[0-9]{2}[A-Z]{1}[0-9]{23}",
+      CM: "CM[0-9]{2}[0-9]{23}",
+      CR: "CR[0-9]{2}[0-9]{3}[0-9]{14}",
+      CV: "CV[0-9]{2}[0-9]{21}",
+      CY: "CY[0-9]{2}[0-9]{3}[0-9]{5}[A-Z0-9]{16}",
+      CZ: "CZ[0-9]{2}[0-9]{20}",
+      DE: "DE[0-9]{2}[0-9]{8}[0-9]{10}",
+      DK: "DK[0-9]{2}[0-9]{14}",
+      DO: "DO[0-9]{2}[A-Z0-9]{4}[0-9]{20}",
+      DZ: "DZ[0-9]{2}[0-9]{20}",
+      EE: "EE[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{11}[0-9]{1}",
+      ES: "ES[0-9]{2}[0-9]{4}[0-9]{4}[0-9]{1}[0-9]{1}[0-9]{10}",
+      FI: "FI[0-9]{2}[0-9]{6}[0-9]{7}[0-9]{1}",
+      FO: "FO[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}",
+      FR: "FR[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}",
+      GB: "GB[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}",
+      GE: "GE[0-9]{2}[A-Z]{2}[0-9]{16}",
+      GI: "GI[0-9]{2}[A-Z]{4}[A-Z0-9]{15}",
+      GL: "GL[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}",
+      GR: "GR[0-9]{2}[0-9]{3}[0-9]{4}[A-Z0-9]{16}",
+      GT: "GT[0-9]{2}[A-Z0-9]{4}[A-Z0-9]{20}",
+      HR: "HR[0-9]{2}[0-9]{7}[0-9]{10}",
+      HU: "HU[0-9]{2}[0-9]{3}[0-9]{4}[0-9]{1}[0-9]{15}[0-9]{1}",
+      IE: "IE[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}",
+      IL: "IL[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{13}",
+      IR: "IR[0-9]{2}[0-9]{22}",
+      IS: "IS[0-9]{2}[0-9]{4}[0-9]{2}[0-9]{6}[0-9]{10}",
+      IT: "IT[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[A-Z0-9]{12}",
+      JO: "JO[0-9]{2}[A-Z]{4}[0-9]{4}[0]{8}[A-Z0-9]{10}",
+      KW: "KW[0-9]{2}[A-Z]{4}[0-9]{22}",
+      KZ: "KZ[0-9]{2}[0-9]{3}[A-Z0-9]{13}",
+      LB: "LB[0-9]{2}[0-9]{4}[A-Z0-9]{20}",
+      LI: "LI[0-9]{2}[0-9]{5}[A-Z0-9]{12}",
+      LT: "LT[0-9]{2}[0-9]{5}[0-9]{11}",
+      LU: "LU[0-9]{2}[0-9]{3}[A-Z0-9]{13}",
+      LV: "LV[0-9]{2}[A-Z]{4}[A-Z0-9]{13}",
+      MC: "MC[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}",
+      MD: "MD[0-9]{2}[A-Z0-9]{20}",
+      ME: "ME[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}",
+      MG: "MG[0-9]{2}[0-9]{23}",
+      MK: "MK[0-9]{2}[0-9]{3}[A-Z0-9]{10}[0-9]{2}",
+      ML: "ML[0-9]{2}[A-Z]{1}[0-9]{23}",
+      MR: "MR13[0-9]{5}[0-9]{5}[0-9]{11}[0-9]{2}",
+      MT: "MT[0-9]{2}[A-Z]{4}[0-9]{5}[A-Z0-9]{18}",
+      MU: "MU[0-9]{2}[A-Z]{4}[0-9]{2}[0-9]{2}[0-9]{12}[0-9]{3}[A-Z]{3}",
+      MZ: "MZ[0-9]{2}[0-9]{21}",
+      NL: "NL[0-9]{2}[A-Z]{4}[0-9]{10}",
+      NO: "NO[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{1}",
+      PK: "PK[0-9]{2}[A-Z]{4}[A-Z0-9]{16}",
+      PL: "PL[0-9]{2}[0-9]{8}[0-9]{16}",
+      PS: "PS[0-9]{2}[A-Z]{4}[A-Z0-9]{21}",
+      PT: "PT[0-9]{2}[0-9]{4}[0-9]{4}[0-9]{11}[0-9]{2}",
+      QA: "QA[0-9]{2}[A-Z]{4}[A-Z0-9]{21}",
+      RO: "RO[0-9]{2}[A-Z]{4}[A-Z0-9]{16}",
+      RS: "RS[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}",
+      SA: "SA[0-9]{2}[0-9]{2}[A-Z0-9]{18}",
+      SE: "SE[0-9]{2}[0-9]{3}[0-9]{16}[0-9]{1}",
+      SI: "SI[0-9]{2}[0-9]{5}[0-9]{8}[0-9]{2}",
+      SK: "SK[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{10}",
+      SM: "SM[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[A-Z0-9]{12}",
+      SN: "SN[0-9]{2}[A-Z]{1}[0-9]{23}",
+      TN: "TN59[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}",
+      TR: "TR[0-9]{2}[0-9]{5}[A-Z0-9]{1}[A-Z0-9]{16}",
+      VG: "VG[0-9]{2}[A-Z]{4}[0-9]{16}"
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      e = e.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+      var f = d.country;
+      if (f ? "string" == typeof f && this.REGEX[f] || (f = b.getDynamicOption(c, f)) : f = e.substr(0, 2), !this.REGEX[f]) return {
+        valid: !1,
+        message: a.fn.bootstrapValidator.helpers.format(a.fn.bootstrapValidator.i18n.iban.countryNotSupported, f)
+      };
+      if (!new RegExp("^" + this.REGEX[f] + "$").test(e)) return {
+        valid: !1,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.iban.country, a.fn.bootstrapValidator.i18n.iban.countries[f])
+      };
+      e = e.substr(4) + e.substr(0, 4), e = a.map(e.split(""), function (a) {
+        var b = a.charCodeAt(0);
+        return b >= "A".charCodeAt(0) && b <= "Z".charCodeAt(0) ? b - "A".charCodeAt(0) + 10 : a;
+      }), e = e.join("");
+      for (var g = parseInt(e.substr(0, 1), 10), h = e.length, i = 1; h > i; ++i) g = (10 * g + parseInt(e.substr(i, 1), 10)) % 97;
+      return {
+        valid: 1 === g,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.iban.country, a.fn.bootstrapValidator.i18n.iban.countries[f])
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.id = a.extend(a.fn.bootstrapValidator.i18n.id || {}, {
+    "default": "Please enter a valid identification number",
+    countryNotSupported: "The country code %s is not supported",
+    country: "Please enter a valid identification number in %s",
+    countries: {
+      BA: "Bosnia and Herzegovina",
+      BG: "Bulgaria",
+      BR: "Brazil",
+      CH: "Switzerland",
+      CL: "Chile",
+      CN: "China",
+      CZ: "Czech Republic",
+      DK: "Denmark",
+      EE: "Estonia",
+      ES: "Spain",
+      FI: "Finland",
+      HR: "Croatia",
+      IE: "Ireland",
+      IS: "Iceland",
+      LT: "Lithuania",
+      LV: "Latvia",
+      ME: "Montenegro",
+      MK: "Macedonia",
+      NL: "Netherlands",
+      RO: "Romania",
+      RS: "Serbia",
+      SE: "Sweden",
+      SI: "Slovenia",
+      SK: "Slovakia",
+      SM: "San Marino",
+      TH: "Thailand",
+      ZA: "South Africa"
+    }
+  }), a.fn.bootstrapValidator.validators.id = {
+    html5Attributes: {
+      message: "message",
+      country: "country"
+    },
+    COUNTRY_CODES: ["BA", "BG", "BR", "CH", "CL", "CN", "CZ", "DK", "EE", "ES", "FI", "HR", "IE", "IS", "LT", "LV", "ME", "MK", "NL", "RO", "RS", "SE", "SI", "SK", "SM", "TH", "ZA"],
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      var f = d.country;
+      if (f ? ("string" != typeof f || -1 === a.inArray(f.toUpperCase(), this.COUNTRY_CODES)) && (f = b.getDynamicOption(c, f)) : f = e.substr(0, 2), -1 === a.inArray(f, this.COUNTRY_CODES)) return {
+        valid: !1,
+        message: a.fn.bootstrapValidator.helpers.format(a.fn.bootstrapValidator.i18n.id.countryNotSupported, f)
+      };
+      var g = ["_", f.toLowerCase()].join("");
+      return this[g](e) ? !0 : {
+        valid: !1,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.id.country, a.fn.bootstrapValidator.i18n.id.countries[f.toUpperCase()])
+      };
+    },
+    _validateJMBG: function _validateJMBG(a, b) {
+      if (!/^\d{13}$/.test(a)) return !1;
+      var c = parseInt(a.substr(0, 2), 10),
+        d = parseInt(a.substr(2, 2), 10),
+        e = (parseInt(a.substr(4, 3), 10), parseInt(a.substr(7, 2), 10)),
+        f = parseInt(a.substr(12, 1), 10);
+      if (c > 31 || d > 12) return !1;
+      for (var g = 0, h = 0; 6 > h; h++) g += (7 - h) * (parseInt(a.charAt(h), 10) + parseInt(a.charAt(h + 6), 10));
+      if (g = 11 - g % 11, (10 === g || 11 === g) && (g = 0), g !== f) return !1;
+      switch (b.toUpperCase()) {
+        case "BA":
+          return e >= 10 && 19 >= e;
+        case "MK":
+          return e >= 41 && 49 >= e;
+        case "ME":
+          return e >= 20 && 29 >= e;
+        case "RS":
+          return e >= 70 && 99 >= e;
+        case "SI":
+          return e >= 50 && 59 >= e;
+        default:
+          return !0;
+      }
+    },
+    _ba: function _ba(a) {
+      return this._validateJMBG(a, "BA");
+    },
+    _mk: function _mk(a) {
+      return this._validateJMBG(a, "MK");
+    },
+    _me: function _me(a) {
+      return this._validateJMBG(a, "ME");
+    },
+    _rs: function _rs(a) {
+      return this._validateJMBG(a, "RS");
+    },
+    _si: function _si(a) {
+      return this._validateJMBG(a, "SI");
+    },
+    _bg: function _bg(b) {
+      if (!/^\d{10}$/.test(b) && !/^\d{6}\s\d{3}\s\d{1}$/.test(b)) return !1;
+      b = b.replace(/\s/g, "");
+      var c = parseInt(b.substr(0, 2), 10) + 1900,
+        d = parseInt(b.substr(2, 2), 10),
+        e = parseInt(b.substr(4, 2), 10);
+      if (d > 40 ? (c += 100, d -= 40) : d > 20 && (c -= 100, d -= 20), !a.fn.bootstrapValidator.helpers.date(c, d, e)) return !1;
+      for (var f = 0, g = [2, 4, 8, 5, 10, 9, 7, 3, 6], h = 0; 9 > h; h++) f += parseInt(b.charAt(h), 10) * g[h];
+      return f = f % 11 % 10, f + "" === b.substr(9, 1);
+    },
+    _br: function _br(a) {
+      if (/^1{11}|2{11}|3{11}|4{11}|5{11}|6{11}|7{11}|8{11}|9{11}|0{11}$/.test(a)) return !1;
+      if (!/^\d{11}$/.test(a) && !/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(a)) return !1;
+      a = a.replace(/\./g, "").replace(/-/g, "");
+      for (var b = 0, c = 0; 9 > c; c++) b += (10 - c) * parseInt(a.charAt(c), 10);
+      if (b = 11 - b % 11, (10 === b || 11 === b) && (b = 0), b + "" !== a.charAt(9)) return !1;
+      var d = 0;
+      for (c = 0; 10 > c; c++) d += (11 - c) * parseInt(a.charAt(c), 10);
+      return d = 11 - d % 11, (10 === d || 11 === d) && (d = 0), d + "" === a.charAt(10);
+    },
+    _ch: function _ch(a) {
+      if (!/^756[\.]{0,1}[0-9]{4}[\.]{0,1}[0-9]{4}[\.]{0,1}[0-9]{2}$/.test(a)) return !1;
+      a = a.replace(/\D/g, "").substr(3);
+      for (var b = a.length, c = 0, d = 8 === b ? [3, 1] : [1, 3], e = 0; b - 1 > e; e++) c += parseInt(a.charAt(e), 10) * d[e % 2];
+      return c = 10 - c % 10, c + "" === a.charAt(b - 1);
+    },
+    _cl: function _cl(a) {
+      if (!/^\d{7,8}[-]{0,1}[0-9K]$/i.test(a)) return !1;
+      for (a = a.replace(/\-/g, ""); a.length < 9;) a = "0" + a;
+      for (var b = 0, c = [3, 2, 7, 6, 5, 4, 3, 2], d = 0; 8 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b = 11 - b % 11, 11 === b ? b = 0 : 10 === b && (b = "K"), b + "" === a.charAt(8).toUpperCase();
+    },
+    _cn: function _cn(b) {
+      if (b = b.trim(), !/^\d{15}$/.test(b) && !/^\d{17}[\dXx]{1}$/.test(b)) return !1;
+      var c = {
+          11: {
+            0: [0],
+            1: [[0, 9], [11, 17]],
+            2: [0, 28, 29]
+          },
+          12: {
+            0: [0],
+            1: [[0, 16]],
+            2: [0, 21, 23, 25]
+          },
+          13: {
+            0: [0],
+            1: [[0, 5], 7, 8, 21, [23, 33], [81, 85]],
+            2: [[0, 5], [7, 9], [23, 25], 27, 29, 30, 81, 83],
+            3: [[0, 4], [21, 24]],
+            4: [[0, 4], 6, 21, [23, 35], 81],
+            5: [[0, 3], [21, 35], 81, 82],
+            6: [[0, 4], [21, 38], [81, 84]],
+            7: [[0, 3], 5, 6, [21, 33]],
+            8: [[0, 4], [21, 28]],
+            9: [[0, 3], [21, 30], [81, 84]],
+            10: [[0, 3], [22, 26], 28, 81, 82],
+            11: [[0, 2], [21, 28], 81, 82]
+          },
+          14: {
+            0: [0],
+            1: [0, 1, [5, 10], [21, 23], 81],
+            2: [[0, 3], 11, 12, [21, 27]],
+            3: [[0, 3], 11, 21, 22],
+            4: [[0, 2], 11, 21, [23, 31], 81],
+            5: [[0, 2], 21, 22, 24, 25, 81],
+            6: [[0, 3], [21, 24]],
+            7: [[0, 2], [21, 29], 81],
+            8: [[0, 2], [21, 30], 81, 82],
+            9: [[0, 2], [21, 32], 81],
+            10: [[0, 2], [21, 34], 81, 82],
+            11: [[0, 2], [21, 30], 81, 82],
+            23: [[0, 3], 22, 23, [25, 30], 32, 33]
+          },
+          15: {
+            0: [0],
+            1: [[0, 5], [21, 25]],
+            2: [[0, 7], [21, 23]],
+            3: [[0, 4]],
+            4: [[0, 4], [21, 26], [28, 30]],
+            5: [[0, 2], [21, 26], 81],
+            6: [[0, 2], [21, 27]],
+            7: [[0, 3], [21, 27], [81, 85]],
+            8: [[0, 2], [21, 26]],
+            9: [[0, 2], [21, 29], 81],
+            22: [[0, 2], [21, 24]],
+            25: [[0, 2], [22, 31]],
+            26: [[0, 2], [24, 27], [29, 32], 34],
+            28: [0, 1, [22, 27]],
+            29: [0, [21, 23]]
+          },
+          21: {
+            0: [0],
+            1: [[0, 6], [11, 14], [22, 24], 81],
+            2: [[0, 4], [11, 13], 24, [81, 83]],
+            3: [[0, 4], 11, 21, 23, 81],
+            4: [[0, 4], 11, [21, 23]],
+            5: [[0, 5], 21, 22],
+            6: [[0, 4], 24, 81, 82],
+            7: [[0, 3], 11, 26, 27, 81, 82],
+            8: [[0, 4], 11, 81, 82],
+            9: [[0, 5], 11, 21, 22],
+            10: [[0, 5], 11, 21, 81],
+            11: [[0, 3], 21, 22],
+            12: [[0, 2], 4, 21, 23, 24, 81, 82],
+            13: [[0, 3], 21, 22, 24, 81, 82],
+            14: [[0, 4], 21, 22, 81]
+          },
+          22: {
+            0: [0],
+            1: [[0, 6], 12, 22, [81, 83]],
+            2: [[0, 4], 11, 21, [81, 84]],
+            3: [[0, 3], 22, 23, 81, 82],
+            4: [[0, 3], 21, 22],
+            5: [[0, 3], 21, 23, 24, 81, 82],
+            6: [[0, 2], 4, 5, [21, 23], 25, 81],
+            7: [[0, 2], [21, 24], 81],
+            8: [[0, 2], 21, 22, 81, 82],
+            24: [[0, 6], 24, 26]
+          },
+          23: {
+            0: [0],
+            1: [[0, 12], 21, [23, 29], [81, 84]],
+            2: [[0, 8], 21, [23, 25], 27, [29, 31], 81],
+            3: [[0, 7], 21, 81, 82],
+            4: [[0, 7], 21, 22],
+            5: [[0, 3], 5, 6, [21, 24]],
+            6: [[0, 6], [21, 24]],
+            7: [[0, 16], 22, 81],
+            8: [[0, 5], 11, 22, 26, 28, 33, 81, 82],
+            9: [[0, 4], 21],
+            10: [[0, 5], 24, 25, 81, [83, 85]],
+            11: [[0, 2], 21, 23, 24, 81, 82],
+            12: [[0, 2], [21, 26], [81, 83]],
+            27: [[0, 4], [21, 23]]
+          },
+          31: {
+            0: [0],
+            1: [0, 1, [3, 10], [12, 20]],
+            2: [0, 30]
+          },
+          32: {
+            0: [0],
+            1: [[0, 7], 11, [13, 18], 24, 25],
+            2: [[0, 6], 11, 81, 82],
+            3: [[0, 5], 11, 12, [21, 24], 81, 82],
+            4: [[0, 2], 4, 5, 11, 12, 81, 82],
+            5: [[0, 9], [81, 85]],
+            6: [[0, 2], 11, 12, 21, 23, [81, 84]],
+            7: [0, 1, 3, 5, 6, [21, 24]],
+            8: [[0, 4], 11, 26, [29, 31]],
+            9: [[0, 3], [21, 25], 28, 81, 82],
+            10: [[0, 3], 11, 12, 23, 81, 84, 88],
+            11: [[0, 2], 11, 12, [81, 83]],
+            12: [[0, 4], [81, 84]],
+            13: [[0, 2], 11, [21, 24]]
+          },
+          33: {
+            0: [0],
+            1: [[0, 6], [8, 10], 22, 27, 82, 83, 85],
+            2: [0, 1, [3, 6], 11, 12, 25, 26, [81, 83]],
+            3: [[0, 4], 22, 24, [26, 29], 81, 82],
+            4: [[0, 2], 11, 21, 24, [81, 83]],
+            5: [[0, 3], [21, 23]],
+            6: [[0, 2], 21, 24, [81, 83]],
+            7: [[0, 3], 23, 26, 27, [81, 84]],
+            8: [[0, 3], 22, 24, 25, 81],
+            9: [[0, 3], 21, 22],
+            10: [[0, 4], [21, 24], 81, 82],
+            11: [[0, 2], [21, 27], 81]
+          },
+          34: {
+            0: [0],
+            1: [[0, 4], 11, [21, 24], 81],
+            2: [[0, 4], 7, 8, [21, 23], 25],
+            3: [[0, 4], 11, [21, 23]],
+            4: [[0, 6], 21],
+            5: [[0, 4], 6, [21, 23]],
+            6: [[0, 4], 21],
+            7: [[0, 3], 11, 21],
+            8: [[0, 3], 11, [22, 28], 81],
+            10: [[0, 4], [21, 24]],
+            11: [[0, 3], 22, [24, 26], 81, 82],
+            12: [[0, 4], 21, 22, 25, 26, 82],
+            13: [[0, 2], [21, 24]],
+            14: [[0, 2], [21, 24]],
+            15: [[0, 3], [21, 25]],
+            16: [[0, 2], [21, 23]],
+            17: [[0, 2], [21, 23]],
+            18: [[0, 2], [21, 25], 81]
+          },
+          35: {
+            0: [0],
+            1: [[0, 5], 11, [21, 25], 28, 81, 82],
+            2: [[0, 6], [11, 13]],
+            3: [[0, 5], 22],
+            4: [[0, 3], 21, [23, 30], 81],
+            5: [[0, 5], 21, [24, 27], [81, 83]],
+            6: [[0, 3], [22, 29], 81],
+            7: [[0, 2], [21, 25], [81, 84]],
+            8: [[0, 2], [21, 25], 81],
+            9: [[0, 2], [21, 26], 81, 82]
+          },
+          36: {
+            0: [0],
+            1: [[0, 5], 11, [21, 24]],
+            2: [[0, 3], 22, 81],
+            3: [[0, 2], 13, [21, 23]],
+            4: [[0, 3], 21, [23, 30], 81, 82],
+            5: [[0, 2], 21],
+            6: [[0, 2], 22, 81],
+            7: [[0, 2], [21, 35], 81, 82],
+            8: [[0, 3], [21, 30], 81],
+            9: [[0, 2], [21, 26], [81, 83]],
+            10: [[0, 2], [21, 30]],
+            11: [[0, 2], [21, 30], 81]
+          },
+          37: {
+            0: [0],
+            1: [[0, 5], 12, 13, [24, 26], 81],
+            2: [[0, 3], 5, [11, 14], [81, 85]],
+            3: [[0, 6], [21, 23]],
+            4: [[0, 6], 81],
+            5: [[0, 3], [21, 23]],
+            6: [[0, 2], [11, 13], 34, [81, 87]],
+            7: [[0, 5], 24, 25, [81, 86]],
+            8: [[0, 2], 11, [26, 32], [81, 83]],
+            9: [[0, 3], 11, 21, 23, 82, 83],
+            10: [[0, 2], [81, 83]],
+            11: [[0, 3], 21, 22],
+            12: [[0, 3]],
+            13: [[0, 2], 11, 12, [21, 29]],
+            14: [[0, 2], [21, 28], 81, 82],
+            15: [[0, 2], [21, 26], 81],
+            16: [[0, 2], [21, 26]],
+            17: [[0, 2], [21, 28]]
+          },
+          41: {
+            0: [0],
+            1: [[0, 6], 8, 22, [81, 85]],
+            2: [[0, 5], 11, [21, 25]],
+            3: [[0, 7], 11, [22, 29], 81],
+            4: [[0, 4], 11, [21, 23], 25, 81, 82],
+            5: [[0, 3], 5, 6, 22, 23, 26, 27, 81],
+            6: [[0, 3], 11, 21, 22],
+            7: [[0, 4], 11, 21, [24, 28], 81, 82],
+            8: [[0, 4], 11, [21, 23], 25, [81, 83]],
+            9: [[0, 2], 22, 23, [26, 28]],
+            10: [[0, 2], [23, 25], 81, 82],
+            11: [[0, 4], [21, 23]],
+            12: [[0, 2], 21, 22, 24, 81, 82],
+            13: [[0, 3], [21, 30], 81],
+            14: [[0, 3], [21, 26], 81],
+            15: [[0, 3], [21, 28]],
+            16: [[0, 2], [21, 28], 81],
+            17: [[0, 2], [21, 29]],
+            90: [0, 1]
+          },
+          42: {
+            0: [0],
+            1: [[0, 7], [11, 17]],
+            2: [[0, 5], 22, 81],
+            3: [[0, 3], [21, 25], 81],
+            5: [[0, 6], [25, 29], [81, 83]],
+            6: [[0, 2], 6, 7, [24, 26], [82, 84]],
+            7: [[0, 4]],
+            8: [[0, 2], 4, 21, 22, 81],
+            9: [[0, 2], [21, 23], 81, 82, 84],
+            10: [[0, 3], [22, 24], 81, 83, 87],
+            11: [[0, 2], [21, 27], 81, 82],
+            12: [[0, 2], [21, 24], 81],
+            13: [[0, 3], 21, 81],
+            28: [[0, 2], 22, 23, [25, 28]],
+            90: [0, [4, 6], 21]
+          },
+          43: {
+            0: [0],
+            1: [[0, 5], 11, 12, 21, 22, 24, 81],
+            2: [[0, 4], 11, 21, [23, 25], 81],
+            3: [[0, 2], 4, 21, 81, 82],
+            4: [0, 1, [5, 8], 12, [21, 24], 26, 81, 82],
+            5: [[0, 3], 11, [21, 25], [27, 29], 81],
+            6: [[0, 3], 11, 21, 23, 24, 26, 81, 82],
+            7: [[0, 3], [21, 26], 81],
+            8: [[0, 2], 11, 21, 22],
+            9: [[0, 3], [21, 23], 81],
+            10: [[0, 3], [21, 28], 81],
+            11: [[0, 3], [21, 29]],
+            12: [[0, 2], [21, 30], 81],
+            13: [[0, 2], 21, 22, 81, 82],
+            31: [0, 1, [22, 27], 30]
+          },
+          44: {
+            0: [0],
+            1: [[0, 7], [11, 16], 83, 84],
+            2: [[0, 5], 21, 22, 24, 29, 32, 33, 81, 82],
+            3: [0, 1, [3, 8]],
+            4: [[0, 4]],
+            5: [0, 1, [6, 15], 23, 82, 83],
+            6: [0, 1, [4, 8]],
+            7: [0, 1, [3, 5], 81, [83, 85]],
+            8: [[0, 4], 11, 23, 25, [81, 83]],
+            9: [[0, 3], 23, [81, 83]],
+            12: [[0, 3], [23, 26], 83, 84],
+            13: [[0, 3], [22, 24], 81],
+            14: [[0, 2], [21, 24], 26, 27, 81],
+            15: [[0, 2], 21, 23, 81],
+            16: [[0, 2], [21, 25]],
+            17: [[0, 2], 21, 23, 81],
+            18: [[0, 3], 21, 23, [25, 27], 81, 82],
+            19: [0],
+            20: [0],
+            51: [[0, 3], 21, 22],
+            52: [[0, 3], 21, 22, 24, 81],
+            53: [[0, 2], [21, 23], 81]
+          },
+          45: {
+            0: [0],
+            1: [[0, 9], [21, 27]],
+            2: [[0, 5], [21, 26]],
+            3: [[0, 5], 11, 12, [21, 32]],
+            4: [0, 1, [3, 6], 11, [21, 23], 81],
+            5: [[0, 3], 12, 21],
+            6: [[0, 3], 21, 81],
+            7: [[0, 3], 21, 22],
+            8: [[0, 4], 21, 81],
+            9: [[0, 3], [21, 24], 81],
+            10: [[0, 2], [21, 31]],
+            11: [[0, 2], [21, 23]],
+            12: [[0, 2], [21, 29], 81],
+            13: [[0, 2], [21, 24], 81],
+            14: [[0, 2], [21, 25], 81]
+          },
+          46: {
+            0: [0],
+            1: [0, 1, [5, 8]],
+            2: [0, 1],
+            3: [0, [21, 23]],
+            90: [[0, 3], [5, 7], [21, 39]]
+          },
+          50: {
+            0: [0],
+            1: [[0, 19]],
+            2: [0, [22, 38], [40, 43]],
+            3: [0, [81, 84]]
+          },
+          51: {
+            0: [0],
+            1: [0, 1, [4, 8], [12, 15], [21, 24], 29, 31, 32, [81, 84]],
+            3: [[0, 4], 11, 21, 22],
+            4: [[0, 3], 11, 21, 22],
+            5: [[0, 4], 21, 22, 24, 25],
+            6: [0, 1, 3, 23, 26, [81, 83]],
+            7: [0, 1, 3, 4, [22, 27], 81],
+            8: [[0, 2], 11, 12, [21, 24]],
+            9: [[0, 4], [21, 23]],
+            10: [[0, 2], 11, 24, 25, 28],
+            11: [[0, 2], [11, 13], 23, 24, 26, 29, 32, 33, 81],
+            13: [[0, 4], [21, 25], 81],
+            14: [[0, 2], [21, 25]],
+            15: [[0, 3], [21, 29]],
+            16: [[0, 3], [21, 23], 81],
+            17: [[0, 3], [21, 25], 81],
+            18: [[0, 3], [21, 27]],
+            19: [[0, 3], [21, 23]],
+            20: [[0, 2], 21, 22, 81],
+            32: [0, [21, 33]],
+            33: [0, [21, 38]],
+            34: [0, 1, [22, 37]]
+          },
+          52: {
+            0: [0],
+            1: [[0, 3], [11, 15], [21, 23], 81],
+            2: [0, 1, 3, 21, 22],
+            3: [[0, 3], [21, 30], 81, 82],
+            4: [[0, 2], [21, 25]],
+            5: [[0, 2], [21, 27]],
+            6: [[0, 3], [21, 28]],
+            22: [0, 1, [22, 30]],
+            23: [0, 1, [22, 28]],
+            24: [0, 1, [22, 28]],
+            26: [0, 1, [22, 36]],
+            27: [[0, 2], 22, 23, [25, 32]]
+          },
+          53: {
+            0: [0],
+            1: [[0, 3], [11, 14], 21, 22, [24, 29], 81],
+            3: [[0, 2], [21, 26], 28, 81],
+            4: [[0, 2], [21, 28]],
+            5: [[0, 2], [21, 24]],
+            6: [[0, 2], [21, 30]],
+            7: [[0, 2], [21, 24]],
+            8: [[0, 2], [21, 29]],
+            9: [[0, 2], [21, 27]],
+            23: [0, 1, [22, 29], 31],
+            25: [[0, 4], [22, 32]],
+            26: [0, 1, [21, 28]],
+            27: [0, 1, [22, 30]],
+            28: [0, 1, 22, 23],
+            29: [0, 1, [22, 32]],
+            31: [0, 2, 3, [22, 24]],
+            34: [0, [21, 23]],
+            33: [0, 21, [23, 25]],
+            35: [0, [21, 28]]
+          },
+          54: {
+            0: [0],
+            1: [[0, 2], [21, 27]],
+            21: [0, [21, 29], 32, 33],
+            22: [0, [21, 29], [31, 33]],
+            23: [0, 1, [22, 38]],
+            24: [0, [21, 31]],
+            25: [0, [21, 27]],
+            26: [0, [21, 27]]
+          },
+          61: {
+            0: [0],
+            1: [[0, 4], [11, 16], 22, [24, 26]],
+            2: [[0, 4], 22],
+            3: [[0, 4], [21, 24], [26, 31]],
+            4: [[0, 4], [22, 31], 81],
+            5: [[0, 2], [21, 28], 81, 82],
+            6: [[0, 2], [21, 32]],
+            7: [[0, 2], [21, 30]],
+            8: [[0, 2], [21, 31]],
+            9: [[0, 2], [21, 29]],
+            10: [[0, 2], [21, 26]]
+          },
+          62: {
+            0: [0],
+            1: [[0, 5], 11, [21, 23]],
+            2: [0, 1],
+            3: [[0, 2], 21],
+            4: [[0, 3], [21, 23]],
+            5: [[0, 3], [21, 25]],
+            6: [[0, 2], [21, 23]],
+            7: [[0, 2], [21, 25]],
+            8: [[0, 2], [21, 26]],
+            9: [[0, 2], [21, 24], 81, 82],
+            10: [[0, 2], [21, 27]],
+            11: [[0, 2], [21, 26]],
+            12: [[0, 2], [21, 28]],
+            24: [0, 21, [24, 29]],
+            26: [0, 21, [23, 30]],
+            29: [0, 1, [21, 27]],
+            30: [0, 1, [21, 27]]
+          },
+          63: {
+            0: [0],
+            1: [[0, 5], [21, 23]],
+            2: [0, 2, [21, 25]],
+            21: [0, [21, 23], [26, 28]],
+            22: [0, [21, 24]],
+            23: [0, [21, 24]],
+            25: [0, [21, 25]],
+            26: [0, [21, 26]],
+            27: [0, 1, [21, 26]],
+            28: [[0, 2], [21, 23]]
+          },
+          64: {
+            0: [0],
+            1: [0, 1, [4, 6], 21, 22, 81],
+            2: [[0, 3], 5, [21, 23]],
+            3: [[0, 3], [21, 24], 81],
+            4: [[0, 2], [21, 25]],
+            5: [[0, 2], 21, 22]
+          },
+          65: {
+            0: [0],
+            1: [[0, 9], 21],
+            2: [[0, 5]],
+            21: [0, 1, 22, 23],
+            22: [0, 1, 22, 23],
+            23: [[0, 3], [23, 25], 27, 28],
+            28: [0, 1, [22, 29]],
+            29: [0, 1, [22, 29]],
+            30: [0, 1, [22, 24]],
+            31: [0, 1, [21, 31]],
+            32: [0, 1, [21, 27]],
+            40: [0, 2, 3, [21, 28]],
+            42: [[0, 2], 21, [23, 26]],
+            43: [0, 1, [21, 26]],
+            90: [[0, 4]],
+            27: [[0, 2], 22, 23]
+          },
+          71: {
+            0: [0]
+          },
+          81: {
+            0: [0]
+          },
+          82: {
+            0: [0]
+          }
+        },
+        d = parseInt(b.substr(0, 2), 10),
+        e = parseInt(b.substr(2, 2), 10),
+        f = parseInt(b.substr(4, 2), 10);
+      if (!c[d] || !c[d][e]) return !1;
+      for (var g = !1, h = c[d][e], i = 0; i < h.length; i++) if (a.isArray(h[i]) && h[i][0] <= f && f <= h[i][1] || !a.isArray(h[i]) && f === h[i]) {
+        g = !0;
+        break;
+      }
+      if (!g) return !1;
+      var j;
+      j = 18 === b.length ? b.substr(6, 8) : "19" + b.substr(6, 6);
+      var k = parseInt(j.substr(0, 4), 10),
+        l = parseInt(j.substr(4, 2), 10),
+        m = parseInt(j.substr(6, 2), 10);
+      if (!a.fn.bootstrapValidator.helpers.date(k, l, m)) return !1;
+      if (18 === b.length) {
+        var n = 0,
+          o = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+        for (i = 0; 17 > i; i++) n += parseInt(b.charAt(i), 10) * o[i];
+        n = (12 - n % 11) % 11;
+        var p = "X" !== b.charAt(17).toUpperCase() ? parseInt(b.charAt(17), 10) : 10;
+        return p === n;
+      }
+      return !0;
+    },
+    _cz: function _cz(b) {
+      if (!/^\d{9,10}$/.test(b)) return !1;
+      var c = 1900 + parseInt(b.substr(0, 2), 10),
+        d = parseInt(b.substr(2, 2), 10) % 50 % 20,
+        e = parseInt(b.substr(4, 2), 10);
+      if (9 === b.length) {
+        if (c >= 1980 && (c -= 100), c > 1953) return !1;
+      } else 1954 > c && (c += 100);
+      if (!a.fn.bootstrapValidator.helpers.date(c, d, e)) return !1;
+      if (10 === b.length) {
+        var f = parseInt(b.substr(0, 9), 10) % 11;
+        return 1985 > c && (f %= 10), f + "" === b.substr(9, 1);
+      }
+      return !0;
+    },
+    _dk: function _dk(b) {
+      if (!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(b)) return !1;
+      b = b.replace(/-/g, "");
+      var c = parseInt(b.substr(0, 2), 10),
+        d = parseInt(b.substr(2, 2), 10),
+        e = parseInt(b.substr(4, 2), 10);
+      switch (!0) {
+        case -1 !== "5678".indexOf(b.charAt(6)) && e >= 58:
+          e += 1800;
+          break;
+        case -1 !== "0123".indexOf(b.charAt(6)):
+        case -1 !== "49".indexOf(b.charAt(6)) && e >= 37:
+          e += 1900;
+          break;
+        default:
+          e += 2e3;
+      }
+      return a.fn.bootstrapValidator.helpers.date(e, d, c);
+    },
+    _ee: function _ee(a) {
+      return this._lt(a);
+    },
+    _es: function _es(a) {
+      if (!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]$/.test(a) && !/^[XYZ][-]{0,1}[0-9]{7}[-]{0,1}[0-9A-Z]$/.test(a)) return !1;
+      a = a.replace(/-/g, "");
+      var b = "XYZ".indexOf(a.charAt(0));
+      -1 !== b && (a = b + a.substr(1) + "");
+      var c = parseInt(a.substr(0, 8), 10);
+      return c = "TRWAGMYFPDXBNJZSQVHLCKE"[c % 23], c === a.substr(8, 1);
+    },
+    _fi: function _fi(b) {
+      if (!/^[0-9]{6}[-+A][0-9]{3}[0-9ABCDEFHJKLMNPRSTUVWXY]$/.test(b)) return !1;
+      var c = parseInt(b.substr(0, 2), 10),
+        d = parseInt(b.substr(2, 2), 10),
+        e = parseInt(b.substr(4, 2), 10),
+        f = {
+          "+": 1800,
+          "-": 1900,
+          A: 2e3
+        };
+      if (e = f[b.charAt(6)] + e, !a.fn.bootstrapValidator.helpers.date(e, d, c)) return !1;
+      var g = parseInt(b.substr(7, 3), 10);
+      if (2 > g) return !1;
+      var h = b.substr(0, 6) + b.substr(7, 3) + "";
+      return h = parseInt(h, 10), "0123456789ABCDEFHJKLMNPRSTUVWXY".charAt(h % 31) === b.charAt(10);
+    },
+    _hr: function _hr(b) {
+      return /^[0-9]{11}$/.test(b) ? a.fn.bootstrapValidator.helpers.mod11And10(b) : !1;
+    },
+    _ie: function _ie(a) {
+      if (!/^\d{7}[A-W][AHWTX]?$/.test(a)) return !1;
+      var b = function b(a) {
+        for (; a.length < 7;) a = "0" + a;
+        for (var b = "WABCDEFGHIJKLMNOPQRSTUV", c = 0, d = 0; 7 > d; d++) c += parseInt(a.charAt(d), 10) * (8 - d);
+        return c += 9 * b.indexOf(a.substr(7)), b[c % 23];
+      };
+      return 9 !== a.length || "A" !== a.charAt(8) && "H" !== a.charAt(8) ? a.charAt(7) === b(a.substr(0, 7)) : a.charAt(7) === b(a.substr(0, 7) + a.substr(8) + "");
+    },
+    _is: function _is(b) {
+      if (!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(b)) return !1;
+      b = b.replace(/-/g, "");
+      var c = parseInt(b.substr(0, 2), 10),
+        d = parseInt(b.substr(2, 2), 10),
+        e = parseInt(b.substr(4, 2), 10),
+        f = parseInt(b.charAt(9), 10);
+      if (e = 9 === f ? 1900 + e : 100 * (20 + f) + e, !a.fn.bootstrapValidator.helpers.date(e, d, c, !0)) return !1;
+      for (var g = 0, h = [3, 2, 7, 6, 5, 4, 3, 2], i = 0; 8 > i; i++) g += parseInt(b.charAt(i), 10) * h[i];
+      return g = 11 - g % 11, g + "" === b.charAt(8);
+    },
+    _lt: function _lt(b) {
+      if (!/^[0-9]{11}$/.test(b)) return !1;
+      var c = parseInt(b.charAt(0), 10),
+        d = parseInt(b.substr(1, 2), 10),
+        e = parseInt(b.substr(3, 2), 10),
+        f = parseInt(b.substr(5, 2), 10),
+        g = c % 2 === 0 ? 17 + c / 2 : 17 + (c + 1) / 2;
+      if (d = 100 * g + d, !a.fn.bootstrapValidator.helpers.date(d, e, f, !0)) return !1;
+      for (var h = 0, i = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1], j = 0; 10 > j; j++) h += parseInt(b.charAt(j), 10) * i[j];
+      if (h %= 11, 10 !== h) return h + "" === b.charAt(10);
+      for (h = 0, i = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3], j = 0; 10 > j; j++) h += parseInt(b.charAt(j), 10) * i[j];
+      return h %= 11, 10 === h && (h = 0), h + "" === b.charAt(10);
+    },
+    _lv: function _lv(b) {
+      if (!/^[0-9]{6}[-]{0,1}[0-9]{5}$/.test(b)) return !1;
+      b = b.replace(/\D/g, "");
+      var c = parseInt(b.substr(0, 2), 10),
+        d = parseInt(b.substr(2, 2), 10),
+        e = parseInt(b.substr(4, 2), 10);
+      if (e = e + 1800 + 100 * parseInt(b.charAt(6), 10), !a.fn.bootstrapValidator.helpers.date(e, d, c, !0)) return !1;
+      for (var f = 0, g = [10, 5, 8, 4, 2, 1, 6, 3, 7, 9], h = 0; 10 > h; h++) f += parseInt(b.charAt(h), 10) * g[h];
+      return f = (f + 1) % 11 % 10, f + "" === b.charAt(10);
+    },
+    _nl: function _nl(a) {
+      for (; a.length < 9;) a = "0" + a;
+      if (!/^[0-9]{4}[.]{0,1}[0-9]{2}[.]{0,1}[0-9]{3}$/.test(a)) return !1;
+      if (a = a.replace(/\./g, ""), 0 === parseInt(a, 10)) return !1;
+      for (var b = 0, c = a.length, d = 0; c - 1 > d; d++) b += (9 - d) * parseInt(a.charAt(d), 10);
+      return b %= 11, 10 === b && (b = 0), b + "" === a.charAt(c - 1);
+    },
+    _ro: function _ro(b) {
+      if (!/^[0-9]{13}$/.test(b)) return !1;
+      var c = parseInt(b.charAt(0), 10);
+      if (0 === c || 7 === c || 8 === c) return !1;
+      var d = parseInt(b.substr(1, 2), 10),
+        e = parseInt(b.substr(3, 2), 10),
+        f = parseInt(b.substr(5, 2), 10),
+        g = {
+          1: 1900,
+          2: 1900,
+          3: 1800,
+          4: 1800,
+          5: 2e3,
+          6: 2e3
+        };
+      if (f > 31 && e > 12) return !1;
+      if (9 !== c && (d = g[c + ""] + d, !a.fn.bootstrapValidator.helpers.date(d, e, f))) return !1;
+      for (var h = 0, i = [2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9], j = b.length, k = 0; j - 1 > k; k++) h += parseInt(b.charAt(k), 10) * i[k];
+      return h %= 11, 10 === h && (h = 1), h + "" === b.charAt(j - 1);
+    },
+    _se: function _se(b) {
+      if (!/^[0-9]{10}$/.test(b) && !/^[0-9]{6}[-|+][0-9]{4}$/.test(b)) return !1;
+      b = b.replace(/[^0-9]/g, "");
+      var c = parseInt(b.substr(0, 2), 10) + 1900,
+        d = parseInt(b.substr(2, 2), 10),
+        e = parseInt(b.substr(4, 2), 10);
+      return a.fn.bootstrapValidator.helpers.date(c, d, e) ? a.fn.bootstrapValidator.helpers.luhn(b) : !1;
+    },
+    _sk: function _sk(a) {
+      return this._cz(a);
+    },
+    _sm: function _sm(a) {
+      return /^\d{5}$/.test(a);
+    },
+    _th: function _th(a) {
+      if (13 !== a.length) return !1;
+      for (var b = 0, c = 0; 12 > c; c++) b += parseInt(a.charAt(c), 10) * (13 - c);
+      return (11 - b % 11) % 10 === parseInt(a.charAt(12), 10);
+    },
+    _za: function _za(b) {
+      if (!/^[0-9]{10}[0|1][8|9][0-9]$/.test(b)) return !1;
+      var c = parseInt(b.substr(0, 2), 10),
+        d = new Date().getFullYear() % 100,
+        e = parseInt(b.substr(2, 2), 10),
+        f = parseInt(b.substr(4, 2), 10);
+      return c = c >= d ? c + 1900 : c + 2e3, a.fn.bootstrapValidator.helpers.date(c, e, f) ? a.fn.bootstrapValidator.helpers.luhn(b) : !1;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.identical = a.extend(a.fn.bootstrapValidator.i18n.identical || {}, {
+    "default": "Please enter the same value"
+  }), a.fn.bootstrapValidator.validators.identical = {
+    html5Attributes: {
+      message: "message",
+      field: "field"
+    },
+    validate: function validate(a, b, c) {
+      var d = b.val();
+      if ("" === d) return !0;
+      var e = a.getFieldElements(c.field);
+      return null === e || 0 === e.length ? !0 : d === e.val() ? (a.updateStatus(c.field, a.STATUS_VALID, "identical"), !0) : !1;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.imei = a.extend(a.fn.bootstrapValidator.i18n.imei || {}, {
+    "default": "Please enter a valid IMEI number"
+  }), a.fn.bootstrapValidator.validators.imei = {
+    validate: function validate(b, c) {
+      var d = c.val();
+      if ("" === d) return !0;
+      switch (!0) {
+        case /^\d{15}$/.test(d):
+        case /^\d{2}-\d{6}-\d{6}-\d{1}$/.test(d):
+        case /^\d{2}\s\d{6}\s\d{6}\s\d{1}$/.test(d):
+          return d = d.replace(/[^0-9]/g, ""), a.fn.bootstrapValidator.helpers.luhn(d);
+        case /^\d{14}$/.test(d):
+        case /^\d{16}$/.test(d):
+        case /^\d{2}-\d{6}-\d{6}(|-\d{2})$/.test(d):
+        case /^\d{2}\s\d{6}\s\d{6}(|\s\d{2})$/.test(d):
+          return !0;
+        default:
+          return !1;
+      }
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.imo = a.extend(a.fn.bootstrapValidator.i18n.imo || {}, {
+    "default": "Please enter a valid IMO number"
+  }), a.fn.bootstrapValidator.validators.imo = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      if ("" === c) return !0;
+      if (!/^IMO \d{7}$/i.test(c)) return !1;
+      for (var d = 0, e = c.replace(/^.*(\d{7})$/, "$1"), f = 6; f >= 1; f--) d += e.slice(6 - f, -f) * (f + 1);
+      return d % 10 === parseInt(e.charAt(6), 10);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.integer = a.extend(a.fn.bootstrapValidator.i18n.integer || {}, {
+    "default": "Please enter a valid number"
+  }), a.fn.bootstrapValidator.validators.integer = {
+    enableByHtml5: function enableByHtml5(a) {
+      return "number" === a.attr("type") && (void 0 === a.attr("step") || a.attr("step") % 1 === 0);
+    },
+    validate: function validate(a, b) {
+      if (this.enableByHtml5(b) && b.get(0).validity && b.get(0).validity.badInput === !0) return !1;
+      var c = b.val();
+      return "" === c ? !0 : /^(?:-?(?:0|[1-9][0-9]*))$/.test(c);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.ip = a.extend(a.fn.bootstrapValidator.i18n.ip || {}, {
+    "default": "Please enter a valid IP address",
+    ipv4: "Please enter a valid IPv4 address",
+    ipv6: "Please enter a valid IPv6 address"
+  }), a.fn.bootstrapValidator.validators.ip = {
+    html5Attributes: {
+      message: "message",
+      ipv4: "ipv4",
+      ipv6: "ipv6"
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      d = a.extend({}, {
+        ipv4: !0,
+        ipv6: !0
+      }, d);
+      var f,
+        g = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
+        h = /^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/,
+        i = !1;
+      switch (!0) {
+        case d.ipv4 && !d.ipv6:
+          i = g.test(e), f = d.message || a.fn.bootstrapValidator.i18n.ip.ipv4;
+          break;
+        case !d.ipv4 && d.ipv6:
+          i = h.test(e), f = d.message || a.fn.bootstrapValidator.i18n.ip.ipv6;
+          break;
+        case d.ipv4 && d.ipv6:
+        default:
+          i = g.test(e) || h.test(e), f = d.message || a.fn.bootstrapValidator.i18n.ip["default"];
+      }
+      return {
+        valid: i,
+        message: f
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.isbn = a.extend(a.fn.bootstrapValidator.i18n.isbn || {}, {
+    "default": "Please enter a valid ISBN number"
+  }), a.fn.bootstrapValidator.validators.isbn = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      if ("" === c) return !0;
+      var d;
+      switch (!0) {
+        case /^\d{9}[\dX]$/.test(c):
+        case 13 === c.length && /^(\d+)-(\d+)-(\d+)-([\dX])$/.test(c):
+        case 13 === c.length && /^(\d+)\s(\d+)\s(\d+)\s([\dX])$/.test(c):
+          d = "ISBN10";
+          break;
+        case /^(978|979)\d{9}[\dX]$/.test(c):
+        case 17 === c.length && /^(978|979)-(\d+)-(\d+)-(\d+)-([\dX])$/.test(c):
+        case 17 === c.length && /^(978|979)\s(\d+)\s(\d+)\s(\d+)\s([\dX])$/.test(c):
+          d = "ISBN13";
+          break;
+        default:
+          return !1;
+      }
+      c = c.replace(/[^0-9X]/gi, "");
+      var e,
+        f,
+        g = c.split(""),
+        h = g.length,
+        i = 0;
+      switch (d) {
+        case "ISBN10":
+          for (i = 0, e = 0; h - 1 > e; e++) i += parseInt(g[e], 10) * (10 - e);
+          return f = 11 - i % 11, 11 === f ? f = 0 : 10 === f && (f = "X"), f + "" === g[h - 1];
+        case "ISBN13":
+          for (i = 0, e = 0; h - 1 > e; e++) i += e % 2 === 0 ? parseInt(g[e], 10) : 3 * parseInt(g[e], 10);
+          return f = 10 - i % 10, 10 === f && (f = "0"), f + "" === g[h - 1];
+        default:
+          return !1;
+      }
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.isin = a.extend(a.fn.bootstrapValidator.i18n.isin || {}, {
+    "default": "Please enter a valid ISIN number"
+  }), a.fn.bootstrapValidator.validators.isin = {
+    COUNTRY_CODES: "AF|AX|AL|DZ|AS|AD|AO|AI|AQ|AG|AR|AM|AW|AU|AT|AZ|BS|BH|BD|BB|BY|BE|BZ|BJ|BM|BT|BO|BQ|BA|BW|BV|BR|IO|BN|BG|BF|BI|KH|CM|CA|CV|KY|CF|TD|CL|CN|CX|CC|CO|KM|CG|CD|CK|CR|CI|HR|CU|CW|CY|CZ|DK|DJ|DM|DO|EC|EG|SV|GQ|ER|EE|ET|FK|FO|FJ|FI|FR|GF|PF|TF|GA|GM|GE|DE|GH|GI|GR|GL|GD|GP|GU|GT|GG|GN|GW|GY|HT|HM|VA|HN|HK|HU|IS|IN|ID|IR|IQ|IE|IM|IL|IT|JM|JP|JE|JO|KZ|KE|KI|KP|KR|KW|KG|LA|LV|LB|LS|LR|LY|LI|LT|LU|MO|MK|MG|MW|MY|MV|ML|MT|MH|MQ|MR|MU|YT|MX|FM|MD|MC|MN|ME|MS|MA|MZ|MM|NA|NR|NP|NL|NC|NZ|NI|NE|NG|NU|NF|MP|NO|OM|PK|PW|PS|PA|PG|PY|PE|PH|PN|PL|PT|PR|QA|RE|RO|RU|RW|BL|SH|KN|LC|MF|PM|VC|WS|SM|ST|SA|SN|RS|SC|SL|SG|SX|SK|SI|SB|SO|ZA|GS|SS|ES|LK|SD|SR|SJ|SZ|SE|CH|SY|TW|TJ|TZ|TH|TL|TG|TK|TO|TT|TN|TR|TM|TC|TV|UG|UA|AE|GB|US|UM|UY|UZ|VU|VE|VN|VG|VI|WF|EH|YE|ZM|ZW",
+    validate: function validate(a, b) {
+      var c = b.val();
+      if ("" === c) return !0;
+      c = c.toUpperCase();
+      var d = new RegExp("^(" + this.COUNTRY_CODES + ")[0-9A-Z]{10}$");
+      if (!d.test(c)) return !1;
+      for (var e = "", f = c.length, g = 0; f - 1 > g; g++) {
+        var h = c.charCodeAt(g);
+        e += h > 57 ? (h - 55).toString() : c.charAt(g);
+      }
+      var i = "",
+        j = e.length,
+        k = j % 2 !== 0 ? 0 : 1;
+      for (g = 0; j > g; g++) i += parseInt(e[g], 10) * (g % 2 === k ? 2 : 1) + "";
+      var l = 0;
+      for (g = 0; g < i.length; g++) l += parseInt(i.charAt(g), 10);
+      return l = (10 - l % 10) % 10, l + "" === c.charAt(f - 1);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.ismn = a.extend(a.fn.bootstrapValidator.i18n.ismn || {}, {
+    "default": "Please enter a valid ISMN number"
+  }), a.fn.bootstrapValidator.validators.ismn = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      if ("" === c) return !0;
+      var d;
+      switch (!0) {
+        case /^M\d{9}$/.test(c):
+        case /^M-\d{4}-\d{4}-\d{1}$/.test(c):
+        case /^M\s\d{4}\s\d{4}\s\d{1}$/.test(c):
+          d = "ISMN10";
+          break;
+        case /^9790\d{9}$/.test(c):
+        case /^979-0-\d{4}-\d{4}-\d{1}$/.test(c):
+        case /^979\s0\s\d{4}\s\d{4}\s\d{1}$/.test(c):
+          d = "ISMN13";
+          break;
+        default:
+          return !1;
+      }
+      "ISMN10" === d && (c = "9790" + c.substr(1)), c = c.replace(/[^0-9]/gi, "");
+      for (var e = c.length, f = 0, g = [1, 3], h = 0; e - 1 > h; h++) f += parseInt(c.charAt(h), 10) * g[h % 2];
+      return f = 10 - f % 10, f + "" === c.charAt(e - 1);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.issn = a.extend(a.fn.bootstrapValidator.i18n.issn || {}, {
+    "default": "Please enter a valid ISSN number"
+  }), a.fn.bootstrapValidator.validators.issn = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      if ("" === c) return !0;
+      if (!/^\d{4}\-\d{3}[\dX]$/.test(c)) return !1;
+      c = c.replace(/[^0-9X]/gi, "");
+      var d = c.split(""),
+        e = d.length,
+        f = 0;
+      "X" === d[7] && (d[7] = 10);
+      for (var g = 0; e > g; g++) f += parseInt(d[g], 10) * (8 - g);
+      return f % 11 === 0;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.lessThan = a.extend(a.fn.bootstrapValidator.i18n.lessThan || {}, {
+    "default": "Please enter a value less than or equal to %s",
+    notInclusive: "Please enter a value less than %s"
+  }), a.fn.bootstrapValidator.validators.lessThan = {
+    html5Attributes: {
+      message: "message",
+      value: "value",
+      inclusive: "inclusive"
+    },
+    enableByHtml5: function enableByHtml5(a) {
+      var b = a.attr("type"),
+        c = a.attr("max");
+      return c && "date" !== b ? {
+        value: c
+      } : !1;
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      if (!a.isNumeric(e)) return !1;
+      var f = a.isNumeric(d.value) ? d.value : b.getDynamicOption(c, d.value);
+      return e = parseFloat(e), d.inclusive === !0 || void 0 === d.inclusive ? {
+        valid: f >= e,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.lessThan["default"], f)
+      } : {
+        valid: f > e,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.lessThan.notInclusive, f)
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.mac = a.extend(a.fn.bootstrapValidator.i18n.mac || {}, {
+    "default": "Please enter a valid MAC address"
+  }), a.fn.bootstrapValidator.validators.mac = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      return "" === c ? !0 : /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/.test(c);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.meid = a.extend(a.fn.bootstrapValidator.i18n.meid || {}, {
+    "default": "Please enter a valid MEID number"
+  }), a.fn.bootstrapValidator.validators.meid = {
+    validate: function validate(b, c) {
+      var d = c.val();
+      if ("" === d) return !0;
+      switch (!0) {
+        case /^[0-9A-F]{15}$/i.test(d):
+        case /^[0-9A-F]{2}[- ][0-9A-F]{6}[- ][0-9A-F]{6}[- ][0-9A-F]$/i.test(d):
+        case /^\d{19}$/.test(d):
+        case /^\d{5}[- ]\d{5}[- ]\d{4}[- ]\d{4}[- ]\d$/.test(d):
+          var e = d.charAt(d.length - 1);
+          if (d = d.replace(/[- ]/g, ""), d.match(/^\d*$/i)) return a.fn.bootstrapValidator.helpers.luhn(d);
+          d = d.slice(0, -1);
+          for (var f = "", g = 1; 13 >= g; g += 2) f += (2 * parseInt(d.charAt(g), 16)).toString(16);
+          var h = 0;
+          for (g = 0; g < f.length; g++) h += parseInt(f.charAt(g), 16);
+          return h % 10 === 0 ? "0" === e : e === (2 * (10 * Math.floor((h + 10) / 10) - h)).toString(16);
+        case /^[0-9A-F]{14}$/i.test(d):
+        case /^[0-9A-F]{2}[- ][0-9A-F]{6}[- ][0-9A-F]{6}$/i.test(d):
+        case /^\d{18}$/.test(d):
+        case /^\d{5}[- ]\d{5}[- ]\d{4}[- ]\d{4}$/.test(d):
+          return !0;
+        default:
+          return !1;
+      }
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.notEmpty = a.extend(a.fn.bootstrapValidator.i18n.notEmpty || {}, {
+    "default": "Please enter a value"
+  }), a.fn.bootstrapValidator.validators.notEmpty = {
+    enableByHtml5: function enableByHtml5(a) {
+      var b = a.attr("required") + "";
+      return "required" === b || "true" === b;
+    },
+    validate: function validate(b, c) {
+      var d = c.attr("type");
+      return "radio" === d || "checkbox" === d ? b.getFieldElements(c.attr("data-bv-field")).filter(":checked").length > 0 : "number" === d && c.get(0).validity && c.get(0).validity.badInput === !0 ? !0 : "" !== a.trim(c.val());
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.numeric = a.extend(a.fn.bootstrapValidator.i18n.numeric || {}, {
+    "default": "Please enter a valid float number"
+  }), a.fn.bootstrapValidator.validators.numeric = {
+    html5Attributes: {
+      message: "message",
+      separator: "separator"
+    },
+    enableByHtml5: function enableByHtml5(a) {
+      return "number" === a.attr("type") && void 0 !== a.attr("step") && a.attr("step") % 1 !== 0;
+    },
+    validate: function validate(a, b, c) {
+      if (this.enableByHtml5(b) && b.get(0).validity && b.get(0).validity.badInput === !0) return !1;
+      var d = b.val();
+      if ("" === d) return !0;
+      var e = c.separator || ".";
+      return "." !== e && (d = d.replace(e, ".")), !isNaN(parseFloat(d)) && isFinite(d);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.phone = a.extend(a.fn.bootstrapValidator.i18n.phone || {}, {
+    "default": "Please enter a valid phone number",
+    countryNotSupported: "The country code %s is not supported",
+    country: "Please enter a valid phone number in %s",
+    countries: {
+      BR: "Brazil",
+      CN: "China",
+      CZ: "Czech Republic",
+      DK: "Denmark",
+      ES: "Spain",
+      FR: "France",
+      GB: "United Kingdom",
+      MA: "Morocco",
+      PK: "Pakistan",
+      RO: "Romania",
+      RU: "Russia",
+      SK: "Slovakia",
+      TH: "Thailand",
+      US: "USA",
+      VE: "Venezuela"
+    }
+  }), a.fn.bootstrapValidator.validators.phone = {
+    html5Attributes: {
+      message: "message",
+      country: "country"
+    },
+    COUNTRY_CODES: ["BR", "CN", "CZ", "DK", "ES", "FR", "GB", "MA", "PK", "RO", "RU", "SK", "TH", "US", "VE"],
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      var f = d.country;
+      if (("string" != typeof f || -1 === a.inArray(f, this.COUNTRY_CODES)) && (f = b.getDynamicOption(c, f)), !f || -1 === a.inArray(f.toUpperCase(), this.COUNTRY_CODES)) return {
+        valid: !1,
+        message: a.fn.bootstrapValidator.helpers.format(a.fn.bootstrapValidator.i18n.phone.countryNotSupported, f)
+      };
+      var g = !0;
+      switch (f.toUpperCase()) {
+        case "BR":
+          e = a.trim(e), g = /^(([\d]{4}[-.\s]{1}[\d]{2,3}[-.\s]{1}[\d]{2}[-.\s]{1}[\d]{2})|([\d]{4}[-.\s]{1}[\d]{3}[-.\s]{1}[\d]{4})|((\(?\+?[0-9]{2}\)?\s?)?(\(?\d{2}\)?\s?)?\d{4,5}[-.\s]?\d{4}))$/.test(e);
+          break;
+        case "CN":
+          e = a.trim(e), g = /^((00|\+)?(86(?:-| )))?((\d{11})|(\d{3}[- ]{1}\d{4}[- ]{1}\d{4})|((\d{2,4}[- ]){1}(\d{7,8}|(\d{3,4}[- ]{1}\d{4}))([- ]{1}\d{1,4})?))$/.test(e);
+          break;
+        case "CZ":
+          g = /^(((00)([- ]?)|\+)(420)([- ]?))?((\d{3})([- ]?)){2}(\d{3})$/.test(e);
+          break;
+        case "DK":
+          e = a.trim(e), g = /^(\+45|0045|\(45\))?\s?[2-9](\s?\d){7}$/.test(e);
+          break;
+        case "ES":
+          e = a.trim(e), g = /^(?:(?:(?:\+|00)34\D?))?(?:9|6)(?:\d\D?){8}$/.test(e);
+          break;
+        case "FR":
+          e = a.trim(e), g = /^(?:(?:(?:\+|00)33[ ]?(?:\(0\)[ ]?)?)|0){1}[1-9]{1}([ .-]?)(?:\d{2}\1?){3}\d{2}$/.test(e);
+          break;
+        case "GB":
+          e = a.trim(e), g = /^\(?(?:(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?\(?(?:0\)?[\s-]?\(?)?|0)(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}|\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4}|\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3})|\d{5}\)?[\s-]?\d{4,5}|8(?:00[\s-]?11[\s-]?11|45[\s-]?46[\s-]?4\d))(?:(?:[\s-]?(?:x|ext\.?\s?|\#)\d+)?)$/.test(e);
+          break;
+        case "MA":
+          e = a.trim(e), g = /^(?:(?:(?:\+|00)212[\s]?(?:[\s]?\(0\)[\s]?)?)|0){1}(?:5[\s.-]?[2-3]|6[\s.-]?[13-9]){1}[0-9]{1}(?:[\s.-]?\d{2}){3}$/.test(e);
+          break;
+        case "PK":
+          e = a.trim(e), g = /^0?3[0-9]{2}[0-9]{7}$/.test(e);
+          break;
+        case "RO":
+          g = /^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g.test(e);
+          break;
+        case "RU":
+          g = /^((8|\+7|007)[\-\.\/ ]?)?([\(\/\.]?\d{3}[\)\/\.]?[\-\.\/ ]?)?[\d\-\.\/ ]{7,10}$/g.test(e);
+          break;
+        case "SK":
+          g = /^(((00)([- ]?)|\+)(420)([- ]?))?((\d{3})([- ]?)){2}(\d{3})$/.test(e);
+          break;
+        case "TH":
+          g = /^0\(?([6|8-9]{2})*-([0-9]{3})*-([0-9]{4})$/.test(e);
+          break;
+        case "VE":
+          e = a.trim(e), g = /^0(?:2(?:12|4[0-9]|5[1-9]|6[0-9]|7[0-8]|8[1-35-8]|9[1-5]|3[45789])|4(?:1[246]|2[46]))\d{7}$/.test(e);
+          break;
+        case "US":
+        default:
+          e = e.replace(/\D/g, ""), g = /^(?:(1\-?)|(\+1 ?))?\(?(\d{3})[\)\-\.]?(\d{3})[\-\.]?(\d{4})$/.test(e) && 10 === e.length;
+      }
+      return {
+        valid: g,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.phone.country, a.fn.bootstrapValidator.i18n.phone.countries[f])
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.regexp = a.extend(a.fn.bootstrapValidator.i18n.regexp || {}, {
+    "default": "Please enter a value matching the pattern"
+  }), a.fn.bootstrapValidator.validators.regexp = {
+    html5Attributes: {
+      message: "message",
+      regexp: "regexp"
+    },
+    enableByHtml5: function enableByHtml5(a) {
+      var b = a.attr("pattern");
+      return b ? {
+        regexp: b
+      } : !1;
+    },
+    validate: function validate(a, b, c) {
+      var d = b.val();
+      if ("" === d) return !0;
+      var e = "string" == typeof c.regexp ? new RegExp(c.regexp) : c.regexp;
+      return e.test(d);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.remote = a.extend(a.fn.bootstrapValidator.i18n.remote || {}, {
+    "default": "Please enter a valid value"
+  }), a.fn.bootstrapValidator.validators.remote = {
+    html5Attributes: {
+      message: "message",
+      name: "name",
+      type: "type",
+      url: "url",
+      delay: "delay"
+    },
+    destroy: function destroy(a, b) {
+      b.data("bv.remote.timer") && (clearTimeout(b.data("bv.remote.timer")), b.removeData("bv.remote.timer"));
+    },
+    validate: function validate(b, c, d) {
+      function e() {
+        var b = a.ajax({
+          type: k,
+          headers: l,
+          url: j,
+          dataType: "json",
+          data: i
+        });
+        return b.then(function (a) {
+          a.valid = a.valid === !0 || "true" === a.valid, g.resolve(c, "remote", a);
+        }), g.fail(function () {
+          b.abort();
+        }), g;
+      }
+      var f = c.val(),
+        g = new a.Deferred();
+      if ("" === f) return g.resolve(c, "remote", {
+        valid: !0
+      }), g;
+      var h = c.attr("data-bv-field"),
+        i = d.data || {},
+        j = d.url,
+        k = d.type || "GET",
+        l = d.headers || {};
+      return "function" == typeof i && (i = i.call(this, b)), "function" == typeof j && (j = j.call(this, b)), i[d.name || h] = f, d.delay ? (c.data("bv.remote.timer") && clearTimeout(c.data("bv.remote.timer")), c.data("bv.remote.timer", setTimeout(e, d.delay)), g) : e();
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.rtn = a.extend(a.fn.bootstrapValidator.i18n.rtn || {}, {
+    "default": "Please enter a valid RTN number"
+  }), a.fn.bootstrapValidator.validators.rtn = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      if ("" === c) return !0;
+      if (!/^\d{9}$/.test(c)) return !1;
+      for (var d = 0, e = 0; e < c.length; e += 3) d += 3 * parseInt(c.charAt(e), 10) + 7 * parseInt(c.charAt(e + 1), 10) + parseInt(c.charAt(e + 2), 10);
+      return 0 !== d && d % 10 === 0;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.sedol = a.extend(a.fn.bootstrapValidator.i18n.sedol || {}, {
+    "default": "Please enter a valid SEDOL number"
+  }), a.fn.bootstrapValidator.validators.sedol = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      if ("" === c) return !0;
+      if (c = c.toUpperCase(), !/^[0-9A-Z]{7}$/.test(c)) return !1;
+      for (var d = 0, e = [1, 3, 1, 7, 3, 9, 1], f = c.length, g = 0; f - 1 > g; g++) d += e[g] * parseInt(c.charAt(g), 36);
+      return d = (10 - d % 10) % 10, d + "" === c.charAt(f - 1);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.siren = a.extend(a.fn.bootstrapValidator.i18n.siren || {}, {
+    "default": "Please enter a valid SIREN number"
+  }), a.fn.bootstrapValidator.validators.siren = {
+    validate: function validate(b, c) {
+      var d = c.val();
+      return "" === d ? !0 : /^\d{9}$/.test(d) ? a.fn.bootstrapValidator.helpers.luhn(d) : !1;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.siret = a.extend(a.fn.bootstrapValidator.i18n.siret || {}, {
+    "default": "Please enter a valid SIRET number"
+  }), a.fn.bootstrapValidator.validators.siret = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      if ("" === c) return !0;
+      for (var d, e = 0, f = c.length, g = 0; f > g; g++) d = parseInt(c.charAt(g), 10), g % 2 === 0 && (d = 2 * d, d > 9 && (d -= 9)), e += d;
+      return e % 10 === 0;
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.step = a.extend(a.fn.bootstrapValidator.i18n.step || {}, {
+    "default": "Please enter a valid step of %s"
+  }), a.fn.bootstrapValidator.validators.step = {
+    html5Attributes: {
+      message: "message",
+      base: "baseValue",
+      step: "step"
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      if (d = a.extend({}, {
+        baseValue: 0,
+        step: 1
+      }, d), e = parseFloat(e), !a.isNumeric(e)) return !1;
+      var f = function f(a, b) {
+          var c = Math.pow(10, b);
+          a *= c;
+          var d = a > 0 | -(0 > a),
+            e = a % 1 === .5 * d;
+          return e ? (Math.floor(a) + (d > 0)) / c : Math.round(a) / c;
+        },
+        g = function g(a, b) {
+          if (0 === b) return 1;
+          var c = (a + "").split("."),
+            d = (b + "").split("."),
+            e = (1 === c.length ? 0 : c[1].length) + (1 === d.length ? 0 : d[1].length);
+          return f(a - b * Math.floor(a / b), e);
+        },
+        h = g(e - d.baseValue, d.step);
+      return {
+        valid: 0 === h || h === d.step,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.step["default"], [d.step])
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.stringCase = a.extend(a.fn.bootstrapValidator.i18n.stringCase || {}, {
+    "default": "Please enter only lowercase characters",
+    upper: "Please enter only uppercase characters"
+  }), a.fn.bootstrapValidator.validators.stringCase = {
+    html5Attributes: {
+      message: "message",
+      "case": "case"
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      var f = (d["case"] || "lower").toLowerCase();
+      return {
+        valid: "upper" === f ? e === e.toUpperCase() : e === e.toLowerCase(),
+        message: d.message || ("upper" === f ? a.fn.bootstrapValidator.i18n.stringCase.upper : a.fn.bootstrapValidator.i18n.stringCase["default"])
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.stringLength = a.extend(a.fn.bootstrapValidator.i18n.stringLength || {}, {
+    "default": "Please enter a value with valid length",
+    less: "Please enter less than %s characters",
+    more: "Please enter more than %s characters",
+    between: "Please enter value between %s and %s characters long"
+  }), a.fn.bootstrapValidator.validators.stringLength = {
+    html5Attributes: {
+      message: "message",
+      min: "min",
+      max: "max"
+    },
+    enableByHtml5: function enableByHtml5(b) {
+      var c = {},
+        d = b.attr("maxlength"),
+        e = b.attr("minlength");
+      return d && (c.max = parseInt(d, 10)), e && (c.min = parseInt(e, 10)), a.isEmptyObject(c) ? !1 : c;
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      var f = a.isNumeric(d.min) ? d.min : b.getDynamicOption(c, d.min),
+        g = a.isNumeric(d.max) ? d.max : b.getDynamicOption(c, d.max),
+        h = e.length,
+        i = !0,
+        j = d.message || a.fn.bootstrapValidator.i18n.stringLength["default"];
+      switch ((f && h < parseInt(f, 10) || g && h > parseInt(g, 10)) && (i = !1), !0) {
+        case !!f && !!g:
+          j = a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.stringLength.between, [parseInt(f, 10), parseInt(g, 10)]);
+          break;
+        case !!f:
+          j = a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.stringLength.more, parseInt(f, 10));
+          break;
+        case !!g:
+          j = a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.stringLength.less, parseInt(g, 10));
+      }
+      return {
+        valid: i,
+        message: j
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.uri = a.extend(a.fn.bootstrapValidator.i18n.uri || {}, {
+    "default": "Please enter a valid URI"
+  }), a.fn.bootstrapValidator.validators.uri = {
+    html5Attributes: {
+      message: "message",
+      allowlocal: "allowLocal",
+      protocol: "protocol"
+    },
+    enableByHtml5: function enableByHtml5(a) {
+      return "url" === a.attr("type");
+    },
+    validate: function validate(a, b, c) {
+      var d = b.val();
+      if ("" === d) return !0;
+      var e = c.allowLocal === !0 || "true" === c.allowLocal,
+        f = (c.protocol || "http, https, ftp").split(",").join("|").replace(/\s/g, ""),
+        g = new RegExp("^(?:(?:" + f + ")://)(?:\\S+(?::\\S*)?@)?(?:" + (e ? "" : "(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})") + "(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))" + (e ? "?" : "") + ")(?::\\d{2,5})?(?:/[^\\s]*)?$", "i");
+      return g.test(d);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.uuid = a.extend(a.fn.bootstrapValidator.i18n.uuid || {}, {
+    "default": "Please enter a valid UUID number",
+    version: "Please enter a valid UUID version %s number"
+  }), a.fn.bootstrapValidator.validators.uuid = {
+    html5Attributes: {
+      message: "message",
+      version: "version"
+    },
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      var f = {
+          3: /^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
+          4: /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+          5: /^[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+          all: /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i
+        },
+        g = d.version ? d.version + "" : "all";
+      return {
+        valid: null === f[g] ? !0 : f[g].test(e),
+        message: d.version ? a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.uuid.version, d.version) : d.message || a.fn.bootstrapValidator.i18n.uuid["default"]
+      };
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.vat = a.extend(a.fn.bootstrapValidator.i18n.vat || {}, {
+    "default": "Please enter a valid VAT number",
+    countryNotSupported: "The country code %s is not supported",
+    country: "Please enter a valid VAT number in %s",
+    countries: {
+      AT: "Austria",
+      BE: "Belgium",
+      BG: "Bulgaria",
+      BR: "Brazil",
+      CH: "Switzerland",
+      CY: "Cyprus",
+      CZ: "Czech Republic",
+      DE: "Germany",
+      DK: "Denmark",
+      EE: "Estonia",
+      ES: "Spain",
+      FI: "Finland",
+      FR: "France",
+      GB: "United Kingdom",
+      GR: "Greek",
+      EL: "Greek",
+      HU: "Hungary",
+      HR: "Croatia",
+      IE: "Ireland",
+      IS: "Iceland",
+      IT: "Italy",
+      LT: "Lithuania",
+      LU: "Luxembourg",
+      LV: "Latvia",
+      MT: "Malta",
+      NL: "Netherlands",
+      NO: "Norway",
+      PL: "Poland",
+      PT: "Portugal",
+      RO: "Romania",
+      RU: "Russia",
+      RS: "Serbia",
+      SE: "Sweden",
+      SI: "Slovenia",
+      SK: "Slovakia",
+      VE: "Venezuela",
+      ZA: "South Africa"
+    }
+  }), a.fn.bootstrapValidator.validators.vat = {
+    html5Attributes: {
+      message: "message",
+      country: "country"
+    },
+    COUNTRY_CODES: ["AT", "BE", "BG", "BR", "CH", "CY", "CZ", "DE", "DK", "EE", "EL", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "RU", "RS", "SE", "SK", "SI", "VE", "ZA"],
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e) return !0;
+      var f = d.country;
+      if (f ? ("string" != typeof f || -1 === a.inArray(f.toUpperCase(), this.COUNTRY_CODES)) && (f = b.getDynamicOption(c, f)) : f = e.substr(0, 2), -1 === a.inArray(f, this.COUNTRY_CODES)) return {
+        valid: !1,
+        message: a.fn.bootstrapValidator.helpers.format(a.fn.bootstrapValidator.i18n.vat.countryNotSupported, f)
+      };
+      var g = ["_", f.toLowerCase()].join("");
+      return this[g](e) ? !0 : {
+        valid: !1,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.vat.country, a.fn.bootstrapValidator.i18n.vat.countries[f.toUpperCase()])
+      };
+    },
+    _at: function _at(a) {
+      if (/^ATU[0-9]{8}$/.test(a) && (a = a.substr(2)), !/^U[0-9]{8}$/.test(a)) return !1;
+      a = a.substr(1);
+      for (var b = 0, c = [1, 2, 1, 2, 1, 2, 1], d = 0, e = 0; 7 > e; e++) d = parseInt(a.charAt(e), 10) * c[e], d > 9 && (d = Math.floor(d / 10) + d % 10), b += d;
+      return b = 10 - (b + 4) % 10, 10 === b && (b = 0), b + "" === a.substr(7, 1);
+    },
+    _be: function _be(a) {
+      if (/^BE[0]{0,1}[0-9]{9}$/.test(a) && (a = a.substr(2)), !/^[0]{0,1}[0-9]{9}$/.test(a)) return !1;
+      if (9 === a.length && (a = "0" + a), "0" === a.substr(1, 1)) return !1;
+      var b = parseInt(a.substr(0, 8), 10) + parseInt(a.substr(8, 2), 10);
+      return b % 97 === 0;
+    },
+    _bg: function _bg(b) {
+      if (/^BG[0-9]{9,10}$/.test(b) && (b = b.substr(2)), !/^[0-9]{9,10}$/.test(b)) return !1;
+      var c = 0,
+        d = 0;
+      if (9 === b.length) {
+        for (d = 0; 8 > d; d++) c += parseInt(b.charAt(d), 10) * (d + 1);
+        if (c %= 11, 10 === c) for (c = 0, d = 0; 8 > d; d++) c += parseInt(b.charAt(d), 10) * (d + 3);
+        return c %= 10, c + "" === b.substr(8);
+      }
+      if (10 === b.length) {
+        var e = function e(b) {
+            var c = parseInt(b.substr(0, 2), 10) + 1900,
+              d = parseInt(b.substr(2, 2), 10),
+              e = parseInt(b.substr(4, 2), 10);
+            if (d > 40 ? (c += 100, d -= 40) : d > 20 && (c -= 100, d -= 20), !a.fn.bootstrapValidator.helpers.date(c, d, e)) return !1;
+            for (var f = 0, g = [2, 4, 8, 5, 10, 9, 7, 3, 6], h = 0; 9 > h; h++) f += parseInt(b.charAt(h), 10) * g[h];
+            return f = f % 11 % 10, f + "" === b.substr(9, 1);
+          },
+          f = function f(a) {
+            for (var b = 0, c = [21, 19, 17, 13, 11, 9, 7, 3, 1], d = 0; 9 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+            return b %= 10, b + "" === a.substr(9, 1);
+          },
+          g = function g(a) {
+            for (var b = 0, c = [4, 3, 2, 7, 6, 5, 4, 3, 2], d = 0; 9 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+            return b = 11 - b % 11, 10 === b ? !1 : (11 === b && (b = 0), b + "" === a.substr(9, 1));
+          };
+        return e(b) || f(b) || g(b);
+      }
+      return !1;
+    },
+    _br: function _br(a) {
+      if ("" === a) return !0;
+      var b = a.replace(/[^\d]+/g, "");
+      if ("" === b || 14 !== b.length) return !1;
+      if ("00000000000000" === b || "11111111111111" === b || "22222222222222" === b || "33333333333333" === b || "44444444444444" === b || "55555555555555" === b || "66666666666666" === b || "77777777777777" === b || "88888888888888" === b || "99999999999999" === b) return !1;
+      for (var c = b.length - 2, d = b.substring(0, c), e = b.substring(c), f = 0, g = c - 7, h = c; h >= 1; h--) f += parseInt(d.charAt(c - h), 10) * g--, 2 > g && (g = 9);
+      var i = 2 > f % 11 ? 0 : 11 - f % 11;
+      if (i !== parseInt(e.charAt(0), 10)) return !1;
+      for (c += 1, d = b.substring(0, c), f = 0, g = c - 7, h = c; h >= 1; h--) f += parseInt(d.charAt(c - h), 10) * g--, 2 > g && (g = 9);
+      return i = 2 > f % 11 ? 0 : 11 - f % 11, i === parseInt(e.charAt(1), 10);
+    },
+    _ch: function _ch(a) {
+      if (/^CHE[0-9]{9}(MWST)?$/.test(a) && (a = a.substr(2)), !/^E[0-9]{9}(MWST)?$/.test(a)) return !1;
+      a = a.substr(1);
+      for (var b = 0, c = [5, 4, 3, 2, 7, 6, 5, 4], d = 0; 8 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b = 11 - b % 11, 10 === b ? !1 : (11 === b && (b = 0), b + "" === a.substr(8, 1));
+    },
+    _cy: function _cy(a) {
+      if (/^CY[0-5|9]{1}[0-9]{7}[A-Z]{1}$/.test(a) && (a = a.substr(2)), !/^[0-5|9]{1}[0-9]{7}[A-Z]{1}$/.test(a)) return !1;
+      if ("12" === a.substr(0, 2)) return !1;
+      for (var b = 0, c = {
+          0: 1,
+          1: 0,
+          2: 5,
+          3: 7,
+          4: 9,
+          5: 13,
+          6: 15,
+          7: 17,
+          8: 19,
+          9: 21
+        }, d = 0; 8 > d; d++) {
+        var e = parseInt(a.charAt(d), 10);
+        d % 2 === 0 && (e = c[e + ""]), b += e;
+      }
+      return b = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[b % 26], b + "" === a.substr(8, 1);
+    },
+    _cz: function _cz(b) {
+      if (/^CZ[0-9]{8,10}$/.test(b) && (b = b.substr(2)), !/^[0-9]{8,10}$/.test(b)) return !1;
+      var c = 0,
+        d = 0;
+      if (8 === b.length) {
+        if (b.charAt(0) + "" == "9") return !1;
+        for (c = 0, d = 0; 7 > d; d++) c += parseInt(b.charAt(d), 10) * (8 - d);
+        return c = 11 - c % 11, 10 === c && (c = 0), 11 === c && (c = 1), c + "" === b.substr(7, 1);
+      }
+      if (9 === b.length && b.charAt(0) + "" == "6") {
+        for (c = 0, d = 0; 7 > d; d++) c += parseInt(b.charAt(d + 1), 10) * (8 - d);
+        return c = 11 - c % 11, 10 === c && (c = 0), 11 === c && (c = 1), c = [8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 10][c - 1], c + "" === b.substr(8, 1);
+      }
+      if (9 === b.length || 10 === b.length) {
+        var e = 1900 + parseInt(b.substr(0, 2), 10),
+          f = parseInt(b.substr(2, 2), 10) % 50 % 20,
+          g = parseInt(b.substr(4, 2), 10);
+        if (9 === b.length) {
+          if (e >= 1980 && (e -= 100), e > 1953) return !1;
+        } else 1954 > e && (e += 100);
+        if (!a.fn.bootstrapValidator.helpers.date(e, f, g)) return !1;
+        if (10 === b.length) {
+          var h = parseInt(b.substr(0, 9), 10) % 11;
+          return 1985 > e && (h %= 10), h + "" === b.substr(9, 1);
+        }
+        return !0;
+      }
+      return !1;
+    },
+    _de: function _de(b) {
+      return /^DE[0-9]{9}$/.test(b) && (b = b.substr(2)), /^[0-9]{9}$/.test(b) ? a.fn.bootstrapValidator.helpers.mod11And10(b) : !1;
+    },
+    _dk: function _dk(a) {
+      if (/^DK[0-9]{8}$/.test(a) && (a = a.substr(2)), !/^[0-9]{8}$/.test(a)) return !1;
+      for (var b = 0, c = [2, 7, 6, 5, 4, 3, 2, 1], d = 0; 8 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b % 11 === 0;
+    },
+    _ee: function _ee(a) {
+      if (/^EE[0-9]{9}$/.test(a) && (a = a.substr(2)), !/^[0-9]{9}$/.test(a)) return !1;
+      for (var b = 0, c = [3, 7, 1, 3, 7, 1, 3, 7, 1], d = 0; 9 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b % 10 === 0;
+    },
+    _es: function _es(a) {
+      if (/^ES[0-9A-Z][0-9]{7}[0-9A-Z]$/.test(a) && (a = a.substr(2)), !/^[0-9A-Z][0-9]{7}[0-9A-Z]$/.test(a)) return !1;
+      var b = function b(a) {
+          var b = parseInt(a.substr(0, 8), 10);
+          return b = "TRWAGMYFPDXBNJZSQVHLCKE"[b % 23], b + "" === a.substr(8, 1);
+        },
+        c = function c(a) {
+          var b = ["XYZ".indexOf(a.charAt(0)), a.substr(1)].join("");
+          return b = parseInt(b, 10), b = "TRWAGMYFPDXBNJZSQVHLCKE"[b % 23], b + "" === a.substr(8, 1);
+        },
+        d = function d(a) {
+          var b,
+            c = a.charAt(0);
+          if (-1 !== "KLM".indexOf(c)) return b = parseInt(a.substr(1, 8), 10), b = "TRWAGMYFPDXBNJZSQVHLCKE"[b % 23], b + "" === a.substr(8, 1);
+          if (-1 !== "ABCDEFGHJNPQRSUVW".indexOf(c)) {
+            for (var d = 0, e = [2, 1, 2, 1, 2, 1, 2], f = 0, g = 0; 7 > g; g++) f = parseInt(a.charAt(g + 1), 10) * e[g], f > 9 && (f = Math.floor(f / 10) + f % 10), d += f;
+            return d = 10 - d % 10, d + "" === a.substr(8, 1) || "JABCDEFGHI"[d] === a.substr(8, 1);
+          }
+          return !1;
+        },
+        e = a.charAt(0);
+      return /^[0-9]$/.test(e) ? b(a) : /^[XYZ]$/.test(e) ? c(a) : d(a);
+    },
+    _fi: function _fi(a) {
+      if (/^FI[0-9]{8}$/.test(a) && (a = a.substr(2)), !/^[0-9]{8}$/.test(a)) return !1;
+      for (var b = 0, c = [7, 9, 10, 5, 8, 4, 2, 1], d = 0; 8 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b % 11 === 0;
+    },
+    _fr: function _fr(b) {
+      if (/^FR[0-9A-Z]{2}[0-9]{9}$/.test(b) && (b = b.substr(2)), !/^[0-9A-Z]{2}[0-9]{9}$/.test(b)) return !1;
+      if (!a.fn.bootstrapValidator.helpers.luhn(b.substr(2))) return !1;
+      if (/^[0-9]{2}$/.test(b.substr(0, 2))) return b.substr(0, 2) === parseInt(b.substr(2) + "12", 10) % 97 + "";
+      var c,
+        d = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+      return c = /^[0-9]{1}$/.test(b.charAt(0)) ? 24 * d.indexOf(b.charAt(0)) + d.indexOf(b.charAt(1)) - 10 : 34 * d.indexOf(b.charAt(0)) + d.indexOf(b.charAt(1)) - 100, (parseInt(b.substr(2), 10) + 1 + Math.floor(c / 11)) % 11 === c % 11;
+    },
+    _gb: function _gb(a) {
+      if ((/^GB[0-9]{9}$/.test(a) || /^GB[0-9]{12}$/.test(a) || /^GBGD[0-9]{3}$/.test(a) || /^GBHA[0-9]{3}$/.test(a) || /^GB(GD|HA)8888[0-9]{5}$/.test(a)) && (a = a.substr(2)), !(/^[0-9]{9}$/.test(a) || /^[0-9]{12}$/.test(a) || /^GD[0-9]{3}$/.test(a) || /^HA[0-9]{3}$/.test(a) || /^(GD|HA)8888[0-9]{5}$/.test(a))) return !1;
+      var b = a.length;
+      if (5 === b) {
+        var c = a.substr(0, 2),
+          d = parseInt(a.substr(2), 10);
+        return "GD" === c && 500 > d || "HA" === c && d >= 500;
+      }
+      if (11 === b && ("GD8888" === a.substr(0, 6) || "HA8888" === a.substr(0, 6))) return "GD" === a.substr(0, 2) && parseInt(a.substr(6, 3), 10) >= 500 || "HA" === a.substr(0, 2) && parseInt(a.substr(6, 3), 10) < 500 ? !1 : parseInt(a.substr(6, 3), 10) % 97 === parseInt(a.substr(9, 2), 10);
+      if (9 === b || 12 === b) {
+        for (var e = 0, f = [8, 7, 6, 5, 4, 3, 2, 10, 1], g = 0; 9 > g; g++) e += parseInt(a.charAt(g), 10) * f[g];
+        return e %= 97, parseInt(a.substr(0, 3), 10) >= 100 ? 0 === e || 42 === e || 55 === e : 0 === e;
+      }
+      return !0;
+    },
+    _gr: function _gr(a) {
+      if (/^(GR|EL)[0-9]{9}$/.test(a) && (a = a.substr(2)), !/^[0-9]{9}$/.test(a)) return !1;
+      8 === a.length && (a = "0" + a);
+      for (var b = 0, c = [256, 128, 64, 32, 16, 8, 4, 2], d = 0; 8 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b = b % 11 % 10, b + "" === a.substr(8, 1);
+    },
+    _el: function _el(a) {
+      return this._gr(a);
+    },
+    _hu: function _hu(a) {
+      if (/^HU[0-9]{8}$/.test(a) && (a = a.substr(2)), !/^[0-9]{8}$/.test(a)) return !1;
+      for (var b = 0, c = [9, 7, 3, 1, 9, 7, 3, 1], d = 0; 8 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b % 10 === 0;
+    },
+    _hr: function _hr(b) {
+      return /^HR[0-9]{11}$/.test(b) && (b = b.substr(2)), /^[0-9]{11}$/.test(b) ? a.fn.bootstrapValidator.helpers.mod11And10(b) : !1;
+    },
+    _ie: function _ie(a) {
+      if (/^IE[0-9]{1}[0-9A-Z\*\+]{1}[0-9]{5}[A-Z]{1,2}$/.test(a) && (a = a.substr(2)), !/^[0-9]{1}[0-9A-Z\*\+]{1}[0-9]{5}[A-Z]{1,2}$/.test(a)) return !1;
+      var b = function b(a) {
+        for (; a.length < 7;) a = "0" + a;
+        for (var b = "WABCDEFGHIJKLMNOPQRSTUV", c = 0, d = 0; 7 > d; d++) c += parseInt(a.charAt(d), 10) * (8 - d);
+        return c += 9 * b.indexOf(a.substr(7)), b[c % 23];
+      };
+      return /^[0-9]+$/.test(a.substr(0, 7)) ? a.charAt(7) === b(a.substr(0, 7) + a.substr(8) + "") : -1 !== "ABCDEFGHIJKLMNOPQRSTUVWXYZ+*".indexOf(a.charAt(1)) ? a.charAt(7) === b(a.substr(2, 5) + a.substr(0, 1) + "") : !0;
+    },
+    _is: function _is(a) {
+      return /^IS[0-9]{5,6}$/.test(a) && (a = a.substr(2)), /^[0-9]{5,6}$/.test(a);
+    },
+    _it: function _it(b) {
+      if (/^IT[0-9]{11}$/.test(b) && (b = b.substr(2)), !/^[0-9]{11}$/.test(b)) return !1;
+      if (0 === parseInt(b.substr(0, 7), 10)) return !1;
+      var c = parseInt(b.substr(7, 3), 10);
+      return 1 > c || c > 201 && 999 !== c && 888 !== c ? !1 : a.fn.bootstrapValidator.helpers.luhn(b);
+    },
+    _lt: function _lt(a) {
+      if (/^LT([0-9]{7}1[0-9]{1}|[0-9]{10}1[0-9]{1})$/.test(a) && (a = a.substr(2)), !/^([0-9]{7}1[0-9]{1}|[0-9]{10}1[0-9]{1})$/.test(a)) return !1;
+      var b,
+        c = a.length,
+        d = 0;
+      for (b = 0; c - 1 > b; b++) d += parseInt(a.charAt(b), 10) * (1 + b % 9);
+      var e = d % 11;
+      if (10 === e) for (d = 0, b = 0; c - 1 > b; b++) d += parseInt(a.charAt(b), 10) * (1 + (b + 2) % 9);
+      return e = e % 11 % 10, e + "" === a.charAt(c - 1);
+    },
+    _lu: function _lu(a) {
+      return /^LU[0-9]{8}$/.test(a) && (a = a.substr(2)), /^[0-9]{8}$/.test(a) ? parseInt(a.substr(0, 6), 10) % 89 + "" === a.substr(6, 2) : !1;
+    },
+    _lv: function _lv(b) {
+      if (/^LV[0-9]{11}$/.test(b) && (b = b.substr(2)), !/^[0-9]{11}$/.test(b)) return !1;
+      var c,
+        d = parseInt(b.charAt(0), 10),
+        e = 0,
+        f = [],
+        g = b.length;
+      if (d > 3) {
+        for (e = 0, f = [9, 1, 4, 8, 3, 10, 2, 5, 7, 6, 1], c = 0; g > c; c++) e += parseInt(b.charAt(c), 10) * f[c];
+        return e %= 11, 3 === e;
+      }
+      var h = parseInt(b.substr(0, 2), 10),
+        i = parseInt(b.substr(2, 2), 10),
+        j = parseInt(b.substr(4, 2), 10);
+      if (j = j + 1800 + 100 * parseInt(b.charAt(6), 10), !a.fn.bootstrapValidator.helpers.date(j, i, h)) return !1;
+      for (e = 0, f = [10, 5, 8, 4, 2, 1, 6, 3, 7, 9], c = 0; g - 1 > c; c++) e += parseInt(b.charAt(c), 10) * f[c];
+      return e = (e + 1) % 11 % 10, e + "" === b.charAt(g - 1);
+    },
+    _mt: function _mt(a) {
+      if (/^MT[0-9]{8}$/.test(a) && (a = a.substr(2)), !/^[0-9]{8}$/.test(a)) return !1;
+      for (var b = 0, c = [3, 4, 6, 7, 8, 9, 10, 1], d = 0; 8 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b % 37 === 0;
+    },
+    _nl: function _nl(a) {
+      if (/^NL[0-9]{9}B[0-9]{2}$/.test(a) && (a = a.substr(2)), !/^[0-9]{9}B[0-9]{2}$/.test(a)) return !1;
+      for (var b = 0, c = [9, 8, 7, 6, 5, 4, 3, 2], d = 0; 8 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b %= 11, b > 9 && (b = 0), b + "" === a.substr(8, 1);
+    },
+    _no: function _no(a) {
+      if (/^NO[0-9]{9}$/.test(a) && (a = a.substr(2)), !/^[0-9]{9}$/.test(a)) return !1;
+      for (var b = 0, c = [3, 2, 7, 6, 5, 4, 3, 2], d = 0; 8 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b = 11 - b % 11, 11 === b && (b = 0), b + "" === a.substr(8, 1);
+    },
+    _pl: function _pl(a) {
+      if (/^PL[0-9]{10}$/.test(a) && (a = a.substr(2)), !/^[0-9]{10}$/.test(a)) return !1;
+      for (var b = 0, c = [6, 5, 7, 2, 3, 4, 5, 6, 7, -1], d = 0; 10 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b % 11 === 0;
+    },
+    _pt: function _pt(a) {
+      if (/^PT[0-9]{9}$/.test(a) && (a = a.substr(2)), !/^[0-9]{9}$/.test(a)) return !1;
+      for (var b = 0, c = [9, 8, 7, 6, 5, 4, 3, 2], d = 0; 8 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b = 11 - b % 11, b > 9 && (b = 0), b + "" === a.substr(8, 1);
+    },
+    _ro: function _ro(a) {
+      if (/^RO[1-9][0-9]{1,9}$/.test(a) && (a = a.substr(2)), !/^[1-9][0-9]{1,9}$/.test(a)) return !1;
+      for (var b = a.length, c = [7, 5, 3, 2, 1, 7, 5, 3, 2].slice(10 - b), d = 0, e = 0; b - 1 > e; e++) d += parseInt(a.charAt(e), 10) * c[e];
+      return d = 10 * d % 11 % 10, d + "" === a.substr(b - 1, 1);
+    },
+    _ru: function _ru(a) {
+      if (/^RU([0-9]{10}|[0-9]{12})$/.test(a) && (a = a.substr(2)), !/^([0-9]{10}|[0-9]{12})$/.test(a)) return !1;
+      var b = 0;
+      if (10 === a.length) {
+        var c = 0,
+          d = [2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
+        for (b = 0; 10 > b; b++) c += parseInt(a.charAt(b), 10) * d[b];
+        return c %= 11, c > 9 && (c %= 10), c + "" === a.substr(9, 1);
+      }
+      if (12 === a.length) {
+        var e = 0,
+          f = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0],
+          g = 0,
+          h = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
+        for (b = 0; 11 > b; b++) e += parseInt(a.charAt(b), 10) * f[b], g += parseInt(a.charAt(b), 10) * h[b];
+        return e %= 11, e > 9 && (e %= 10), g %= 11, g > 9 && (g %= 10), e + "" === a.substr(10, 1) && g + "" === a.substr(11, 1);
+      }
+      return !1;
+    },
+    _rs: function _rs(a) {
+      if (/^RS[0-9]{9}$/.test(a) && (a = a.substr(2)), !/^[0-9]{9}$/.test(a)) return !1;
+      for (var b = 10, c = 0, d = 0; 8 > d; d++) c = (parseInt(a.charAt(d), 10) + b) % 10, 0 === c && (c = 10), b = 2 * c % 11;
+      return (b + parseInt(a.substr(8, 1), 10)) % 10 === 1;
+    },
+    _se: function _se(b) {
+      return /^SE[0-9]{10}01$/.test(b) && (b = b.substr(2)), /^[0-9]{10}01$/.test(b) ? (b = b.substr(0, 10), a.fn.bootstrapValidator.helpers.luhn(b)) : !1;
+    },
+    _si: function _si(a) {
+      if (/^SI[0-9]{8}$/.test(a) && (a = a.substr(2)), !/^[0-9]{8}$/.test(a)) return !1;
+      for (var b = 0, c = [8, 7, 6, 5, 4, 3, 2], d = 0; 7 > d; d++) b += parseInt(a.charAt(d), 10) * c[d];
+      return b = 11 - b % 11, 10 === b && (b = 0), b + "" === a.substr(7, 1);
+    },
+    _sk: function _sk(a) {
+      return /^SK[1-9][0-9][(2-4)|(6-9)][0-9]{7}$/.test(a) && (a = a.substr(2)), /^[1-9][0-9][(2-4)|(6-9)][0-9]{7}$/.test(a) ? parseInt(a, 10) % 11 === 0 : !1;
+    },
+    _ve: function _ve(a) {
+      if (/^VE[VEJPG][0-9]{9}$/.test(a) && (a = a.substr(2)), !/^[VEJPG][0-9]{9}$/.test(a)) return !1;
+      for (var b = {
+          V: 4,
+          E: 8,
+          J: 12,
+          P: 16,
+          G: 20
+        }, c = b[a.charAt(0)], d = [3, 2, 7, 6, 5, 4, 3, 2], e = 0; 8 > e; e++) c += parseInt(a.charAt(e + 1), 10) * d[e];
+      return c = 11 - c % 11, (11 === c || 10 === c) && (c = 0), c + "" === a.substr(9, 1);
+    },
+    _za: function _za(a) {
+      return /^ZA4[0-9]{9}$/.test(a) && (a = a.substr(2)), /^4[0-9]{9}$/.test(a);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.vin = a.extend(a.fn.bootstrapValidator.i18n.vin || {}, {
+    "default": "Please enter a valid VIN number"
+  }), a.fn.bootstrapValidator.validators.vin = {
+    validate: function validate(a, b) {
+      var c = b.val();
+      if ("" === c) return !0;
+      if (!/^[a-hj-npr-z0-9]{8}[0-9xX][a-hj-npr-z0-9]{8}$/i.test(c)) return !1;
+      c = c.toUpperCase();
+      for (var d = {
+          A: 1,
+          B: 2,
+          C: 3,
+          D: 4,
+          E: 5,
+          F: 6,
+          G: 7,
+          H: 8,
+          J: 1,
+          K: 2,
+          L: 3,
+          M: 4,
+          N: 5,
+          P: 7,
+          R: 9,
+          S: 2,
+          T: 3,
+          U: 4,
+          V: 5,
+          W: 6,
+          X: 7,
+          Y: 8,
+          Z: 9,
+          1: 1,
+          2: 2,
+          3: 3,
+          4: 4,
+          5: 5,
+          6: 6,
+          7: 7,
+          8: 8,
+          9: 9,
+          0: 0
+        }, e = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2], f = 0, g = c.length, h = 0; g > h; h++) f += d[c.charAt(h) + ""] * e[h];
+      var i = f % 11;
+      return 10 === i && (i = "X"), i + "" === c.charAt(8);
+    }
+  };
+}(window.jQuery), function (a) {
+  a.fn.bootstrapValidator.i18n.zipCode = a.extend(a.fn.bootstrapValidator.i18n.zipCode || {}, {
+    "default": "Please enter a valid postal code",
+    countryNotSupported: "The country code %s is not supported",
+    country: "Please enter a valid postal code in %s",
+    countries: {
+      BR: "Brazil",
+      CA: "Canada",
+      CZ: "Czech Republic",
+      DK: "Denmark",
+      GB: "United Kingdom",
+      IT: "Italy",
+      MA: "Morocco",
+      NL: "Netherlands",
+      RO: "Romania",
+      RU: "Russia",
+      SE: "Sweden",
+      SG: "Singapore",
+      SK: "Slovakia",
+      US: "USA"
+    }
+  }), a.fn.bootstrapValidator.validators.zipCode = {
+    html5Attributes: {
+      message: "message",
+      country: "country"
+    },
+    COUNTRY_CODES: ["BR", "CA", "CZ", "DK", "GB", "IT", "MA", "NL", "RO", "RU", "SE", "SG", "SK", "US"],
+    validate: function validate(b, c, d) {
+      var e = c.val();
+      if ("" === e || !d.country) return !0;
+      var f = d.country;
+      if (("string" != typeof f || -1 === a.inArray(f, this.COUNTRY_CODES)) && (f = b.getDynamicOption(c, f)), !f || -1 === a.inArray(f.toUpperCase(), this.COUNTRY_CODES)) return {
+        valid: !1,
+        message: a.fn.bootstrapValidator.helpers.format(a.fn.bootstrapValidator.i18n.zipCode.countryNotSupported, f)
+      };
+      var g = !1;
+      switch (f = f.toUpperCase()) {
+        case "BR":
+          g = /^(\d{2})([\.]?)(\d{3})([\-]?)(\d{3})$/.test(e);
+          break;
+        case "CA":
+          g = /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}[0-9]{1}$/i.test(e);
+          break;
+        case "CZ":
+          g = /^(\d{3})([ ]?)(\d{2})$/.test(e);
+          break;
+        case "DK":
+          g = /^(DK(-|\s)?)?\d{4}$/i.test(e);
+          break;
+        case "GB":
+          g = this._gb(e);
+          break;
+        case "IT":
+          g = /^(I-|IT-)?\d{5}$/i.test(e);
+          break;
+        case "MA":
+          g = /^[1-9][0-9]{4}$/i.test(e);
+          break;
+        case "NL":
+          g = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(e);
+          break;
+        case "RO":
+          g = /^(0[1-8]{1}|[1-9]{1}[0-5]{1})?[0-9]{4}$/i.test(e);
+          break;
+        case "RU":
+          g = /^[0-9]{6}$/i.test(e);
+          break;
+        case "SE":
+          g = /^(S-)?\d{3}\s?\d{2}$/i.test(e);
+          break;
+        case "SG":
+          g = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(e);
+          break;
+        case "SK":
+          g = /^(\d{3})([ ]?)(\d{2})$/.test(e);
+          break;
+        case "US":
+        default:
+          g = /^\d{4,5}([\-]?\d{4})?$/.test(e);
+      }
+      return {
+        valid: g,
+        message: a.fn.bootstrapValidator.helpers.format(d.message || a.fn.bootstrapValidator.i18n.zipCode.country, a.fn.bootstrapValidator.i18n.zipCode.countries[f])
+      };
+    },
+    _gb: function _gb(a) {
+      for (var b = "[ABCDEFGHIJKLMNOPRSTUWYZ]", c = "[ABCDEFGHKLMNOPQRSTUVWXY]", d = "[ABCDEFGHJKPMNRSTUVWXY]", e = "[ABEHMNPRVWXY]", f = "[ABDEFGHJLNPQRSTUWXYZ]", g = [new RegExp("^(" + b + "{1}" + c + "?[0-9]{1,2})(\\s*)([0-9]{1}" + f + "{2})$", "i"), new RegExp("^(" + b + "{1}[0-9]{1}" + d + "{1})(\\s*)([0-9]{1}" + f + "{2})$", "i"), new RegExp("^(" + b + "{1}" + c + "{1}?[0-9]{1}" + e + "{1})(\\s*)([0-9]{1}" + f + "{2})$", "i"), new RegExp("^(BF1)(\\s*)([0-6]{1}[ABDEFGHJLNPQRST]{1}[ABDEFGHJLNPQRSTUWZYZ]{1})$", "i"), /^(GIR)(\s*)(0AA)$/i, /^(BFPO)(\s*)([0-9]{1,4})$/i, /^(BFPO)(\s*)(c\/o\s*[0-9]{1,3})$/i, /^([A-Z]{4})(\s*)(1ZZ)$/i, /^(AI-2640)$/i], h = 0; h < g.length; h++) if (g[h].test(a)) return !0;
+      return !1;
+    }
+  };
+}(window.jQuery);
+
+/***/ },
+
+/***/ "./assets/js/form/functionForm.js"
+/*!****************************************!*\
+  !*** ./assets/js/form/functionForm.js ***!
+  \****************************************/
+() {
+
+/**
+ * [NumCheck description]
+ *
+ * @param {[type]} e     [description]
+ * @param {[type]} field [description]
+ */
+
+function NumCheck(e, field) {
+  key = e.keyCode ? e.keyCode : e.which;
+  if (key == 8) return true;
+  if (key > 47 && key < 58) {
+    if (field.value == "") return true;
+    existePto = /[.]/.test(field.value);
+    if (existePto == false) {
+      regexp = /.[0-9]{14}$/;
+    } else {
+      regexp = /.[0-9]{2}$/;
+    }
+    return !regexp.test(field.value);
+  }
+  if (key == 46) {
+    if (field.value == "") return false;
+    regexp = /^[0-9]+$/;
+    return regexp.test(field.value);
+  }
+  return false;
+}
+window.onload = function () {
+  /**
+   * Solo texto y espacios
+   * @param  {RegExp} event) {             var regex [description]
+   * @return {[type]}        [description]
+   */
+
+  $(".letras").bind('keypress', function (event) {
+    var regex = new RegExp("^[a-zA-Z ]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+      event.preventDefault();
+      return false;
+    }
+  });
+
+  /**
+   * Solo números
+   * @param  {RegExp} event) {             var regex [description]
+   * @return {[type]}        [description]
+   */
+
+  $(".numeros-sin-punto").bind('keypress', function (event) {
+    var regex = new RegExp("^[0-9]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+      event.preventDefault();
+      return false;
+    }
+  });
+
+  /**
+   * [Generar contraseña random description]
+   *
+   * @param  {[type]} id [description]
+   * @return {[type]}    [description]
+   */
+
+  function randString(id) {
+    var dataSet = $(id).attr('data-character-set').split(',');
+    var possible = '';
+    if ($.inArray('a-z', dataSet) >= 0) {
+      possible += 'abcdefghijklmnopqrstuvwxyz';
+    }
+    if ($.inArray('A-Z', dataSet) >= 0) {
+      possible += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    }
+    if ($.inArray('0-9', dataSet) >= 0) {
+      possible += '0123456789';
+    }
+    if ($.inArray('#', dataSet) >= 0) {
+      possible += '![]{}()%&*$#^<>~@|';
+    }
+    var text = '';
+    for (var i = 0; i < $(id).attr('data-size'); i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  }
+
+  // Create a new password
+  $(document).on('click', '.getNewPass', function () {
+    var field = $(this).closest('div').find('input[rel="gp"]');
+    field.val(randString(field));
+  });
+
+  // Auto Select Pass On Focus
+  $(document).on('click', 'input[rel="gp"]', function () {
+    $(this).select();
+  });
+
+  //Mostrar/Ocultar contraseña
+  if ($("div").hasClass("js-show")) {
+    $('.js-show').each(function () {
+      var $pass = $(this).find('.js-pass');
+      var $input = $(this).find('.js-check');
+      $input.click(function () {
+        if ($pass.attr('type').toLowerCase() === 'password') {
+          $pass.attr('type', 'text');
+        } else {
+          $pass.attr('type', 'password');
+        }
+      });
+    });
+  }
+
+  //Función para validar un RFC
+  function rfcValido(rfc) {
+    var re = /^([ A-ZÑ&]?[A-ZÑ&]{3}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/,
+      validado = rfc.match(re);
+    if (!validado)
+      //Coincide con el formato general?
+      return false;
+
+    //Separar el dígito verificador del resto del RFC
+    var digitoVerificador = validado.pop(),
+      rfcSinDigito = validado.slice(1).join('');
+
+    //Obtener el digito esperado
+    var diccionario = "0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ Ñ",
+      lngSuma = 0.0,
+      digitoEsperado;
+    if (rfcSinDigito.length == 11) rfc = " " + rfc; //Ajustar a 12
+    for (var i = 0; i < 13; i++) lngSuma = lngSuma + diccionario.indexOf(rfcSinDigito.charAt(i)) * (13 - i);
+    digitoEsperado = 11 - lngSuma % 11;
+    if (digitoEsperado == 11) digitoEsperado = 0;
+    if (digitoEsperado == 10) digitoEsperado = "A";
+
+    //El dígito verificador coincide con el esperado?
+    return digitoVerificador == digitoEsperado;
+  }
+
+  //Handler para el evento cuando cambia el input
+  //Lleva la RFC a mayúsculas para validarlo
+  function validarInputRFC(input) {
+    var rfc = input.value.toUpperCase(),
+      inputRFC = $(".rfc-sat"),
+      resultadoRFC = document.getElementById("resultadoRFC"),
+      valido = "Incorrecto";
+    input.value = rfc;
+    resultadoRFC.classList.remove("d-none");
+    if (rfcValido(rfc)) {
+      // ⬅️ Acá se comprueba
+      valido = "Válido";
+      inputRFC.removeClass("error").addClass("valid");
+      resultadoRFC.classList.remove("error");
+      resultadoRFC.classList.add("text-success");
+    } else {
+      inputRFC.removeClass("valid").addClass("error");
+      resultadoRFC.classList.remove("text-success");
+      resultadoRFC.classList.add("error");
+    }
+    if (input.value.length == 0) {
+      resultadoRFC.classList.remove("error");
+      resultadoRFC.classList.remove("text-success");
+    }
+    resultadoRFC.innerText = valido;
+  }
+};
+
+/***/ },
+
+/***/ "./assets/pages/home/homeFunctions.js"
+/*!********************************************!*\
+  !*** ./assets/pages/home/homeFunctions.js ***!
+  \********************************************/
+() {
+
+//import Carousel from '../../common-sass/bootstrap/js/dist/carousel';
+//import owlCarousel from '../../common-sass/owl.carousel/dist/owl.carousel';
+
+var homeFunctions = new function () {
+  //Carrousel Home Owl
+  this.carouselHomeOwl = function () {
+    var owlCarouselHome = $('.owl-carousel-slider');
+    $(owlCarouselHome).owlCarousel({
+      items: 1,
+      dots: false,
+      //navText:['<i class="fa-solid fa-arrow-left fa-fw fa-2xl"></i>','<i class="fa-solid fa-arrow-right fa-fw fa-2xl"></i>'],
+      autoplay: true,
+      autoplayTimeout: 1600,
+      autoplayHoverPause: true
+    });
+  };
+  //función de arranque
+  this.init = function () {
+    //homeFunctions.carouselHomeOwl();
+  };
+}();
+$(document).ready(function () {
+  homeFunctions.init();
+});
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!***********************************!*\
+  !*** ./assets/pages/home/home.js ***!
+  \***********************************/
+/**
+**
+** Aquí requerimos los js para compilar
+**
+**/
+__webpack_require__(/*! ../../common-sass/bootstrapValidator/bootstrapValidator.min */ "./assets/common-sass/bootstrapValidator/bootstrapValidator.min.js");
+__webpack_require__(/*! ../../common-sass/bootstrap-fileupload/bootstrap-fileupload.min */ "./assets/common-sass/bootstrap-fileupload/bootstrap-fileupload.min.js");
+__webpack_require__(/*! ../../js/form/functionForm */ "./assets/js/form/functionForm.js");
+__webpack_require__(/*! ./homeFunctions */ "./assets/pages/home/homeFunctions.js");
+})();
+
+/******/ })()
+;
