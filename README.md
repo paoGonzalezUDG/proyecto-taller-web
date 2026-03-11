@@ -56,7 +56,7 @@ https://github.com/user-attachments/assets/3a9b7382-3941-45f7-bd94-8c47da2b00f6
 
 - [ ] **Paso 6:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías) desde Figma.
 
-https://github.com/user-attachments/assets/efe92bb0-c4eb-4437-b435-76055a92531e
+https://github.com/user-attachments/assets/40a88f2b-d212-4990-94fb-72117b18b954
       
 - [ ] **Paso 7:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios ni acentos):
 
