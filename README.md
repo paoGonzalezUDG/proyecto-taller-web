@@ -59,6 +59,12 @@ https://github.com/user-attachments/assets/3a9b7382-3941-45f7-bd94-8c47da2b00f6
 https://github.com/user-attachments/assets/efe92bb0-c4eb-4437-b435-76055a92531e
       
 - [ ] **Paso 7:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios):
+
+  Actualiza tu repositorio
+
+  `git pull origin main`
+
+  Crea tu propia rama
       
   `git checkout -b portafolio-TU_NOMBRE`
 
