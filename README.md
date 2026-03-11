@@ -139,6 +139,8 @@ Recuerda que de ahora en adelante, debes estar en tu rama creada `portafolio-TU_
 
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu interdum mauris. Nunc eu sem quis odio egestas consectetur. Mauris posuere fermentum mi, sed finibus lectus tincidunt vitae. Phasellus rhoncus congue dolor, et vehicula sapien ornare mattis. Duis ac nisl congue, rutrum nisl non, maximus nisl. Sed ultrices interdum nisl, eget viverra lacus ultricies vitae. Ut arcu purus, condimentum mattis semper eget, ultricies et metus. Praesent magna nibh, cursus id tempor a, blandit ac dolor. Nam faucibus ullamcorper dolor eget euismod. Etiam placerat purus ut nisl sagittis tempus. Donec commodo eleifend tellus id fermentum. Mauris porta consequat ligula. Donec diam augue, aliquet at elit sit amet, volutpat blandit mauris. Nunc nunc nisl, placerat id tincidunt nec, tempor a ipsum.</p>
 
+https://github.com/user-attachments/assets/41587fd2-8140-4e12-bdbc-728b14b88394
+
 - [ ] **Paso 9:** Especificar tus cambios (meterlos al carrito):
       
   `git add .`
