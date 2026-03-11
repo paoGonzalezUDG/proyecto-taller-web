@@ -89,39 +89,40 @@ https://github.com/user-attachments/assets/9ead90da-3735-456c-b5a0-1768d688d279
 
 - [ ] **Paso 8:** Maquetar el esqueleto HTML semántico en el archivo `index.php` base: Hero, About, Projects y Contact.
 
-      A continuación, te explicamos la anatomía completa de nuestro proyecto web MVC (Modelo-Vista-Controlador). 
+      A continuación, te explico la arquitectura completa de nuestro proyecto web MVC (Modelo-Vista-Controlador). 
       Para este paso, enfócate únicamente en la carpeta "views/index":
 
       proyecto-taller-web/
       ├── assets/                  <-- 1. Archivos crudos de diseño (SASS, JS modular). Aquí daremos estilo a la web.
-      │   ├── common-sass/         <-- Librerías externas de diseño (Bootstrap, FontAwesome, etc.).
-      │   ├── front/               <-- Variables generales, colores base, configuración de temas.
-      │   ├── js/                  <-- Scripts de JavaScript separados en módulos funcionales.
-      │   ├── pages/               <-- Estilos SASS y JS específicos por cada página (ej. home).
-      │   ├── app.js               <-- Script principal que agrupa todo el código de JS.
-      │   └── app.scss             <-- Archivo maestro de SASS que importa todos los estilos.
-      ├── controllers/             <-- 2. Cerebros (Lógica PHP). Procesan la información antes de mostrar la pantalla.
-      ├── core/                    <-- 3. Núcleo. Configuraciones maestras, variables globales y accesos.
-      ├── css/                     <-- 4. Estilos compilados listos para usar (Generados automáticamente, NO EDITAR).
+      │   ├── common-sass/               <-- Librerías externas de diseño (Bootstrap, FontAwesome, etc.).
+      │   ├── front/                     <-- Variables generales, colores base, configuración de temas.
+      │   ├── js/                        <-- Scripts de JavaScript separados en módulos funcionales.
+      │   ├── pages/                     <-- Estilos SASS y JS específicos por cada página (ej. home).
+      │   ├── app.js                     <-- Script principal que agrupa todo el código de JS.
+      │   └── app.scss                   <-- Archivo principal de SASS que importa todos los estilos.
+      ├── controllers/             <-- 2. (Lógica PHP). Procesan la información antes de mostrar la pantalla.
+      ├── core/                    <-- 3. (Núcleo). Configuraciones maestras, variables globales y accesos.
+      ├── css/                     <-- 4. Estilos compilados listos para usar (Generados automáticamente, NO EDITAR NI ELIMINAR).
       ├── fonts/                   <-- 5. Tipografías locales del proyecto (.woff, .ttf).
-      ├── images/                  <-- 6. Imágenes públicas, logotipos e ilustraciones (.jpg, .png, .webp).
-      ├── js/                      <-- 7. JavaScript minificado (Generado automáticamente, NO EDITAR).
-      ├── languages/               <-- 8. Diccionarios PHP con textos para hacer la web bilingüe.
-      ├── node_modules/            <-- 9. Paquetes instalados por NPM. (Pesa mucho y Git lo ignora).
-      ├── templates/               <-- 10. Piezas de rompecabezas reutilizables para toda la página.
-      │   ├── head.php             <-- Metadatos, SEO, título de pestaña y vínculos a CSS.
-      │   ├── header.php           <-- Menú de navegación principal (la barra de arriba).
-      │   └── footer.php           <-- Pie de página (sección inferior con créditos/redes).
-      ├── views/                   <-- 11. VISTAS: Las pantallas de nuestro sistema (Páginas).
-      │   ├── aviso-de-privacidad/ <-- Vista legal del sitio.
-      │   ├── error/               <-- Páginas personalizadas si el usuario se pierde (Ej. Error 404).
-      │   └── index/               <-- 🎯 ¡EL ÁREA DE TRABAJO DE HOY!
-      │       └── index.php        <-- 🎯 ARCHIVO DONDE MAQUETARÁN EL CÓDIGO HTML DE SU PORTAFOLIO.
+      ├── images/                  <-- 6. Imágenes que se crean con Node.js en formato (.webp). (Generados automáticamente, NO EDITAR NI ELIMINAR).
+      ├── img/                     <-- 7. Imágenes públicas, logotipos e ilustraciones (.jpg, .png, .webp).
+      ├── js/                      <-- 8. JavaScript minificado (Generado automáticamente, NO EDITAR NI ELIMINAR).
+      ├── languages/               <-- 9. Diccionarios PHP con textos para hacer la web bilingüe.
+      ├── node_modules/            <-- 10. Paquetes instalados por NPM. (Pesa mucho y Git lo ignora).
+      ├── templates/               <-- 11. Plantillas reutilizables para toda la página.
+      │   ├── head.php                   <-- Metadatos, SEO, título de pestaña y vínculos a CSS.
+      │   ├── header.php                 <-- Menú de navegación principal (la barra de arriba).
+      │   └── footer.php                 <-- Pie de página (sección inferior con copyright/redes).
+      ├── views/                   <-- 12. (Vistas) Las pantallas de nuestro sistema (Páginas).
+      │   ├── aviso-de-privacidad/       <-- Vista legal del sitio. (toda página debe tener una)
+      │   ├── error/                     <-- Páginas personalizadas si el usuario se pierde (Ej. Error 404).
+      │   └── index/                     <-- 🎯 ¡EL ÁREA DE TRABAJO DE HOY!
+      │       └── index.php                    <-- 🎯 ARCHIVO DONDE MAQUETARÁN EL CÓDIGO HTML DE SU PORTAFOLIO.
       ├── .gitignore               <-- Le dice a Git qué archivos privados/pesados debe ignorar.
       ├── .htaccess                <-- Configura nuestro servidor web (URLs limpias, caché, seguridad).
       ├── index.php                <-- Portero principal. Todo el tráfico de la web pasa por aquí primero.
       ├── package.json             <-- Lista de compras de Node.js (Nos dice qué instalar con "npm i").
-      └── webpack.mix.js           <-- La "receta" que usa Laravel Mix para compilar nuestro SASS a CSS.
+      └── webpack.mix.js           <-- Laravel Mix para compilar nuestro SASS a CSS.
 
 - [ ] **Paso 9:** Especificar tus cambios (meterlos al carrito):
       
