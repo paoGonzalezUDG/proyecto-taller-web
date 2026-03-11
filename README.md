@@ -133,6 +133,10 @@ Solo fíjate en la estructura de las carpetas, los iconos y tema de Visual Studi
 
   <img width="213" height="686" alt="Captura de pantalla 2026-03-11 083002" src="https://github.com/user-attachments/assets/b15b0ff8-378e-47a6-bbed-49f76dd7faeb" />
 
+Ahora editemos el `index.php` y agreguemos un párrafo nuevo en la etiqueta `<body>`
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu interdum mauris. Nunc eu sem quis odio egestas consectetur. Mauris posuere fermentum mi, sed finibus lectus tincidunt vitae. Phasellus rhoncus congue dolor, et vehicula sapien ornare mattis. Duis ac nisl congue, rutrum nisl non, maximus nisl. Sed ultrices interdum nisl, eget viverra lacus ultricies vitae. Ut arcu purus, condimentum mattis semper eget, ultricies et metus. Praesent magna nibh, cursus id tempor a, blandit ac dolor. Nam faucibus ullamcorper dolor eget euismod. Etiam placerat purus ut nisl sagittis tempus. Donec commodo eleifend tellus id fermentum. Mauris porta consequat ligula. Donec diam augue, aliquet at elit sit amet, volutpat blandit mauris. Nunc nunc nisl, placerat id tincidunt nec, tempor a ipsum.</p>
+
 - [ ] **Paso 9:** Especificar tus cambios (meterlos al carrito):
       
   `git add .`
