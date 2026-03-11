@@ -83,7 +83,7 @@ https://github.com/user-attachments/assets/efe92bb0-c4eb-4437-b435-76055a92531e
 
 https://github.com/user-attachments/assets/9ead90da-3735-456c-b5a0-1768d688d279
 
-  Ya lo subí a GitHub (ya hice push):
+  [No hagas este paso] Ya lo subí a GitHub (ya hice push):
 
   `git push -u origin portafolio-TU_NOMBRE_CORREGIDO`
 
