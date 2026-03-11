@@ -92,14 +92,14 @@ https://github.com/user-attachments/assets/9ead90da-3735-456c-b5a0-1768d688d279
 - [ ] **Paso 8:** Maquetar el esqueleto HTML semántico en el archivo `index.php` base: Hero, About, Projects y Contact.
 
       proyecto-taller-web/
-      ├── assets/                  &lt;-- 1. Aquí guardarán sus imágenes de Figma
-      │   └── images/              
-      ├── templates/               &lt;-- 2. Aquí viven tu Header y Footer (No tocar)
+      ├── assets/                  <-- 1. Aquí viven los estilos crudos (SASS) y librerías
+      ├── images/                  <-- 2. Aquí guardarán sus imágenes exportadas de Figma
+      ├── templates/               <-- 3. Aquí viven tu Header y Footer
       │   ├── header.php
       │   └── footer.php
-      └── views/                   &lt;-- 3. ¡EL ÁREA DE TRABAJO!
-          └── index/
-              └── index.php        &lt;-- 🎯 AQUÍ VAN A MAQUETAR EL PORTAFOLIO
+      └── views/                   <-- 4. Todas las vistas de mi web
+          └── index/               <-- 5. Vista principal (lo que ve el usuario al cargar la página)
+              └── index.php        <-- Código HTML
 
 - [ ] **Paso 9:** Especificar tus cambios (meterlos al carrito):
       
