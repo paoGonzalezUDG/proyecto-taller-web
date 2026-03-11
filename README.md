@@ -12,10 +12,12 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
 
 ## 🎨 Clase 2: Del Diseño a la Estructura (Figma a HTML)
 
-- [ ] **Paso 1:** Exploración de la plantilla de Figma e introducción al *Dev Mode*.
+- [ ] **Paso 1:** ¿Cómo veo mis plantillas de Figma? y activo *Dev Mode*.
       
       https://www.figma.com/files/project/566141154
-      
+
+https://github.com/user-attachments/assets/fa416156-5d13-48f9-aeac-ce11cef68a5a
+
 - [ ] **Paso 2:** Descargar la estructura inicial. Abre la terminal, dirígete a la carpeta de Laragon (`cd C:\laragon\www`) y clona el repositorio del taller:
       
       `git config --global user.name "TU_USUARIO_EN_GITHUB"`
