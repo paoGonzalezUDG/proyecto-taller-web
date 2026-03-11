@@ -72,7 +72,7 @@ Corregir errores. (`En caso de que marque alguno`)
 
 https://github.com/user-attachments/assets/dc566af8-db9a-40e7-bc60-87d708023177
 
-      Si aún no se corrige el problema, intenta con los siguientes videos
+Si aún no se corrige el problema, intenta con los siguientes videos
 
 [Can't run the code "npm-install" in Visual Studio Code | Running Scripts is disabled on this System](https://www.youtube.com/watch?v=t9_ziPwYUWI)
 
