@@ -1,6 +1,6 @@
 # 🚀 Actividades del Taller: Creación de Portafolio Web
 
-Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en algún momento, revisa en qué paso vamos y apóyate con tu equipo. Nuestro objetivo final es construir un portafolio profesional basado en [este diseño de Figma](https://www.figma.com/design/XUBbeQRfPIwIEfSFBgzEjW/Illustration-Based-Portfolio-Website-Template--Community-?node-id=0-1&t=2z3KwNk2RVX5XoB1-1).
+Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en algún momento, revisa en qué paso vamos y apóyate con tu equipo. Nuestro objetivo final es construir un portafolio profesional basado en [este diseño de Figma](https://www.figma.com/files/project/566141154).
 
 ## ✅ Clase 1: Preparación del Entorno (Virtual)
 *¡Completada el miércoles 03 de marzo!*
