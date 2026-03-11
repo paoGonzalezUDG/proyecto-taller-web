@@ -26,7 +26,7 @@ Aquí llevaremos el registro de nuestro avance en cada sesión. Si te pierdes en
       
  https://github.com/user-attachments/assets/ec6b69eb-6207-418d-b3cc-b0c00261bb4e
 
-- [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y verifica que el prefijo NPM no marque error.
+- [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y verifica que el prefijo `npm` no marque error.
       
       npm i         
 
@@ -58,31 +58,31 @@ https://github.com/user-attachments/assets/efe92bb0-c4eb-4437-b435-76055a92531e
       
 - [ ] **Paso 7:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios ni acentos):
 
-        Actualiza tu repositorio
+Actualiza tu repositorio
 
   `git pull origin main`
 
-        Crea tu propia rama
+Crea tu propia rama
       
   `git checkout -b portafolio-TU_NOMBRE`
 
-        Ejemplo:
+Ejemplo:
       
   `git checkout -b portafolio-paola-gonzalez`
 
-        Si te equivocaste, no pasa nada, solo reenómbralo
-        Asegúrate de estar dentro de la rama creada
+Si te equivocaste, no pasa nada, solo `reenómbralo`
+Asegúrate de estar dentro de la rama creada
 
   `git branch -m portafolio-TU_NOMBRE_CORREGIDO`
 
-        Ejemplo:
+Ejemplo:
       
   `git branch -m portafolio-paola-delgado`
 
 https://github.com/user-attachments/assets/9ead90da-3735-456c-b5a0-1768d688d279
 
-        [No hagas este paso] 
-        Ya lo subí a GitHub (ya hice push):
+[No hagas este paso] 
+Ya lo subí a GitHub (ya hice push):
 
   `git push -u origin portafolio-TU_NOMBRE_CORREGIDO`
 
@@ -125,9 +125,9 @@ https://github.com/user-attachments/assets/9ead90da-3735-456c-b5a0-1768d688d279
       ├── package.json             <-- Lista de compras de Node.js (Nos dice qué instalar con "npm i").
       └── webpack.mix.js           <-- Laravel Mix para compilar nuestro SASS a CSS.
 
-        Así debe verse tu proyecto clonado
+Así debe verse tu proyecto clonado
 
-        Solo fíjate en la estructura de las carpetas, los iconos y tema de Visual Studio Code varían según tus extensiones instaladas
+Solo fíjate en la estructura de las carpetas, los iconos y tema de Visual Studio Code varían según tus extensiones instaladas
 
   <img width="213" height="686" alt="Captura de pantalla 2026-03-11 083002" src="https://github.com/user-attachments/assets/b15b0ff8-378e-47a6-bbed-49f76dd7faeb" />
 
