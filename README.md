@@ -53,12 +53,16 @@ Reto 5
 - [ ] **Paso 2:** Descargar la estructura inicial. Abre la terminal, dirígete a la carpeta de Laragon (`cd C:\laragon\www`) y clona el repositorio del taller:
       
       `git config --global user.name "TU_USUARIO_EN_GITHUB"`
+      
 
       `git config --global user.email "TU_CORREO_EN_GITHUB"`
       
-      `git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git`
       
- https://github.com/user-attachments/assets/ec6b69eb-6207-418d-b3cc-b0c00261bb4e
+      `git clone https://github.com/paoGonzalezUDG/proyecto-taller-web.git`
+
+      
+https://github.com/user-attachments/assets/d8571bce-ebcc-42a5-9ece-7580ac57d4b6
+
 
 - [ ] **Paso 3:** Abre la nueva carpeta descargada (`proyecto-taller-web`) en Visual Studio Code y verifica que el prefijo `npm` no marque error.
       
