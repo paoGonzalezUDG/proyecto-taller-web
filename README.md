@@ -66,7 +66,7 @@ Reto 5
 
 https://github.com/user-attachments/assets/0c3350a6-ec40-40a2-ab9c-539d860c1529
 
-- [ ] **Paso 4:** Corregir errores.
+Corregir errores. (`En caso de que marque alguno`)
       
      <img width="1699" height="487" alt="Captura de pantalla 2026-03-10 150829" src="https://github.com/user-attachments/assets/b07dd54a-21ad-4f6b-9eff-5751884a5968" />
 
@@ -78,19 +78,23 @@ https://github.com/user-attachments/assets/dc566af8-db9a-40e7-bc60-87d708023177
 
 [NodeJS término npm no sé reconoce como nombre de un cmdlet](https://www.youtube.com/shorts/mKwI95AtunA)
       
-- [ ] **Paso 5:** Ejecutar Laragon y mostrar proyecto.
+- [ ] **Paso 4:** Ejecutar Laragon y mostrar proyecto.
+
+Borrar cache
 
       npm cache clean --force
-      
+
+Correr servicios
+
       npm run watch
 
 https://github.com/user-attachments/assets/3a9b7382-3941-45f7-bd94-8c47da2b00f6
 
-- [ ] **Paso 6:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías) desde Figma.
+- [ ] **Paso 5:** Extraer assets (ilustraciones) y variables de diseño (colores, tipografías) desde Figma.
 
 https://github.com/user-attachments/assets/40a88f2b-d212-4990-94fb-72117b18b954
       
-- [ ] **Paso 7:** Crea tu propia rama y muévete a ella (cambia "TU_NOMBRE" por tu nombre real sin espacios ni acentos):
+- [ ] **Paso 6:** Crea tu propia rama y muévete a ella (`cambia "TU_NOMBRE" por tu nombre real sin espacios ni acentos`):
 
 Actualiza tu repositorio
 
@@ -104,8 +108,9 @@ Ejemplo:
       
   `git checkout -b portafolio-paola-gonzalez`
 
-Si te equivocaste, no pasa nada, solo `reenómbralo`
-Asegúrate de estar dentro de la rama creada
+Si te equivocaste, no pasa nada, solo (`reenómbralo`)
+
+Asegúrate de estar dentro de la rama creada (`portafolio-TU_NOMBRE_CORREGIDO`)
 
   `git branch -m portafolio-TU_NOMBRE_CORREGIDO`
 
@@ -115,14 +120,15 @@ Ejemplo:
 
 https://github.com/user-attachments/assets/9ead90da-3735-456c-b5a0-1768d688d279
 
-[No hagas este paso] 
+(`No hagas este paso`)
+
 Ya lo subí a GitHub (ya hice push):
 
   `git push -u origin portafolio-TU_NOMBRE_CORREGIDO`
 
   `git push origin --delete portafolio-TU_NOMBRE_EQUIVOCADO`
 
-- [ ] **Paso 8:** Maquetar el esqueleto HTML semántico en el archivo `index.php` base: Hero, About, Projects y Contact.
+- [ ] **Paso 7:** Maquetar el esqueleto HTML semántico en el archivo `index.php` base: Hero, About, Projects y Contact.
 
       A continuación, te explico la arquitectura completa de nuestro proyecto web MVC (Modelo-Vista-Controlador). 
       Para este paso, enfócate únicamente en la carpeta "views/index":
@@ -161,25 +167,27 @@ Ya lo subí a GitHub (ya hice push):
 
 Así debe verse tu proyecto clonado
 
-Solo fíjate en la estructura de las carpetas, los iconos y tema de Visual Studio Code varían según tus extensiones instaladas
+Solo fíjate en la `estructura de las carpetas`, los iconos y tema de Visual Studio Code varían según tus extensiones instaladas
 
   <img width="213" height="686" alt="Captura de pantalla 2026-03-11 083002" src="https://github.com/user-attachments/assets/b15b0ff8-378e-47a6-bbed-49f76dd7faeb" />
 
-Ahora editemos el `index.php` y agreguemos un párrafo nuevo en la etiqueta `<body>`.
+Ahora editemos el `index.php` y agreguemos un párrafo `<p>` nuevo en la etiqueta `<body>`.
 
-Recuerda que de ahora en adelante, debes estar en tu rama creada `portafolio-TU_NOMBRE`
+Recuerda que de ahora en adelante, debes estar en tu rama creada (`portafolio-TU_NOMBRE`)
 
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu interdum mauris. Nunc eu sem quis odio egestas consectetur. Mauris posuere fermentum mi, sed finibus lectus tincidunt vitae. Phasellus rhoncus congue dolor, et vehicula sapien ornare mattis. Duis ac nisl congue, rutrum nisl non, maximus nisl. Sed ultrices interdum nisl, eget viverra lacus ultricies vitae. Ut arcu purus, condimentum mattis semper eget, ultricies et metus. Praesent magna nibh, cursus id tempor a, blandit ac dolor. Nam faucibus ullamcorper dolor eget euismod. Etiam placerat purus ut nisl sagittis tempus. Donec commodo eleifend tellus id fermentum. Mauris porta consequat ligula. Donec diam augue, aliquet at elit sit amet, volutpat blandit mauris. Nunc nunc nisl, placerat id tincidunt nec, tempor a ipsum.</p>
 
 https://github.com/user-attachments/assets/41587fd2-8140-4e12-bdbc-728b14b88394
 
-- [ ] **Paso 9:** Ya quiero subir mis cambios al repositorio remoto (el que está en línea):
-      
+- [ ] **Paso 8:** Ya quiero subir mis cambios al repositorio remoto (`el que está en línea`):
+
+Agregar los archivos del proyecto
+
   `git add .`
 
-Al realizar un commit, es indispensable incluir un mensaje claro y descriptivo que explique el cambio realizado. Entre más específico sea el mensaje, mejor.
+Al realizar un `commit`, es indispensable incluir un `mensaje claro y descriptivo` que explique el cambio realizado. Entre más específico sea el mensaje, mejor.
 
-Evita repetir el mismo mensaje en todos tus commits. Cada cambio debe tener un mensaje único, ya que usar mensajes genéricos es una mala práctica y dificulta entender el historial del proyecto.
+`Evita repetir` el mismo mensaje en todos tus commits. Cada cambio debe tener un `mensaje único`, ya que usar mensajes genéricos es una mala práctica y dificulta entender el historial del proyecto.
 
   `git commit -m "TU_CAMBIO_DE_CODIGO_ESPECIFICO"`
 
@@ -187,7 +195,7 @@ Ejemplo
 
   `git commit -m "Agrega párrafo de texto en la sección de contenido"`
 
-Sube tu avance a **TU**  rama específica `portafolio-TU_NOMBRE` en GitHub por primera vez:
+Sube tu avance a tu rama específica (`portafolio-TU_NOMBRE`) en GitHub por primera vez:
       
   `git push -u origin portafolio-TU_NOMBRE`
 
