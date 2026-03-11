@@ -125,6 +125,7 @@ https://github.com/user-attachments/assets/9ead90da-3735-456c-b5a0-1768d688d279
       └── webpack.mix.js           <-- Laravel Mix para compilar nuestro SASS a CSS.
 
   Así debe verse tu proyecto clonado
+  Solo fíjate en la estructura de las carpetas, los iconos y tema de Visual Studio Code varían según tus extensiones
 
   <img width="213" height="686" alt="Captura de pantalla 2026-03-11 083002" src="https://github.com/user-attachments/assets/b15b0ff8-378e-47a6-bbed-49f76dd7faeb" />
 
