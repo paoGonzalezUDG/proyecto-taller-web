@@ -153,7 +153,7 @@ Evita repetir el mismo mensaje en todos tus commits. Cada cambio debe tener un m
 
 Ejemplo
 
-  `git commit -m "Agrega párrafo de texto en la sección de contenido""`
+  `git commit -m "Agrega párrafo de texto en la sección de contenido"`
 
 Sube tu avance a **TU**  rama específica `portafolio-TU_NOMBRE` en GitHub por primera vez:
       
